@@ -19,6 +19,10 @@ config/name="Wave Shooter"
 run/main_scene="res://Player.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Global.gd"
+
 [display]
 
 window/size/width=640
