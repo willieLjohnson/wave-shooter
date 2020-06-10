@@ -21,4 +21,4 @@ position = Vector2( 320, 180 )
 environment = SubResource( 1 )
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 87.3684, 86.3158 )
+position = Vector2( 33.6842, 36.8421 )
