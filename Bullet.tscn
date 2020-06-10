@@ -8,3 +8,6 @@ modulate = Color( 0, 0.670588, 1, 1 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
