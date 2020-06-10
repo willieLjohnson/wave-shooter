@@ -5,6 +5,12 @@
 
 [node name="Player" type="Sprite"]
 modulate = Color( 0, 0.670588, 1, 1 )
+position = Vector2( -2, 0 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
+
+[node name="ReloadSpeed" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+[connection signal="timeout" from="ReloadSpeed" to="." method="_on_Timer_timeout"]
