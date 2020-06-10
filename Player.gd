@@ -22,6 +22,9 @@ func _process(delta: float) -> void:
 	
 	velocity = velocity.normalized()
 	
+	global_position.x = clamp(global_position.x, 24, 616)
+	global_position.y = clamp(global_position.y, 24, 336)
+	
 	global_position += speed * velocity * delta
 	
 	if Input.is_action_pressed("shoot") and Global.node_creation_parent != null and can_shoot:
