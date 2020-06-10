@@ -24,6 +24,5 @@ environment = SubResource( 1 )
 position = Vector2( 33.6842, 36.8421 )
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 0.25
 autostart = true
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
