@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/Square.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
 
 [node name="Player" type="Sprite"]
 modulate = Color( 0, 0.670588, 1, 1 )
@@ -13,4 +16,10 @@ script = ExtResource( 2 )
 [node name="ReloadSpeed" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource( 1 )
 [connection signal="timeout" from="ReloadSpeed" to="." method="_on_Timer_timeout"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]
