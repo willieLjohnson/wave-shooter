@@ -6,6 +6,13 @@ var velocity = Vector2.ZERO
 var bullet = preload("res://Bullet.tscn")
 
 var can_shoot = true
+
+func _ready() -> void:
+	Global.player = self
+	
+func _exit_tree() -> void:
+	Global.player = null
+
 func _process(delta: float) -> void:
 	velocity.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 	velocity.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
