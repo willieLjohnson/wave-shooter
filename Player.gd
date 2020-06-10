@@ -13,5 +13,5 @@ func _process(delta: float) -> void:
 	
 	global_position += speed * velocity * delta
 	
-	if Input.is_action_just_pressed("shoot"):
-		Global.instance_node(bullet, global_position, get_parent())
+	if Input.is_action_just_pressed("shoot") and Global.node_creation_parent != null:
+		Global.instance_node(bullet, global_position, Global.node_creation_parent)
