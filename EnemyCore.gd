@@ -22,6 +22,7 @@ func _process(_delta: float) -> void:
 		if Global.node_creation_parent != null:
 			var blood_particles = Global.instance_node(BLOOD_PARTICLES, global_position, Global.node_creation_parent)
 			blood_particles.rotation = velocity.angle()
+			blood_particles.modulate = Color.from_hsv(current_color.h, 0.75, current_color.v)
 		queue_free()
 
 func basic_movement_towards_player(delta: float) -> void:
