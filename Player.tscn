@@ -1,15 +1,14 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/Square.png" type="Texture" id=1]
+[ext_resource path="res://assets/Circle.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 57.797
 
 [node name="Player" type="Sprite"]
 modulate = Color( 0, 0.670588, 1, 1 )
-position = Vector2( -2, 0 )
-scale = Vector2( 1.5, 1.5 )
+scale = Vector2( 0.2, 0.2 )
 z_index = 1
 texture = ExtResource( 1 )
 script = ExtResource( 2 )

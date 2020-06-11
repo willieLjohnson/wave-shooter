@@ -5,7 +5,7 @@ var default_speed = 250
 var speed = default_speed
 var initial_speed = default_speed * 3.5
 
-var default_size = 0.75
+var default_size = 0.1
 
 var damage = 1 setget set_damage
 var recoil = damage
@@ -15,8 +15,9 @@ var look_once = true
 var default_scale = scale
 
 func _ready() -> void:
-	set_scale(Vector2((default_size) * damage + velocity.x, default_size * damage + velocity.y))
+	set_scale(Vector2((default_size * damage + velocity.x) * 0.5, (default_size * damage + velocity.y) * 0.5))  
 	speed = initial_speed
+	look_at(get_global_mouse_position())
 	
 func _process(delta: float) -> void:
 	if look_once:
@@ -29,7 +30,7 @@ func _process(delta: float) -> void:
 func set_damage(value) -> void:
 	damage = value
 	recoil = damage
-	set_scale(Vector2(default_size * damage + velocity.x , default_size * damage + velocity.y ))
+	set_scale(Vector2((default_size * damage + velocity.x) * 0.5, (default_size * damage + velocity.y) * 0.5))  
 	$AudioStreamPlayer.pitch_scale = 1 / damage
 		
 func _on_VisibilityNotifier2D_screen_exited() -> void:
