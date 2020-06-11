@@ -20,11 +20,13 @@ func _process(delta: float) -> void:
 		global_position = lerp(global_position, Vector2(320, 180), damp)
 		
 func screen_shake(intensity, time):
-	zoom = Vector2(1, 1) - Vector2(intensity * zoom_factor, intensity * zoom_factor)
-	shake_intensity = intensity
-	$ScreenShakeTime.wait_time = time
-	$ScreenShakeTime.start()
-	screen_shake_started = true
+	if intensity > shake_intensity:
+		zoom = Vector2(1, 1) - Vector2(intensity * zoom_factor, intensity * zoom_factor)
+		shake_intensity = intensity
+		$ScreenShakeTime.wait_time = time
+		$ScreenShakeTime.start()
+		screen_shake_started = true
 
 func _on_ScreenShakeTime_timeout() -> void:
 	screen_shake_started = false
+	shake_intensity = 0

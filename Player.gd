@@ -31,6 +31,7 @@ func _process(delta: float) -> void:
 		Global.instance_node(bullet, global_position, Global.node_creation_parent)
 		$ReloadSpeed.start()
 		can_shoot = false
+		Global.camera.screen_shake(5, 0.01)
 
 func _on_Timer_timeout() -> void:
 	can_shoot = true

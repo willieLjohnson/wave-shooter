@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 
 func _on_Area2D_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_damager") and stun == false:
-		Global.camera.screen_shake(5, 0.05)
+		Global.camera.screen_shake(10, 0.02)
 		modulate = Color.white
 		stun = true
 		velocity = -velocity * 5
