@@ -5,6 +5,8 @@ var base_speed = 250
 var speed = base_speed
 var initial_speed = base_speed * 3.5
 
+var recoil = initial_speed * 0.15
+
 var look_once = true
 
 var current_scale = scale
