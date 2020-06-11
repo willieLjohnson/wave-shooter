@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Arena.gd" type="Script" id=2]
-[ext_resource path="res://Camera2D.gd" type="Script" id=3]
-[ext_resource path="res://assets/Font.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Score.gd" type="Script" id=5]
+[ext_resource path="res://UI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Camera2D.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -12,10 +11,6 @@ glow_enabled = true
 glow_bloom = 0.15
 glow_blend_mode = 0
 glow_bicubic_upscale = true
-
-[sub_resource type="DynamicFont" id=2]
-size = 128
-font_data = ExtResource( 4 )
 
 [node name="Arena" type="Node2D"]
 script = ExtResource( 2 )
@@ -27,36 +22,10 @@ position = Vector2( 320, 180 )
 environment = SubResource( 1 )
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
 autostart = true
 
-[node name="UI" type="Node2D" parent="."]
+[node name="UI" parent="." instance=ExtResource( 3 )]
 
-[node name="Control" type="Control" parent="UI"]
-margin_right = 640.0
-margin_bottom = 360.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Score" type="Label" parent="UI/Control"]
-margin_top = -4.435
-margin_right = 1280.0
-margin_bottom = 140.565
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 2 )
-text = "100"
-align = 1
-valign = 1
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 320, 180 )
-current = true
-script = ExtResource( 3 )
-
-[node name="ScreenShakeTime" type="Timer" parent="Camera2D"]
+[node name="Camera2D" parent="." instance=ExtResource( 4 )]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
-[connection signal="timeout" from="Camera2D/ScreenShakeTime" to="Camera2D" method="_on_ScreenShakeTime_timeout"]

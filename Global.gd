@@ -5,6 +5,7 @@ var player = null
 var camera = null
 
 var score = 0
+var high_score = 0
 
 func instance_node(node, location, parent):
 	var node_instance = node.instance()
