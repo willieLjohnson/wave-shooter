@@ -34,7 +34,7 @@ environment = SubResource( 1 )
 wait_time = 3.0
 autostart = true
 
-[node name="UI" parent="." instance=ExtResource( 3 )]
+[node name="UI" type="Node2D" parent="." instance=ExtResource( 3 )]
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 scale = Vector2( 0.2, 0.2 )
