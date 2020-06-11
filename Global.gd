@@ -22,7 +22,7 @@ func save():
 
 func save_game():
 	var save_file = File.new()
-	save_file.open(save_file_path, File.WRITE)
+	save_file.open_encrypted_with_pass(save_file_path, File.WRITE, "enc")
 	save_file.store_line(to_json(save()))
 	save_file.close()
 	
@@ -32,7 +32,7 @@ func load_game():
 		print("NO SAVE FILE")
 		return
 	
-	save_file.open(save_file_path, File.READ)
+	save_file.open_encrypted_with_pass(save_file_path, File.READ, "enc")
 	var current_line = parse_json(save_file.get_line())
 	
 	high_score = current_line["high_score"]
