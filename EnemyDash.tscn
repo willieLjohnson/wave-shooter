@@ -4,7 +4,8 @@
 
 [node name="EnemyDash" instance=ExtResource( 1 )]
 modulate = Color( 1, 0.917647, 0.384314, 1 )
-speed = 120
+speed = 180
 health = 1
 knockback = 1200
 screen_shake_intensity = 40
+score_value = 20

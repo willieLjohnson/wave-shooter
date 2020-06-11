@@ -6,6 +6,7 @@ export(int) var speed = 75
 export(int) var health = 3
 export(int) var knockback = 600
 export(int) var screen_shake_intensity = 60
+export(int) var score_value = 10
 
 var velocity = Vector2()
 
@@ -18,11 +19,11 @@ func _process(_delta: float) -> void:
 		if Global.camera:
 			Global.camera.screen_shake(screen_shake_intensity, 0.2)
 
-		Global.score += 10
+		Global.score += score_value
 		if Global.node_creation_parent != null:
 			var blood_particles = Global.instance_node(BLOOD_PARTICLES, global_position, Global.node_creation_parent)
 			blood_particles.rotation = velocity.angle()
-			blood_particles.modulate = Color.from_hsv(current_color.h, 0.75, current_color.v)
+			blood_particles.modulate = Color.from_hsv(current_color.h, current_color.s, current_color.v * 0.65)
 		queue_free()
 
 func basic_movement_towards_player(delta: float) -> void:
