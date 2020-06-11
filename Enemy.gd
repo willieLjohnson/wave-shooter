@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 	
 	if health <= 0:
 		if Global.camera:
-			Global.camera.screen_shake(5, 0.1)
+			Global.camera.screen_shake(80, 0.2)
 		Global.score += 10
 		if Global.node_creation_parent != null:
 			var blood_particles = Global.instance_node(BLOOD_PARTICLES, global_position, Global.node_creation_parent)
