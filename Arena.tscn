@@ -6,7 +6,7 @@
 [ext_resource path="res://Camera2D.tscn" type="PackedScene" id=4]
 [ext_resource path="res://EnemyDash.tscn" type="PackedScene" id=5]
 [ext_resource path="res://EnemySimple.tscn" type="PackedScene" id=6]
-[ext_resource path="res://PowerupReload.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Powerup.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -38,7 +38,7 @@ autostart = true
 autostart = true
 
 [node name="PowerupSpawnTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 15.0
 autostart = true
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]

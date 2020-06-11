@@ -25,6 +25,7 @@ one_shot = true
 shape = SubResource( 1 )
 
 [node name="PowerupDuration" type="Timer" parent="."]
+wait_time = 5.0
 one_shot = true
 [connection signal="timeout" from="ReloadSpeed" to="." method="_on_Timer_timeout"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]
