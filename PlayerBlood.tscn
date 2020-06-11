@@ -27,6 +27,8 @@ amount = 100
 lifetime = 0.8
 texture = SubResource( 1 )
 spread = 180.0
+scale_amount = 0.05
+scale_amount_random = 0.1
 script = SubResource( 2 )
 
 [node name="FreezeBlood" parent="Particles" index="0"]

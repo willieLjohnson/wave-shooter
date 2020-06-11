@@ -12,7 +12,7 @@ font_data = ExtResource( 2 )
 size = 64
 font_data = ExtResource( 2 )
 
-[node name="UI" type="Node2D"]
+[node name="UI" type="Node"]
 
 [node name="Control" type="Control" parent="."]
 margin_right = 640.0
