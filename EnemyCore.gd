@@ -40,7 +40,7 @@ func _on_Area2D_area_entered(area: Area2D) -> void:
 		modulate = Color.white
 		stun = true
 		velocity = -velocity * knockback
-		health -= 1
+		health -= area.get_parent().damage
 		$StunTimer.start()
 		area.get_parent().queue_free()
 

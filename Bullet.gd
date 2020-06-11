@@ -4,6 +4,7 @@ var velocity = Vector2(1, 0)
 var base_speed = 250
 var speed = base_speed
 var initial_speed = base_speed * 3.5
+var damage
 
 var recoil = initial_speed * 0.15
 

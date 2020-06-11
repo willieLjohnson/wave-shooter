@@ -8,6 +8,8 @@ var BULLET_SCENE = preload("res://Bullet.tscn")
 var can_shoot = true
 var is_dead = false
 
+var damage = 1
+var default_damage = damage
 var reload_speed = 0.1
 var default_reload_speed = reload_speed
 
@@ -29,6 +31,7 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_pressed("shoot") and Global.node_creation_parent != null and can_shoot:
 		var bullet = Global.instance_node(BULLET_SCENE, global_position, Global.node_creation_parent)
+		bullet.damage = damage
 		var direction = global_position.direction_to(get_global_mouse_position()).normalized()
 		$ReloadSpeed.start()
 		can_shoot = false
