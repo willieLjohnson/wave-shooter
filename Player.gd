@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 		$ReloadSpeed.start()
 		can_shoot = false
 		Global.camera.screen_shake(5, 0.01)
-		velocity += -bullet.recoil * direction * delta
+		velocity += -bullet.recoil * direction
 	
 
 	global_position.x = clamp(global_position.x, 24, 616)
@@ -60,3 +60,6 @@ func _on_PowerupDuration_timeout() -> void:
 	if powerup_reset.find("PowerupReload") != null:
 		reload_speed = default_reload_speed
 		powerup_reset.erase("PowerupReload")
+	elif powerup_reset.find("PowerupDamage") != null:
+		damage = default_damage
+		powerup_reset.erase("PowerupDamage")
