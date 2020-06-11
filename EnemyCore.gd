@@ -16,6 +16,7 @@ onready var current_color = modulate
 
 func _process(_delta: float) -> void:
 	if health <= 0:
+		Global.play_sound("res://enemy-death.wav")
 		if Global.camera:
 			Global.camera.screen_shake(screen_shake_intensity, 0.2)
 
@@ -37,6 +38,7 @@ func basic_movement_towards_player(delta: float) -> void:
 
 func _on_Area2D_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_damager") and stun == false:
+		Global.play_sound("res://enemy-hurt.wav")
 		Global.camera.screen_shake(10, 0.02)
 		modulate = Color.white
 		stun = true

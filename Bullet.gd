@@ -30,7 +30,7 @@ func set_damage(value) -> void:
 	damage = value
 	recoil = damage
 	set_scale(Vector2(default_size * damage + velocity.x , default_size * damage + velocity.y ))
-
+	$AudioStreamPlayer.pitch_scale = 1 / damage
 		
 func _on_VisibilityNotifier2D_screen_exited() -> void:
 	queue_free()

@@ -4,6 +4,7 @@ var speed = 150
 var velocity = Vector2.ZERO
 
 var BULLET_SCENE = preload("res://Bullet.tscn")
+var BLOOD_SCENE = preload("res://PlayerBlood.tscn")
 
 var can_shoot = true
 var is_dead = false
@@ -49,7 +50,11 @@ func _on_Timer_timeout() -> void:
 	$ReloadSpeed.wait_time = reload_speed
 
 func _on_HitBox_area_entered(area: Area2D) -> void:
-	if area.is_in_group("enemy"):
+	if area.is_in_group("enemy") and not is_dead:
+		Global.play_sound("res://player-death.wav")
+		var blood = Global.instance_node(BLOOD_SCENE, global_position, Global.node_creation_parent)
+		blood.rotation = velocity.angle()
+		blood.modulate = modulate
 		is_dead = true
 		visible = false
 		Global.save_game()

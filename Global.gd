@@ -8,12 +8,20 @@ var score = 0
 var high_score = 0
 
 var save_file_path = "user://savegame.save"
+
 func instance_node(node, location, parent):
 	var node_instance = node.instance()
 	parent.add_child(node_instance)
 	node_instance.global_position = location
 	return node_instance  
-
+	
+func play_sound(sound):
+	if node_creation_parent != null:
+		var audioStreamPlayer = AudioStreamPlayer.new()
+		node_creation_parent.add_child(audioStreamPlayer)
+		audioStreamPlayer.stream = load(sound) 
+		audioStreamPlayer.play()
+		
 func save():
 	var save_dict = {
 		"high_score": high_score

@@ -10,6 +10,7 @@ extents = Vector2( 7.77818, 7.77818 )
 [node name="PowerupReload" type="Sprite"]
 modulate = Color( 0.176471, 0.843137, 0.533333, 1 )
 rotation = -0.785398
+scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 player_variable_modify = "reload_speed"
