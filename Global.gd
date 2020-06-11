@@ -7,8 +7,33 @@ var camera = null
 var score = 0
 var high_score = 0
 
+var save_file_path = "user://savegame.save"
 func instance_node(node, location, parent):
 	var node_instance = node.instance()
 	parent.add_child(node_instance)
 	node_instance.global_position = location
 	return node_instance  
+
+func save():
+	var save_dict = {
+		"high_score": high_score
+	}
+	return save_dict
+
+func save_game():
+	var save_file = File.new()
+	save_file.open(save_file_path, File.WRITE)
+	save_file.store_line(to_json(save()))
+	save_file.close()
+	
+func load_game():
+	var save_file = File.new()
+	if not save_file.file_exits(save_file_path):
+		print("NO SAVE FILE")
+		return
+	
+	save_file.open(save_file_path, File.READ)
+	var current_line = parse_json(save_file.get_line())
+	
+	high_score = current_line["high_score"]
+	save_file.close()
