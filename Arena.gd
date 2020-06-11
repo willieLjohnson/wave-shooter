@@ -1,6 +1,7 @@
 extends Node2D
 
 export(Array, PackedScene) var enemies
+export(Array, PackedScene) var powerups
 
 func _ready() -> void:
 	randomize()
@@ -24,3 +25,9 @@ func _on_EnemySpawnTimer_timeout() -> void:
 func _on_DifficultyTimer_timeout() -> void:
 	if 	$EnemySpawnTimer.wait_time > 0.5:
 		$EnemySpawnTimer.wait_time -= 0.025
+
+
+func _on_PowerupSpawnTimer_timeout() -> void:
+	var powerup_position = Vector2(rand_range(0, 640), rand_range(0, 360))
+	var rand_powerup_index = round(rand_range(0, powerups.size() - 1))
+	Global.instance_node(powerups[rand_powerup_index], powerup_position, self)

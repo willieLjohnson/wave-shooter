@@ -8,6 +8,11 @@ var bullet = preload("res://Bullet.tscn")
 var can_shoot = true
 var is_dead = false
 
+var reload_speed = 0.1
+var default_reload_speed = reload_speed
+
+var powerup_reset = []
+
 func _ready() -> void:
 	Global.player = self
 	
@@ -29,13 +34,14 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_pressed("shoot") and Global.node_creation_parent != null and can_shoot:
 		Global.instance_node(bullet, global_position, Global.node_creation_parent)
+		Global.instance_node(bullet, global_position, Global.node_creation_parent)
 		$ReloadSpeed.start()
 		can_shoot = false
 		Global.camera.screen_shake(5, 0.01)
 
 func _on_Timer_timeout() -> void:
 	can_shoot = true
-
+	$ReloadSpeed.wait_time = reload_speed
 
 func _on_HitBox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
@@ -43,3 +49,9 @@ func _on_HitBox_area_entered(area: Area2D) -> void:
 		visible = false
 		yield(get_tree().create_timer(1), "timeout")
 		get_tree().reload_current_scene()
+
+
+func _on_PowerupDuration_timeout() -> void:
+	if powerup_reset.find("PowerupReload") != null:
+		reload_speed = default_reload_speed
+		powerup_reset.erase("PowerupReload")

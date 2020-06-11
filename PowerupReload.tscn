@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/Square.png" type="Texture" id=1]
+[ext_resource path="res://PowerupReload.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.77818, 7.77818 )
+
+[node name="PowerupReload" type="Sprite"]
+modulate = Color( 0.176471, 0.843137, 0.533333, 1 )
+rotation = -0.785398
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+visible = false
+shape = SubResource( 1 )
+[connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]
