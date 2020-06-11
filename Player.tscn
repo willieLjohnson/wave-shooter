@@ -10,6 +10,7 @@ extents = Vector2( 8, 8 )
 modulate = Color( 0, 0.670588, 1, 1 )
 position = Vector2( -2, 0 )
 scale = Vector2( 1.5, 1.5 )
+z_index = 1
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
