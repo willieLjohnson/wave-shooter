@@ -10,7 +10,7 @@ var BULLET_SCENE = preload("res://Bullet.tscn")
 var BLOOD_SCENE = preload("res://PlayerBlood.tscn")
 
 var can_shoot = true
-var is_dead = false
+var is_dead = false setget set_is_dead
 
 var damage = 1
 var default_damage = damage
@@ -21,6 +21,7 @@ var powerup_reset = []
 
 func _ready() -> void:
 	Global.player = self
+	self.is_dead = false
 	
 func _exit_tree() -> void:
 	Global.player = null
@@ -65,12 +66,15 @@ func _on_HitBox_area_entered(area: Area2D) -> void:
 		var blood = Global.instance_node(BLOOD_SCENE, global_position, Global.node_creation_parent)
 		blood.rotation = velocity.angle()
 		blood.modulate = $Sprite.modulate
-		is_dead = true
+		self.is_dead = true
 		visible = false
 		Global.save_game()
 		yield(get_tree().create_timer(1), "timeout")
 		get_tree().reload_current_scene()
 
+func set_is_dead(value):
+	is_dead = value
+	Global.is_player_dead = is_dead
 
 func _on_PowerupDuration_timeout() -> void:
 	if powerup_reset.find("PowerupReload") != null:

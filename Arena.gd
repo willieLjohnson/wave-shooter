@@ -7,6 +7,11 @@ func _ready() -> void:
 	randomize()
 	Global.node_creation_parent = self
 	Global.score = 0
+	Global.is_player_dead = false
+	
+func _process(_delta: float) -> void:
+	if Global.is_player_dead:
+		$UI/Control/HighScore.visible = true
 	
 func _exit_tree() -> void:
 	Global.node_creation_parent = null

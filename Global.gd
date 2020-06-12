@@ -2,6 +2,7 @@ extends Node
 
 var node_creation_parent = null
 var player = null
+var is_player_dead = false
 var camera = null
 
 var score = 0
