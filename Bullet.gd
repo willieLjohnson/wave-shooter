@@ -1,5 +1,7 @@
 extends Sprite
 
+const HIT_EFFECT_SCENE = preload("res://HitEffect.tscn")
+
 var velocity = Vector2(1, 0)
 var default_speed = 250
 var speed = default_speed
