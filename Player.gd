@@ -3,6 +3,7 @@ extends KinematicBody2D
 export var ACCELERATION = 1890
 export var MAX_SPEED = 215
 export var FRICTION = 670
+export var  damage = 1
 
 var velocity = Vector2.ZERO
 
@@ -12,7 +13,6 @@ var BLOOD_SCENE = preload("res://PlayerBlood.tscn")
 var can_shoot = true
 var is_dead = false setget set_is_dead
 
-var damage = 1
 var default_damage = damage
 var reload_speed = 0.1
 var default_reload_speed = reload_speed
