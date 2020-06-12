@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Arena.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Powerup.tscn" type="PackedScene" id=7]
 [ext_resource path="res://PowerupDamage.tscn" type="PackedScene" id=8]
 [ext_resource path="res://EnemyTank.tscn" type="PackedScene" id=9]
+[ext_resource path="res://EnemySpinner.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -53,8 +54,14 @@ autostart = true
 wait_time = 15.0
 autostart = true
 
-[node name="EnemyOne" parent="." instance=ExtResource( 6 )]
-position = Vector2( 208, 160 )
+[node name="EnemySpinner" parent="." instance=ExtResource( 10 )]
+position = Vector2( 120, 88 )
+
+[node name="EnemySpinner2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 224, 296 )
+
+[node name="EnemySpinner3" parent="." instance=ExtResource( 10 )]
+position = Vector2( 560, 72 )
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_PowerupSpawnTimer_timeout"]
