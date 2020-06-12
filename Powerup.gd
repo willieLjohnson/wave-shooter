@@ -2,7 +2,7 @@ extends Sprite
 
 export(String) var player_variable_modify
 export(float) var player_variable_set
-export(float) var powerup_duration = 2
+export(float) var powerup_duration = 5
 
 func _on_HitBox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
