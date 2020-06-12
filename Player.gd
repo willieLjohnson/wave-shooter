@@ -13,6 +13,8 @@ var BLOOD_SCENE = preload("res://PlayerBlood.tscn")
 var can_shoot = true
 var is_dead = false setget set_is_dead
 
+onready var default_sprite_scale = $Sprite.scale
+
 var default_damage = damage
 var reload_speed = 0.1
 var default_reload_speed = reload_speed
@@ -48,18 +50,25 @@ func _physics_process(delta: float) -> void:
 		can_shoot = false
 		Global.camera.screen_shake(5, 0.01)
 		velocity += -bullet.recoil * direction
-	
 	move()
+	squash_stretch(delta)
 	
 func move() -> void:
 	velocity = move_and_slide(velocity)
 	global_position.x = clamp(global_position.x, 24, 616)
 	global_position.y = clamp(global_position.y, 24, 336)
 	
+func squash_stretch(delta) -> void:
+	var scale_vel = Vector2(abs(velocity.x), abs(velocity.y))
+	var squash = ((scale_vel.y + scale_vel.x) * 0.0002)
+	var new_scale = Vector2(squash + default_sprite_scale.x, (squash / -1.5) + default_sprite_scale.x)
+	$Sprite.rotation = velocity.angle()
+	$Sprite.scale = $Sprite.scale.move_toward(new_scale, ACCELERATION * delta)
+	
 func _on_Timer_timeout() -> void:
 	can_shoot = true
 	$ReloadSpeed.wait_time = reload_speed
-
+	
 func _on_HitBox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy") and not is_dead:
 		Global.play_sound("res://player-death.wav")

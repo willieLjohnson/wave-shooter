@@ -38,6 +38,7 @@ autostart = true
 [node name="UI" parent="." instance=ExtResource( 3 )]
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
+scale = Vector2( 0.2, 0.2 )
 limit_left = -5
 limit_top = -5
 limit_right = 645

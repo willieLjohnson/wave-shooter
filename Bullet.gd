@@ -10,7 +10,7 @@ var initial_speed = default_speed * 3.5
 var default_size = 0.1
 
 var damage = 1 setget set_damage
-var recoil = damage * 1.3
+var recoil = damage * default_speed * 0.15
 
 var look_once = true
 
@@ -31,9 +31,9 @@ func _process(delta: float) -> void:
 
 func set_damage(value) -> void:
 	damage = value
-	recoil = damage * default_speed * 0.15
+	recoil = damage * default_speed * 0.2
 	set_scale(Vector2((default_size * damage + velocity.x) * 0.5, (default_size * damage + velocity.y) * 0.5))  
-	$AudioStreamPlayer.pitch_scale = 0.8 / damage
+	$AudioStreamPlayer.pitch_scale = 0.9 / damage
 		
 func _on_VisibilityNotifier2D_screen_exited() -> void:
 	queue_free()
