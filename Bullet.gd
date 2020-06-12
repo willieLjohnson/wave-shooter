@@ -1,4 +1,4 @@
-extends Sprite
+extends Area2D
 
 const HIT_EFFECT_SCENE = preload("res://HitEffect.tscn")
 

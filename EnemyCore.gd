@@ -38,15 +38,15 @@ func basic_movement_towards_player(delta: float) -> void:
 
 func _on_Area2D_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_damager") and stun == false:
-		Global.instance_node(area.get_parent().HIT_EFFECT_SCENE, global_position, Global.node_creation_parent)
+		Global.instance_node(area.HIT_EFFECT_SCENE, global_position, Global.node_creation_parent)
 		Global.play_sound("res://enemy-hurt.wav")
 		Global.camera.screen_shake(10, 0.02)
 		modulate = Color.white
 		stun = true
 		velocity = -velocity * knockback
-		health -= area.get_parent().damage
+		health -= area.damage
 		$StunTimer.start()
-		area.get_parent().queue_free()
+		area.queue_free()
 
 
 func _on_StunTimer_timeout() -> void:
