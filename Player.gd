@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
-var speed = 150
+export var ACCELERATION = 1000
+export var MAX_SPEED = 200
+export var FRICTION = 500
+
 var velocity = Vector2.ZERO
 
 var BULLET_SCENE = preload("res://Bullet.tscn")
@@ -25,10 +28,16 @@ func _exit_tree() -> void:
 func _process(delta: float) -> void:
 	if is_dead: return
 	
-	velocity.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-	velocity.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
+	var input_vector = Vector2.ZERO
+	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	input_vector = input_vector.normalized()
 	
-	velocity = velocity.normalized()
+	if input_vector != Vector2.ZERO:
+		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		rotation /= 2
 	
 	if Input.is_action_pressed("shoot") and Global.node_creation_parent != null and can_shoot:
 		var bullet = Global.instance_node(BULLET_SCENE, global_position, Global.node_creation_parent)
@@ -39,11 +48,10 @@ func _process(delta: float) -> void:
 		Global.camera.screen_shake(5, 0.01)
 		velocity += -bullet.recoil * direction
 	
-
-	global_position.x = clamp(global_position.x, 24, 616)
-	global_position.y = clamp(global_position.y, 24, 336)
+	move()
 	
-	global_position += speed * velocity * delta
+func move() -> void:
+	velocity = move_and_slide(velocity)
 	
 func _on_Timer_timeout() -> void:
 	can_shoot = true
