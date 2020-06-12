@@ -21,7 +21,7 @@ tracks/0/keys = {
 }
 
 [node name="HitEffect" type="Sprite"]
-modulate = Color( 0, 0.835294, 1, 1 )
+modulate = Color( 0, 0.835294, 1, 0.619608 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
