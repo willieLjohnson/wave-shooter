@@ -17,8 +17,8 @@ spread = 18.9
 gravity = Vector2( 0, 0 )
 initial_velocity = 658.0
 initial_velocity_random = 1.0
-scale_amount = 0.8
-scale_amount_random = 0.8
+scale_amount = 0.3
+scale_amount_random = 0.6
 script = ExtResource( 2 )
 
 [node name="FreezeBlood" type="Timer" parent="Particles"]

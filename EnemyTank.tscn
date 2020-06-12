@@ -16,11 +16,11 @@ func _process(delta: float) -> void:
 
 [node name="EnemyTank" instance=ExtResource( 1 )]
 modulate = Color( 1, 0.584314, 0, 1 )
-scale = Vector2( 2.2, 2.2 )
+scale = Vector2( 2.4, 2.4 )
 texture = SubResource( 1 )
 script = SubResource( 2 )
 speed = 60
-health = 20
+health = 10
 knockback = 20
 screen_shake_intensity = 100
 score_value = 25
