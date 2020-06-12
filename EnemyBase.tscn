@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/Square.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5.33333, 5.33333 )
+extents = Vector2( 5.5506, 5.71564 )
 
 [node name="EnemyBase" type="KinematicBody2D"]
 scale = Vector2( 1.2, 1.2 )

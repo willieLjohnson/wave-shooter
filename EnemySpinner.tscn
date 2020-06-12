@@ -16,3 +16,6 @@ visible = true
 
 [node name="Sprite" parent="." index="1"]
 modulate = Color( 0.631373, 0.356863, 1, 1 )
+
+[node name="CollisionShape" parent="HitBox" index="0"]
+visible = true

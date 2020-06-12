@@ -20,7 +20,7 @@ glow_bicubic_upscale = true
 
 [node name="Arena" type="Node2D"]
 script = ExtResource( 2 )
-enemies = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 9 ) ]
+enemies = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 10 ) ]
 powerups = [ ExtResource( 7 ), ExtResource( 8 ) ]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -53,15 +53,6 @@ autostart = true
 [node name="PowerupSpawnTimer" type="Timer" parent="."]
 wait_time = 15.0
 autostart = true
-
-[node name="EnemySpinner" parent="." instance=ExtResource( 10 )]
-position = Vector2( 120, 88 )
-
-[node name="EnemySpinner2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 224, 296 )
-
-[node name="EnemySpinner3" parent="." instance=ExtResource( 10 )]
-position = Vector2( 560, 72 )
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_PowerupSpawnTimer_timeout"]
