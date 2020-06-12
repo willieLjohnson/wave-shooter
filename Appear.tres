@@ -3,6 +3,7 @@
 [resource]
 resource_name = "Appear"
 length = 0.2
+loop = true
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
