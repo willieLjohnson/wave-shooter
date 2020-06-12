@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=1]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/Square.png-5a9cbfea5dd232fdad40fd2c33cac1c9.stex"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends \"res://EnemyCore.gd\"
+
+
+func _process(delta: float) -> void:
+	basic_movement_towards_player(delta)
+"
+
+[node name="EnemyTank" instance=ExtResource( 1 )]
+modulate = Color( 1, 0.584314, 0, 1 )
+scale = Vector2( 2.2, 2.2 )
+texture = SubResource( 1 )
+script = SubResource( 2 )
+speed = 60
+health = 20
+knockback = 20
+screen_shake_intensity = 100
+score_value = 25
+
+[node name="StunTimer" parent="." index="1"]
+wait_time = 0.01
