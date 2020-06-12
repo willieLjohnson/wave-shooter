@@ -6,11 +6,11 @@
 scale = Vector2( 2.4, 2.4 )
 ACCELERATION = 250
 MAX_SPEED = 40
-health = 10
-knockback = 1
+health = 8
+knockback = 0
 
 [node name="Sprite" parent="." index="1"]
 modulate = Color( 0.980392, 0.576471, 0.00392157, 1 )
 
 [node name="StunTimer" parent="." index="3"]
-wait_time = 0.05
+wait_time = 0.08
