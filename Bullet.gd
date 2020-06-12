@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 
 func set_damage(value) -> void:
 	damage = value
-	recoil = damage * default_speed * 0.25
+	recoil = damage * default_speed * 0.15
 	set_scale(Vector2((default_size * damage + velocity.x) * 0.5, (default_size * damage + velocity.y) * 0.5))  
 	$AudioStreamPlayer.pitch_scale = 1 / damage
 		
