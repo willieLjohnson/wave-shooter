@@ -5,11 +5,11 @@
 [ext_resource path="res://HighScore.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 128
+size = 90
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 64
+size = 40
 font_data = ExtResource( 2 )
 
 [node name="UI" type="Node2D"]
@@ -22,13 +22,13 @@ __meta__ = {
 }
 
 [node name="Score" type="Label" parent="Control"]
-margin_top = -4.435
-margin_right = 1280.0
-margin_bottom = 140.565
+margin_left = 76.0
+margin_top = -4.0
+margin_right = 1071.0
+margin_bottom = 134.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = SubResource( 1 )
 text = "100"
-align = 1
 valign = 1
 script = ExtResource( 1 )
 __meta__ = {

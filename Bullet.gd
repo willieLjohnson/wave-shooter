@@ -8,7 +8,7 @@ var initial_speed = default_speed * 3.5
 var default_size = 0.1
 
 var damage = 1 setget set_damage
-var recoil = damage
+var recoil = damage * 1.3
 
 var look_once = true
 
@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 
 func set_damage(value) -> void:
 	damage = value
-	recoil = damage
+	recoil = damage * 1.3
 	set_scale(Vector2((default_size * damage + velocity.x) * 0.5, (default_size * damage + velocity.y) * 0.5))  
 	$AudioStreamPlayer.pitch_scale = 1 / damage
 		
