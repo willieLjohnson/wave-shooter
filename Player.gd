@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export var ACCELERATION = 1000
 export var MAX_SPEED = 200
-export var FRICTION = 500
+export var FRICTION = 800
 
 var velocity = Vector2.ZERO
 
@@ -25,7 +25,7 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	Global.player = null
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if is_dead: return
 	
 	var input_vector = Vector2.ZERO
@@ -52,6 +52,8 @@ func _process(delta: float) -> void:
 	
 func move() -> void:
 	velocity = move_and_slide(velocity)
+	global_position.x = clamp(global_position.x, 24, 616)
+	global_position.y = clamp(global_position.y, 24, 336)
 	
 func _on_Timer_timeout() -> void:
 	can_shoot = true
