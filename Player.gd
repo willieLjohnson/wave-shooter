@@ -1,4 +1,4 @@
-extends Sprite
+extends KinematicBody2D
 
 var speed = 150
 var velocity = Vector2.ZERO
@@ -54,7 +54,7 @@ func _on_HitBox_area_entered(area: Area2D) -> void:
 		Global.play_sound("res://player-death.wav")
 		var blood = Global.instance_node(BLOOD_SCENE, global_position, Global.node_creation_parent)
 		blood.rotation = velocity.angle()
-		blood.modulate = modulate
+		blood.modulate = $Sprite.modulate
 		is_dead = true
 		visible = false
 		Global.save_game()
