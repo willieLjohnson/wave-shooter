@@ -52,6 +52,9 @@ autostart = true
 [node name="PowerupSpawnTimer" type="Timer" parent="."]
 wait_time = 15.0
 autostart = true
+
+[node name="EnemyOne" parent="." instance=ExtResource( 6 )]
+position = Vector2( 208, 160 )
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_PowerupSpawnTimer_timeout"]

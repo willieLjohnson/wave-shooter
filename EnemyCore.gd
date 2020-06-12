@@ -1,18 +1,22 @@
-extends Sprite
+extends KinematicBody2D
 
 var BLOOD_PARTICLES = preload("res://BloodParticles.tscn")
 
-export(int) var speed = 75
+export(int) var ACCELERATION = 500
+export(int) var MAX_SPEED = 85
+export(int) var FRICTION = 100
 export(int) var health = 3
-export(int) var knockback = 600
+export(int) var knockback = 2
 export(int) var screen_shake_intensity = 60
 export(int) var score_value = 10
+
 
 var velocity = Vector2()
 
 var stun = false
 
-onready var current_color = modulate
+onready var sprite = $Sprite
+onready var current_color = sprite.modulate
 
 func _process(_delta: float) -> void:
 	if health <= 0:
@@ -29,11 +33,11 @@ func _process(_delta: float) -> void:
 
 func basic_movement_towards_player(delta: float) -> void:
 	if Global.player != null and stun == false:
-		velocity = global_position.direction_to(Global.player.global_position)
-		global_position += velocity * speed * delta
+		velocity = velocity.move_toward(global_position.direction_to(Global.player.global_position) * MAX_SPEED, ACCELERATION * delta)
+		velocity = move_and_slide(velocity)
 	elif stun:
-		velocity = lerp(velocity, Vector2(0, 0), 0.3)
-		global_position += velocity * delta
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		velocity = move_and_slide(velocity)
 
 
 func _on_Area2D_area_entered(area: Area2D) -> void:
@@ -41,9 +45,9 @@ func _on_Area2D_area_entered(area: Area2D) -> void:
 		Global.instance_node(area.HIT_EFFECT_SCENE, global_position, Global.node_creation_parent)
 		Global.play_sound("res://enemy-hurt.wav")
 		Global.camera.screen_shake(10, 0.02)
-		modulate = Color.white
+		sprite.modulate = Color.white
 		stun = true
-		velocity = -velocity * knockback
+		velocity = (-velocity / 2) * knockback
 		health -= area.damage
 		$StunTimer.start()
 		area.queue_free()
