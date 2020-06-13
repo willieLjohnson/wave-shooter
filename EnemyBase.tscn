@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://EnemySimple.gd" type="Script" id=1]
-[ext_resource path="res://assets/Square.png" type="Texture" id=2]
 
 [node name="EnemyBase" type="KinematicBody2D"]
+modulate = Color( 0.992157, 0.282353, 0.282353, 1 )
 scale = Vector2( 1.2, 1.2 )
 script = ExtResource( 1 )
 
@@ -12,9 +12,8 @@ visible = false
 scale = Vector2( 1.5, 1.5 )
 polygon = PoolVector2Array( -5.55556, -5.55556, 5.55556, -5.55556, 5.55556, 5.55556, -5.55556, 5.55556 )
 
-[node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 1, 0.384314, 0.384314, 1 )
-texture = ExtResource( 2 )
+[node name="Shape" type="Polygon2D" parent="."]
+polygon = PoolVector2Array( -8.33333, -8.33333, 8.33333, -8.33333, 8.33333, 8.33333, -8.33333, 8.33333 )
 
 [node name="HitBox" type="Area2D" parent="." groups=[
 "enemy",

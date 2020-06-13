@@ -4,6 +4,7 @@
 [ext_resource path="res://EnemySpinner.gd" type="Script" id=2]
 
 [node name="EnemySpinner" instance=ExtResource( 1 )]
+modulate = Color( 0.639216, 0.282353, 0.992157, 1 )
 scale = Vector2( 1.6, 0.8 )
 script = ExtResource( 2 )
 ACCELERATION = 210
@@ -11,5 +12,5 @@ MAX_SPEED = 400
 FRICTION = 0
 health = 5
 
-[node name="Sprite" parent="." index="1"]
-modulate = Color( 0.631373, 0.356863, 1, 1 )
+[node name="Shape" parent="." index="1"]
+color = Color( 0.992157, 0.992157, 1, 1 )
