@@ -13,6 +13,7 @@ min_value = 0.3
 _data = [ Vector2( 0.0267857, 0.331818 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Player" type="KinematicBody2D"]
+modulate = Color( 0, 0.670588, 1, 1 )
 scale = Vector2( 0.2, 0.2 )
 script = ExtResource( 2 )
 
@@ -25,7 +26,6 @@ shape = SubResource( 1 )
 scale = Vector2( 1, 1 )
 z_index = 10
 radius = 60.0
-color = Color( 0, 0.670588, 1, 1 )
 
 [node name="ReloadSpeed" type="Timer" parent="."]
 wait_time = 0.1
