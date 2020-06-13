@@ -42,7 +42,7 @@ func basic_movement_towards_player(delta: float) -> void:
 
 func _on_Area2D_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_damager") and stun == false:
-		Global.instance_node(area.HIT_EFFECT_SCENE, global_position, Global.node_creation_parent)
+		Global.instance_node(area.HIT_EFFECT_SCENE, area.global_position, Global.node_creation_parent)
 		Global.play_sound("res://enemy-hurt.wav")
 		Global.camera.screen_shake(10, 0.02)
 		sprite.modulate = Color.white
