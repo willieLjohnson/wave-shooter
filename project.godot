@@ -34,7 +34,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "wakatime" )
+enabled=PoolStringArray( "regular_polygon2d_node", "wakatime" )
 
 [input]
 

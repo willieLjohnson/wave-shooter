@@ -26,8 +26,9 @@ func _process(_delta: float) -> void:
 		Global.score += score_value
 		if Global.node_creation_parent != null:
 			var blood_particles = Global.instance_node(BLOOD_PARTICLES, global_position, Global.node_creation_parent)
-			blood_particles.rotation = -rotation
-			blood_particles.modulate = Color.from_hsv(current_color.h, current_color.s, current_color.v * 0.65)
+			blood_particles.get_node("Particles").scale_amount = 0.3 * scale.x
+			blood_particles.rotation = velocity.angle()
+			blood_particles.modulate = Color.from_hsv(current_color.h, current_color.s, current_color.v * 0.7)
 		queue_free()
 
 func basic_movement_towards_player(delta: float) -> void:

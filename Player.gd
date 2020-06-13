@@ -74,7 +74,8 @@ func _on_HitBox_area_entered(area: Area2D) -> void:
 		Global.play_sound("res://player-death.wav")
 		var blood = Global.instance_node(BLOOD_SCENE, global_position, Global.node_creation_parent)
 		blood.rotation = velocity.angle()
-		blood.modulate = $Circle.color
+		blood.modulate = modulate
+		$Node.queue_free()
 		self.is_dead = true
 		visible = false
 		Global.save_game()

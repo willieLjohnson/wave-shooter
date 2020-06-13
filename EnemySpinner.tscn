@@ -10,7 +10,3 @@ script = ExtResource( 2 )
 ACCELERATION = 210
 MAX_SPEED = 400
 FRICTION = 0
-health = 5
-
-[node name="Shape" parent="." index="1"]
-color = Color( 0.992157, 0.992157, 1, 1 )
