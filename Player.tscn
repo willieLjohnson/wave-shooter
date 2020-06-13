@@ -4,13 +4,10 @@
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://Trail.tscn" type="PackedScene" id=3]
 [ext_resource path="res://BlueGradient.tres" type="Gradient" id=4]
+[ext_resource path="res://TrailWidthCurve.tres" type="Curve" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 310.056
-
-[sub_resource type="Curve" id=2]
-min_value = 0.3
-_data = [ Vector2( 0.0267857, 0.331818 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Player" type="KinematicBody2D"]
 modulate = Color( 0, 0.670588, 1, 1 )
@@ -44,11 +41,10 @@ shape = SubResource( 1 )
 
 [node name="Trail" parent="Node" instance=ExtResource( 3 )]
 width = 1.0
-width_curve = SubResource( 2 )
+width_curve = ExtResource( 5 )
 default_color = Color( 0, 0.670588, 1, 0.839216 )
 gradient = ExtResource( 4 )
 targetPath = NodePath("../..")
-trailLength = 1
 wobble = true
 [connection signal="timeout" from="ReloadSpeed" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="PowerupDuration" to="." method="_on_PowerupDuration_timeout"]

@@ -6,7 +6,7 @@ export(int) var ACCELERATION = 500
 export(int) var MAX_SPEED = 85
 export(int) var FRICTION = 100
 export(int) var health = 3
-export(int) var knockback = 2
+export(float) var knockback = 2
 export(int) var screen_shake_intensity = 60
 export(int) var score_value = 10
 

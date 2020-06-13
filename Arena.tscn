@@ -13,6 +13,7 @@
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
+dof_blur_near_distance = 1.31
 glow_enabled = true
 glow_bloom = 0.15
 glow_blend_mode = 0
@@ -53,6 +54,10 @@ autostart = true
 [node name="PowerupSpawnTimer" type="Timer" parent="."]
 wait_time = 15.0
 autostart = true
+
+[node name="PowerupDamage" parent="." instance=ExtResource( 8 )]
+position = Vector2( 232, 184 )
+scale = Vector2( -6.25e-07, 1e-05 )
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_PowerupSpawnTimer_timeout"]

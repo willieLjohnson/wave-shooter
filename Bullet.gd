@@ -28,12 +28,14 @@ func _process(delta: float) -> void:
 	global_position += velocity.rotated(rotation) * speed * delta
 	scale = lerp(scale, default_scale * damage, 0.15)
 	speed = lerp(speed, default_speed, 0.15)
-
+	var audioPitch = $AudioStreamPlayer.pitch_scale
+	$AudioStreamPlayer.pitch_scale = lerp(audioPitch, 0.9 / damage, 0.01)
+	
 func set_damage(value) -> void:
 	damage = value
 	recoil = damage * default_speed * 0.2
 	set_scale(Vector2((default_size * damage + velocity.x) * 0.5, (default_size * damage + velocity.y) * 0.5))  
-	$AudioStreamPlayer.pitch_scale = 0.9 / damage
+
 		
 func _on_VisibilityNotifier2D_screen_exited() -> void:
 	queue_free()

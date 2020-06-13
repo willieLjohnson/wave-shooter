@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://EnemySimple.gd" type="Script" id=1]
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=2]
+[ext_resource path="res://Trail.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Curve" id=2]
+min_value = 0.3
+_data = [ Vector2( 0.0267857, 0.331818 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.992157, 0.282353, 0.282353, 0, 0.992157, 0.282353, 0.282353, 1 )
 
 [node name="EnemyBase" type="KinematicBody2D"]
 modulate = Color( 0.992157, 0.282353, 0.282353, 1 )
@@ -36,5 +44,17 @@ polygon = PoolVector2Array( -8.33333, -8.33333, 8.33333, -8.33333, 8.33333, 8.33
 [node name="StunTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Trail" parent="Node" instance=ExtResource( 3 )]
+z_index = -1
+width = 1.0
+width_curve = SubResource( 2 )
+default_color = Color( 0.992157, 0.282353, 0.282353, 1 )
+gradient = SubResource( 1 )
+targetPath = NodePath("../..")
+target_width_multiplier = 17
+target_trailLength_multiplier = 25
 [connection signal="area_entered" from="HitBox" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
