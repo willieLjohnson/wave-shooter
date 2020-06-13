@@ -13,7 +13,7 @@ var BLOOD_SCENE = preload("res://PlayerBlood.tscn")
 var can_shoot = true
 var is_dead = false setget set_is_dead
 
-onready var default_sprite_scale = $Sprite.scale
+onready var default_shape_scale = $Circle.scale
 
 var default_damage = damage
 var reload_speed = 0.1
@@ -61,9 +61,9 @@ func move() -> void:
 func squash_stretch(delta) -> void:
 	var scale_vel = Vector2(abs(velocity.x), abs(velocity.y))
 	var squash = ((scale_vel.y + scale_vel.x) * 0.0002)
-	var new_scale = Vector2(squash + default_sprite_scale.x, (squash / -1.5) + default_sprite_scale.x)
-	$Sprite.rotation = velocity.angle()
-	$Sprite.scale = $Sprite.scale.move_toward(new_scale, ACCELERATION * delta)
+	var new_scale = Vector2(squash + default_shape_scale.x, (squash / -1.5) + default_shape_scale.x)
+	$Circle.rotation = velocity.angle()
+	$Circle.scale = $Circle.scale.move_toward(new_scale, ACCELERATION * delta)
 	
 func _on_Timer_timeout() -> void:
 	can_shoot = true
@@ -74,7 +74,7 @@ func _on_HitBox_area_entered(area: Area2D) -> void:
 		Global.play_sound("res://player-death.wav")
 		var blood = Global.instance_node(BLOOD_SCENE, global_position, Global.node_creation_parent)
 		blood.rotation = velocity.angle()
-		blood.modulate = $Sprite.modulate
+		blood.modulate = $Circle.color
 		self.is_dead = true
 		visible = false
 		Global.save_game()
