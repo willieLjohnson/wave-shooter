@@ -17,7 +17,7 @@ var stun = false
 
 onready var current_color = modulate
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if health <= 0:
 		Global.play_sound("res://enemy-death.wav")
 		if Global.camera:
@@ -30,7 +30,11 @@ func _process(_delta: float) -> void:
 			blood_particles.rotation = velocity.angle()
 			blood_particles.modulate = Color.from_hsv(current_color.h, current_color.s, current_color.v * 0.7)
 		queue_free()
-
+	if Global.is_player_dead:
+		velocity = velocity.move_toward(Vector2(rand_range(-1, 1), rand_range(-1, 1))
+			* rand_range(-1000, 1000) * MAX_SPEED, ACCELERATION * 3 * delta)
+		velocity = move_and_slide(velocity)
+		
 func basic_movement_towards_player(delta: float) -> void:
 	move(delta)
 	rotation = lerp(rotation, velocity.angle(), 0.1)

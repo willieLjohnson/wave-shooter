@@ -10,6 +10,3 @@ MAX_SPEED = 220
 health = 1
 screen_shake_intensity = 40
 score_value = 20
-
-[node name="Indicator" parent="." index="4"]
-modulate = Color( 0.87451, 1, 0, 1 )

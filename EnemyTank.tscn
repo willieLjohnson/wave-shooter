@@ -20,6 +20,3 @@ polygon = PoolVector2Array( -8.50292, -8.50951, 0, -12, 8.54301, -8.50951, 12.03
 
 [node name="StunTimer" parent="." index="3"]
 wait_time = 0.08
-
-[node name="Indicator" parent="." index="4"]
-modulate = Color( 0.882353, 0.556863, 0, 1 )
