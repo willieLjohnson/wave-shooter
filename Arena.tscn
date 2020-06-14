@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Arena.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://EnemyTank.tscn" type="PackedScene" id=9]
 [ext_resource path="res://EnemySpinner.tscn" type="PackedScene" id=10]
 [ext_resource path="res://BloomEnvironment.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Background.tscn" type="PackedScene" id=12]
 
 [node name="Arena" type="Node2D"]
 script = ExtResource( 2 )
@@ -30,13 +31,15 @@ wait_time = 3.0
 autostart = true
 
 [node name="UI" parent="." instance=ExtResource( 3 )]
+position = Vector2( -0.122093, 0 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 scale = Vector2( 0.2, 0.2 )
-limit_left = -5
-limit_top = -5
-limit_right = 645
-limit_bottom = 365
+limit_left = -10
+limit_top = -10
+limit_right = 650
+limit_bottom = 370
+limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 2.5
 
@@ -50,6 +53,21 @@ autostart = true
 [node name="PowerupDamage" parent="." instance=ExtResource( 8 )]
 position = Vector2( 232, 184 )
 scale = Vector2( -6.25e-07, 1e-05 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, -0.5 )
+motion_mirroring = Vector2( 640, 640 )
+
+[node name="dot-grid" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 12 )]
+modulate = Color( 1, 1, 1, 0.054902 )
+
+[node name="Border" type="Line2D" parent="."]
+points = PoolVector2Array( 0, -2.5025, 0, 360, 640, 360, 640, 0, 2.5, 0 )
+width = 5.0
+default_color = Color( 1, 1, 1, 0.145098 )
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_PowerupSpawnTimer_timeout"]

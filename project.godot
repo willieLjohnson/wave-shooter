@@ -74,5 +74,7 @@ shoot={
 
 [rendering]
 
+quality/filters/use_nearest_mipmap_filter=true
 environment/default_clear_color=Color( 0.00699999, 0, 0.07, 1 )
+quality/filters/msaa=1
 environment/default_environment="res://default_env.tres"

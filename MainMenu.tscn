@@ -5,10 +5,10 @@
 [ext_resource path="res://ui/uitheme.tres" type="Theme" id=3]
 [ext_resource path="res://BloomEnvironment.tscn" type="PackedScene" id=4]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=1]
 size = 100
 use_filter = true
-extra_spacing_char = 8
+extra_spacing_char = 13
 font_data = ExtResource( 2 )
 
 [sub_resource type="GDScript" id=2]
@@ -33,7 +33,7 @@ func _on_pressed() -> void:
 	get_tree().quit()
 "
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 80
 use_filter = true
 extra_spacing_char = 5
@@ -60,7 +60,7 @@ margin_top = -328.0
 margin_right = 960.0
 margin_bottom = -220.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0.670588, 1, 1 )
 text = "wave shooter"
 align = 1
@@ -91,6 +91,7 @@ __meta__ = {
 }
 
 [node name="HighScore" type="Label" parent="UI/Control"]
+modulate = Color( 1, 1, 1, 0.87451 )
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -100,7 +101,7 @@ margin_top = -48.0
 margin_right = 960.0
 margin_bottom = 38.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "100"
 align = 1
 valign = 1

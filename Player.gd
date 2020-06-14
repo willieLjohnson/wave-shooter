@@ -21,9 +21,14 @@ var default_reload_speed = reload_speed
 
 var powerup_reset = []
 
+var border = null
+var parent = null
+
 func _ready() -> void:
 	Global.player = self
 	self.is_dead = false
+	parent = get_parent()
+	if parent: border = parent.get_node("Border")
 	
 func _exit_tree() -> void:
 	Global.player = null
@@ -55,8 +60,8 @@ func _physics_process(delta: float) -> void:
 	
 func move() -> void:
 	velocity = move_and_slide(velocity)
-	global_position.x = clamp(global_position.x, 24, 616)
-	global_position.y = clamp(global_position.y, 24, 336)
+	global_position.x = clamp(global_position.x, border.points[0].x + 15, border.points[3].x - 15)
+	global_position.y = clamp(global_position.y, border.points[0].y + 15, border.points[1].y - 15)
 	
 func squash_stretch(delta) -> void:
 	var scale_vel = Vector2(abs(velocity.x), abs(velocity.y))
