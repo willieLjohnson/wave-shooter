@@ -11,3 +11,6 @@ ACCELERATION = 210
 MAX_SPEED = 400
 FRICTION = 0
 knockback = 1.0
+
+[node name="Indicator" parent="." index="4"]
+modulate = Color( 0.639216, 0.282353, 0.992157, 1 )
