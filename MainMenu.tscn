@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://HighScore.gd" type="Script" id=1]
+[ext_resource path="res://assets/Font.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://ui/uitheme.tres" type="Theme" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+extra_spacing_char = 5
+font_data = ExtResource( 2 )
+
+[node name="MainMenu" type="Node"]
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+margin_right = 640.0
+margin_bottom = 360.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HighScore" type="Label" parent="UI/Control"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -320.0
+margin_top = -40.0
+margin_right = 960.0
+margin_bottom = 46.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 1 )
+text = "100"
+align = 1
+valign = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonStart" type="Button" parent="UI/Control"]
+margin_left = 272.0
+margin_top = 144.0
+margin_right = 368.0
+margin_bottom = 168.0
+theme = ExtResource( 3 )
+text = "START"
+__meta__ = {
+"_edit_use_anchors_": false
+}
