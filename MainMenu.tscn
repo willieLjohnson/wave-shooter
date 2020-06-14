@@ -65,6 +65,9 @@ custom_colors/font_color = Color( 0, 0.670588, 1, 1 )
 text = "wave shooter"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ButtonStart" type="Button" parent="UI/Control"]
 margin_left = 272.0

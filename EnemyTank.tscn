@@ -21,3 +21,8 @@ polygon = PoolVector2Array( -8.50292, -8.50951, 0, -12, 8.54301, -8.50951, 12.03
 
 [node name="StunTimer" parent="." index="3"]
 wait_time = 0.03
+
+[node name="SoftCollision" parent="." index="5"]
+visible = false
+
+[editable path="SoftCollision"]
