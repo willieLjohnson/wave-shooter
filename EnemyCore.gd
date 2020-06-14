@@ -31,8 +31,7 @@ func _process(delta: float) -> void:
 			blood_particles.modulate = Color.from_hsv(current_color.h, current_color.s, current_color.v * 0.7)
 		queue_free()
 	if Global.is_player_dead:
-		velocity = velocity.move_toward(Vector2(rand_range(-1, 1), rand_range(-1, 1))
-			* rand_range(-1000, 1000) * MAX_SPEED, ACCELERATION * 3 * delta)
+		velocity = velocity.move_toward(Vector2(rand_range(-1, 1), rand_range(-1, 1)) * MAX_SPEED * 3, ACCELERATION * 3 * delta)
 		velocity = move_and_slide(velocity)
 		
 func basic_movement_towards_player(delta: float) -> void:

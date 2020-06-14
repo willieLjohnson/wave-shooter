@@ -16,17 +16,19 @@ func instance_node(node, location, parent):
 	node_instance.global_position = location
 	return node_instance  
 	
-func play_sound(sound):
+func play_sound(sound, volume = 0):
 	if node_creation_parent != null:
 		var audioStreamPlayer = AudioStreamPlayer.new()
 		node_creation_parent.add_child(audioStreamPlayer)
-		audioStreamPlayer.stream = load(sound) 
+		audioStreamPlayer.stream = load(sound)
+		audioStreamPlayer.volume_db = volume
 		audioStreamPlayer.play()
 
-func play_sound_on(parent, sound):
+func play_sound_on(parent, sound, volume = 0):
 	var audioStreamPlayer = AudioStreamPlayer.new()
 	parent.add_child(audioStreamPlayer)
 	audioStreamPlayer.stream = load(sound) 
+	audioStreamPlayer.volume_db = volume
 	audioStreamPlayer.play()
 	
 func save():
