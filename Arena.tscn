@@ -10,14 +10,7 @@
 [ext_resource path="res://PowerupDamage.tscn" type="PackedScene" id=8]
 [ext_resource path="res://EnemyTank.tscn" type="PackedScene" id=9]
 [ext_resource path="res://EnemySpinner.tscn" type="PackedScene" id=10]
-
-[sub_resource type="Environment" id=1]
-background_mode = 4
-dof_blur_near_distance = 1.31
-glow_enabled = true
-glow_bloom = 0.15
-glow_blend_mode = 0
-glow_bicubic_upscale = true
+[ext_resource path="res://BloomEnvironment.tscn" type="PackedScene" id=11]
 
 [node name="Arena" type="Node2D"]
 script = ExtResource( 2 )
@@ -30,8 +23,7 @@ position = Vector2( 320, 180 )
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 1 )
+[node name="BloomEnvironment" parent="." instance=ExtResource( 11 )]
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 3.0

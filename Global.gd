@@ -22,7 +22,13 @@ func play_sound(sound):
 		node_creation_parent.add_child(audioStreamPlayer)
 		audioStreamPlayer.stream = load(sound) 
 		audioStreamPlayer.play()
-		
+
+func play_sound_on(parent, sound):
+	var audioStreamPlayer = AudioStreamPlayer.new()
+	parent.add_child(audioStreamPlayer)
+	audioStreamPlayer.stream = load(sound) 
+	audioStreamPlayer.play()
+	
 func save():
 	var save_dict = {
 		"high_score": high_score
