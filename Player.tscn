@@ -10,8 +10,11 @@
 radius = 310.056
 
 [node name="Player" type="KinematicBody2D"]
+modulate = Color( 0.729412, 1, 0.917647, 1 )
 scale = Vector2( 0.2, 0.2 )
 script = ExtResource( 2 )
+ACCELERATION = 1690
+MAX_SPEED = 200
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.2, 0.2 )

@@ -7,8 +7,8 @@ modulate = Color( 0.882353, 0.556863, 0, 1 )
 scale = Vector2( 2.5, 2.5 )
 ACCELERATION = 250
 MAX_SPEED = 40
-health = 8
 knockback = 0.0
+health = 8
 
 [node name="CollisionShape2" parent="." index="0"]
 polygon = PoolVector2Array( -8.50292, -8.50951, 0, -12, 8.54301, -8.50951, 12.0377, -0.0572708, 8.57987, 8.49957, 0, 12, -8.48449, 8.49957, -12, 0 )

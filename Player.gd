@@ -3,8 +3,9 @@ extends KinematicBody2D
 export var ACCELERATION = 1890
 export var MAX_SPEED = 215 setget set_max_speed
 export var FRICTION = 670
-export(float) var damage = 1
-export(float) var reload_speed = 0.1
+
+export(float) var base_damage = 1 setget set_base_damage
+export(float) var base_reload_speed = 0.2 setget set_base_reload_speed
 
 const BULLET_SCENE = preload("res://Bullet.tscn")
 const BLOOD_SCENE = preload("res://PlayerBlood.tscn")
@@ -13,10 +14,11 @@ onready var default_shape_scale = $Circle.scale
 
 var velocity = Vector2.ZERO
 
-var base_damage = damage setget set_base_damage
-var base_modulate = modulate setget set_base_modulate
-var base_reload_speed = reload_speed setget set_base_reload_speed
 
+var base_modulate = modulate setget set_base_modulate
+
+var reload_speed = base_reload_speed
+var damage = base_damage
 var can_shoot = true
 var is_dead = false setget set_is_dead
 
@@ -78,7 +80,7 @@ func set_max_speed(new_max_speed: float) -> void:
 	MAX_SPEED = new_max_speed
 	ACCELERATION += new_max_speed
 	
-func set_base_damage(new_damage: int) -> void:
+func set_base_damage(new_damage: float) -> void:
 	base_damage  = new_damage
 	damage = max(base_damage, damage)
 	
