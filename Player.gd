@@ -16,6 +16,7 @@ var is_dead = false setget set_is_dead
 onready var default_shape_scale = $Circle.scale
 
 var default_damage = damage
+var default_modulate = modulate
 var reload_speed = 0.1
 var default_reload_speed = reload_speed
 
@@ -58,6 +59,7 @@ func _physics_process(delta: float) -> void:
 		velocity += -bullet.recoil * direction
 	move()
 	squash_stretch(delta)
+	modulate = Color.from_hsv(default_modulate.h + (damage * 0.2), default_modulate.s + (damage * 0.2), default_modulate.v - (damage * 0.1), default_modulate.a)
 	
 func move() -> void:
 	velocity = move_and_slide(velocity)

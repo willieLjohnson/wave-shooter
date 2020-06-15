@@ -41,6 +41,12 @@ func _physics_process(delta: float) -> void:
 	while get_point_count() > trailLength:
 		remove_point(0)
 		
+	if match_target_color:
+		default_color = target.modulate
+		gradient = Gradient.new()
+		gradient.colors[0] = Color(default_color.r, default_color.g, default_color.b, 0)
+		gradient.colors[1] = Color(default_color.r, default_color.g, default_color.b, default_color.a)
+		
 func wobble(delta: float) -> void:
 	frameCount %= maxFrames
 	for i in range(points.size()):
