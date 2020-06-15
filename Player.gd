@@ -3,22 +3,22 @@ extends KinematicBody2D
 export var ACCELERATION = 1890
 export var MAX_SPEED = 215
 export var FRICTION = 670
-export var  damage = 1
+export(float) var damage = 1
+export(float) var reload_speed = 0.1
 
-var velocity = Vector2.ZERO
-
-var BULLET_SCENE = preload("res://Bullet.tscn")
-var BLOOD_SCENE = preload("res://PlayerBlood.tscn")
-
-var can_shoot = true
-var is_dead = false setget set_is_dead
+const BULLET_SCENE = preload("res://Bullet.tscn")
+const BLOOD_SCENE = preload("res://PlayerBlood.tscn")
 
 onready var default_shape_scale = $Circle.scale
 
-var default_damage = damage
-var default_modulate = modulate
-var reload_speed = 0.1
-var default_reload_speed = reload_speed
+var velocity = Vector2.ZERO
+
+var base_damage = damage setget set_base_damage
+var base_modulate = modulate setget set_base_modulate
+var base_reload_speed = reload_speed setget set_base_reload_speed
+
+var can_shoot = true
+var is_dead = false setget set_is_dead
 
 var powerup_reset = []
 
@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 		velocity += -bullet.recoil * direction
 	move()
 	squash_stretch(delta)
-	var new_modulate = Color.from_hsv(default_modulate.h + (damage * 0.2), default_modulate.s + (damage * 0.2), default_modulate.v - (damage * 0.05), default_modulate.a)
+	var new_modulate = Color.from_hsv(base_modulate.h + (damage * 0.2), base_modulate.s + (damage * 0.2), base_modulate.v - (damage * 0.05), base_modulate.a)
 	modulate = lerp(modulate, new_modulate, 0.3)
 	
 func move() -> void:
@@ -73,6 +73,18 @@ func squash_stretch(delta) -> void:
 	var new_scale = Vector2(squash + default_shape_scale.x, (squash / -1.5) + default_shape_scale.x)
 	$Circle.rotation = velocity.angle()
 	$Circle.scale = $Circle.scale.move_toward(new_scale, ACCELERATION * delta)
+
+func set_base_damage(new_damage: float) -> void:
+	base_damage  = new_damage
+	damage = max(base_damage, damage)
+	
+func set_base_reload_speed(new_reload_speed: float) -> void:
+	base_reload_speed = new_reload_speed
+	reload_speed = max(base_reload_speed, reload_speed)
+
+func set_base_modulate(new_modulate: float) -> void:
+	base_modulate = new_modulate
+	modulate = base_modulate
 	
 func _on_Timer_timeout() -> void:
 	can_shoot = true
@@ -97,8 +109,8 @@ func set_is_dead(value):
 
 func _on_PowerupDuration_timeout() -> void:
 	if powerup_reset.find("PowerupReload") != null:
-		reload_speed = default_reload_speed
+		reload_speed = base_reload_speed
 		powerup_reset.erase("PowerupReload")
 	if powerup_reset.find("PowerupDamage") != null:
-		damage = default_damage
+		damage = base_damage
 		powerup_reset.erase("PowerupDamage")

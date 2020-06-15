@@ -4,6 +4,9 @@ export(String) var player_variable_modify
 export(float) var player_variable_set
 export(float) var powerup_duration = 5
 
+func _physics_process(delta: float) -> void:
+	$AnimationPlayer.playback_speed = $LifeTimer.wait_time / $LifeTimer.time_left
+		
 func _on_HitBox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
 		Global.play_sound("res://pickup-powerup.wav")
@@ -13,3 +16,7 @@ func _on_HitBox_area_entered(area: Area2D) -> void:
 		area.get_parent().get_node("PowerupDuration").start()
 		area.get_parent().powerup_reset.append(name)
 		queue_free()
+
+
+func _on_LifeTimer_timeout() -> void:
+	queue_free()
