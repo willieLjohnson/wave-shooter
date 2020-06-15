@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
-var BLOOD_PARTICLES = preload("res://BloodParticles.tscn")
+const BLOOD_PARTICLES = preload("res://BloodParticles.tscn")
+const ESSENCE_SCENE = preload("res://Essence.tscn")
 
 export(int) var ACCELERATION = 500
 export(int) var MAX_SPEED = 85
@@ -23,7 +24,7 @@ func _process(delta: float) -> void:
 		Global.play_sound("res://enemy-death.wav")
 		if Global.camera:
 			Global.camera.screen_shake(screen_shake_intensity, 0.2)
-
+		
 		Global.score += score_value
 		if Global.node_creation_parent != null:
 			var blood_particles = Global.instance_node(BLOOD_PARTICLES, global_position, Global.node_creation_parent)
@@ -31,6 +32,9 @@ func _process(delta: float) -> void:
 			blood_particles.rotation = velocity.angle()
 			blood_particles.modulate = Color.from_hsv(current_color.h, current_color.s, current_color.v * 0.7)
 		queue_free()
+		for essence in range(score_value / 2):
+			var essence_instance = Global.instance_node(ESSENCE_SCENE, global_position, Global.node_creation_parent)
+			essence_instance.velocity = Vector2(rand_range(-1, 1), rand_range(-1, 1))
 	if Global.is_player_dead:
 		velocity = velocity.move_toward(Vector2(rand_range(-1, 1), rand_range(-1, 1)) * MAX_SPEED * 3, ACCELERATION * 3 * delta)
 		velocity = move_and_slide(velocity)
@@ -65,7 +69,6 @@ func _on_Area2D_area_entered(area: Area2D) -> void:
 		health -= area.damage
 		$StunTimer.start()
 		area.queue_free()
-
 
 func _on_StunTimer_timeout() -> void:
 	modulate = Color(current_color)
