@@ -10,7 +10,6 @@
 radius = 310.056
 
 [node name="Player" type="KinematicBody2D"]
-modulate = Color( 0, 0.670588, 1, 1 )
 scale = Vector2( 0.2, 0.2 )
 script = ExtResource( 2 )
 
@@ -46,6 +45,7 @@ default_color = Color( 0, 0.670588, 1, 0.839216 )
 gradient = ExtResource( 4 )
 targetPath = NodePath("../..")
 wobble = true
+match_target_color = true
 [connection signal="timeout" from="ReloadSpeed" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="PowerupDuration" to="." method="_on_PowerupDuration_timeout"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]

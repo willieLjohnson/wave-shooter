@@ -49,6 +49,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("shoot") and Global.node_creation_parent != null and can_shoot:
 		var bullet = Global.instance_node(BULLET_SCENE, global_position, Global.node_creation_parent)
+		bullet.modulate = modulate
 		bullet.damage = damage
 		var direction = global_position.direction_to(get_global_mouse_position()).normalized()
 		$ReloadSpeed.start()

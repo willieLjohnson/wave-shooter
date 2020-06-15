@@ -8,6 +8,7 @@ export var wobble = false
 export var wobbleStrenth = 20
 export var target_width_multiplier = 100
 export var target_trailLength_multiplier = 50
+export(bool) var match_target_color = false
 
 onready var default_width = width
 onready var default_trailLength = trailLength
@@ -21,6 +22,11 @@ func _ready() -> void:
 	target = get_node(targetPath)
 	default_width = width
 	default_trailLength = trailLength
+	if match_target_color:
+		default_color = target.modulate
+		gradient = Gradient.new()
+		gradient.colors[0] = Color(default_color.r, default_color.g, default_color.b, 0)
+		gradient.colors[1] = Color(default_color.r, default_color.g, default_color.b, default_color.a)
 	
 func _physics_process(delta: float) -> void:
 	global_position = Vector2.ZERO

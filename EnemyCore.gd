@@ -55,8 +55,9 @@ func move(delta: float) -> void:
 	velocity = move_and_slide(velocity)
 func _on_Area2D_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_damager") and stun == false:
-		Global.instance_node(area.HIT_EFFECT_SCENE, area.global_position, Global.node_creation_parent)
-		Global.play_sound("res://enemy-hurt.wav")
+		var hit_effect = Global.instance_node(area.HIT_EFFECT_SCENE, area.global_position, Global.node_creation_parent)
+		hit_effect.modulate = modulate
+		Global.play_sound("res://enemy-hurt-2.wav")
 		Global.camera.screen_shake(10, 0.02)
 		modulate = Color.white
 		stun = true
