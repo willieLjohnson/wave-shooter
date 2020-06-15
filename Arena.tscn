@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Arena.gd" type="Script" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://EnemySpinner.tscn" type="PackedScene" id=10]
 [ext_resource path="res://BloomEnvironment.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Background.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Essence.tscn" type="PackedScene" id=13]
 
 [node name="Arena" type="Node2D"]
 script = ExtResource( 2 )
@@ -65,46 +64,6 @@ modulate = Color( 1, 1, 1, 0.054902 )
 points = PoolVector2Array( 0, -2.5025, 0, 360, 640, 360, 640, 0, 2.5, 0 )
 width = 5.0
 default_color = Color( 1, 1, 1, 0.145098 )
-
-[node name="Essence" parent="." instance=ExtResource( 13 )]
-position = Vector2( 221.296, 181.336 )
-
-[node name="Essence5" parent="." instance=ExtResource( 13 )]
-modulate = Color( 0, 0.952941, 1, 1 )
-position = Vector2( 237.541, 95.598 )
-
-[node name="Essence6" parent="." instance=ExtResource( 13 )]
-modulate = Color( 0, 0.952941, 1, 1 )
-position = Vector2( 178.879, 79.353 )
-
-[node name="Essence7" parent="." instance=ExtResource( 13 )]
-modulate = Color( 0, 0.952941, 1, 1 )
-position = Vector2( 116.606, 233.681 )
-
-[node name="Essence8" parent="." instance=ExtResource( 13 )]
-modulate = Color( 0, 0.952941, 1, 1 )
-position = Vector2( 329.597, 159.676 )
-
-[node name="Essence9" parent="." instance=ExtResource( 13 )]
-modulate = Color( 0, 0.952941, 1, 1 )
-position = Vector2( 201.441, 282.416 )
-
-[node name="Essence10" parent="." instance=ExtResource( 13 )]
-modulate = Color( 0, 0.952941, 1, 1 )
-position = Vector2( 94.9458, 177.726 )
-
-[node name="Essence11" parent="." instance=ExtResource( 13 )]
-modulate = Color( 0, 0.952941, 1, 1 )
-position = Vector2( 283.569, 115.453 )
-
-[node name="Essence2" parent="." instance=ExtResource( 13 )]
-position = Vector2( 307.936, 284.221 )
-
-[node name="Essence3" parent="." instance=ExtResource( 13 )]
-position = Vector2( 233.931, 212.021 )
-
-[node name="Essence4" parent="." instance=ExtResource( 13 )]
-position = Vector2( 350.354, 286.026 )
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_PowerupSpawnTimer_timeout"]

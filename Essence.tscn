@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=1]
 [ext_resource path="res://Essence.gd" type="Script" id=2]
+[ext_resource path="res://Magnet.gd" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.46216
@@ -22,6 +23,9 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1.5, 1.5, 1.5, 1 ), Color( 1, 1, 1, 1 ) ]
 }
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 77.5221
 
 [node name="Essence" type="Node2D"]
 modulate = Color( 0, 0.952941, 1, 1 )
@@ -49,4 +53,10 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PowerupReload"]
 autoplay = "Animate"
 anims/Animate = SubResource( 2 )
+
+[node name="Magnet" type="Area2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Magnet"]
+shape = SubResource( 3 )
 [connection signal="area_entered" from="PowerupReload/HitBox" to="." method="_on_HitBox_area_entered"]

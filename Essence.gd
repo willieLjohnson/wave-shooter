@@ -3,6 +3,11 @@ extends Node2D
 export(String) var player_variable_modify
 export(float) var player_variable_set
 
+func _physics_process(delta: float) -> void:
+	var velocity = -$Magnet.get_push_vector() * 15
+	global_position = lerp(global_position, global_position + velocity, 0.3)
+	
+	
 func _on_HitBox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player"):
 		Global.play_sound("res://essence-collect.wav")
