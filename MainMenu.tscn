@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://HighScore.gd" type="Script" id=1]
 [ext_resource path="res://assets/Font.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://ui/uitheme.tres" type="Theme" id=3]
 [ext_resource path="res://BloomEnvironment.tscn" type="PackedScene" id=4]
+[ext_resource path="res://BlueGradient.tres" type="Gradient" id=5]
+[ext_resource path="res://Trail.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Trail.gd" type="Script" id=7]
+[ext_resource path="res://TrailWidthCurve.tres" type="Curve" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -38,6 +42,17 @@ size = 80
 use_filter = true
 extra_spacing_char = 5
 font_data = ExtResource( 2 )
+
+[sub_resource type="GDScript" id=5]
+resource_name = "MouseFollow"
+script/source = "extends Node2D
+
+var velocity = Vector2(1, 1)
+
+func _process(delta: float) -> void:
+	global_position = lerp(global_position, get_global_mouse_position(), 0.5)
+	look_at(get_global_mouse_position())
+"
 
 [node name="MainMenu" type="Node"]
 
@@ -114,3 +129,24 @@ __meta__ = {
 }
 
 [node name="BloomEnvironment" parent="." instance=ExtResource( 4 )]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Trail" type="Line2D" parent="Node" instance=ExtResource( 6 )]
+z_index = -1
+width = 1.0
+width_curve = ExtResource( 8 )
+default_color = Color( 0, 0.670588, 1, 0.839216 )
+gradient = ExtResource( 5 )
+script = ExtResource( 7 )
+targetPath = NodePath("../../MouseFollow")
+wobble = true
+target_width_multiplier = 20
+
+[node name="MouseFollow" type="Polygon2D" parent="."]
+rotation = -1.97222
+scale = Vector2( 0.3, 0.3 )
+color = Color( 0, 0.670588, 1, 0.839216 )
+offset = Vector2( 21.724, 0 )
+polygon = PoolVector2Array( 0, 0, -32, 16, -24, 0, -32, -16 )
+script = SubResource( 5 )

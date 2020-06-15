@@ -44,7 +44,7 @@ func wobble(delta: float) -> void:
 			speed = rand_range(-wobbleStrenth * 2, wobbleStrenth * 2)
 		elif i > trailLength / 2 + 1 and i < trailLength * 0.75:
 			speed = rand_range(-wobbleStrenth * 3, wobbleStrenth * 3)
-		var target_velocity = target.velocity.normalized()				
+		var target_velocity = target.velocity.normalized()		
 		var wobble_vec_normal = Vector2(abs(target_velocity.x), abs(target_velocity.y)).normalized()
 		var wobble_speed = ((wobble_vec_normal.y + wobble_vec_normal.x)) * speed
 		var new_point_position = Vector2(get_point_position(i).x + (wobble_speed * delta), get_point_position(i).y + (wobble_speed * delta))

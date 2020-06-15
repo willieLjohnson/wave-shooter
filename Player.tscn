@@ -33,8 +33,6 @@ one_shot = true
 "player",
 ]]
 scale = Vector2( 0.2, 0.2 )
-monitoring = false
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource( 1 )
