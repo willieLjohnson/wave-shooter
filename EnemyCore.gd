@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 			popup_label.z_index = 10
 			
 		queue_free()
-		for essence in range(score_value / 2):
+		for essence in range(score_value / 3):
 			var essence_instance = Global.instance_node(ESSENCE_SCENE, global_position, Global.node_creation_parent)
 			essence_instance.modulate = base_modulate
 			essence_instance.player_variable_modify = essence_upgrade_variable
