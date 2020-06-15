@@ -4,6 +4,8 @@ const BLOOD_PARTICLES = preload("res://BloodParticles.tscn")
 const ESSENCE_SCENE = preload("res://Essence.tscn")
 
 export(int) var ACCELERATION = 500
+export(String) var essence_upgrade_variable = "damage"
+export(float) var essence_upgrade_amount = 0.01
 export(int) var MAX_SPEED = 85
 export(int) var FRICTION = 100
 export(int) var health = 3
@@ -34,6 +36,9 @@ func _process(delta: float) -> void:
 		queue_free()
 		for essence in range(score_value / 2):
 			var essence_instance = Global.instance_node(ESSENCE_SCENE, global_position, Global.node_creation_parent)
+			essence_instance.modulate = current_color
+			essence_instance.player_variable_modify = essence_upgrade_variable
+			essence_instance.player_variable_set = essence_upgrade_amount
 			essence_instance.velocity = Vector2(rand_range(-1, 1), rand_range(-1, 1))
 	if Global.is_player_dead:
 		velocity = velocity.move_toward(Vector2(rand_range(-1, 1), rand_range(-1, 1)) * MAX_SPEED * 3, ACCELERATION * 3 * delta)

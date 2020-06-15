@@ -6,7 +6,11 @@
 modulate = Color( 0.87451, 1, 0, 1 )
 scale = Vector2( 0.8, 0.8 )
 ACCELERATION = 1000
+essence_upgrade_variable = "MAX_SPEED"
+essence_upgrade_amount = 1.0
 MAX_SPEED = 220
 health = 1
 screen_shake_intensity = 40
 score_value = 20
+
+[editable path="SoftCollision"]
