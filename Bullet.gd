@@ -10,7 +10,7 @@ var initial_speed = default_speed * 3.5
 var default_size = 0.1
 
 var damage = 1 setget set_damage
-var recoil = damage * default_speed * 0.1
+var recoil = (damage) + (default_speed * 0.1)
 
 var look_once = true
 

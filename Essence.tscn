@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/regular_polygon2d_node/RegularPolygon2D.gd" type="Script" id=1]
+[ext_resource path="res://Essence.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.46216
+
+[sub_resource type="Animation" id=2]
+resource_name = "Animate"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1.5, 1.5, 1.5, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Essence" type="Node2D"]
+modulate = Color( 0, 0.952941, 1, 1 )
+script = ExtResource( 2 )
+player_variable_modify = "damage"
+player_variable_set = 0.01
+
+[node name="PowerupReload" type="Node2D" parent="."]
+modulate = Color( 0.176471, 0.843137, 0.533333, 1 )
+self_modulate = Color( 1.11714, 1.11714, 1.11714, 1 )
+script = ExtResource( 1 )
+centered = true
+num_sides = 9
+size = 8.0
+polygon_color = Color( 1, 1, 1, 1 )
+border_size = 0.0
+collision_shape = false
+
+[node name="HitBox" type="Area2D" parent="PowerupReload"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerupReload/HitBox"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PowerupReload"]
+autoplay = "Animate"
+anims/Animate = SubResource( 2 )
+[connection signal="area_entered" from="PowerupReload/HitBox" to="." method="_on_HitBox_area_entered"]

@@ -34,6 +34,7 @@ one_shot = true
 scale = Vector2( 0.2, 0.2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Node" type="Node" parent="."]

@@ -59,7 +59,8 @@ func _physics_process(delta: float) -> void:
 		velocity += -bullet.recoil * direction
 	move()
 	squash_stretch(delta)
-	modulate = Color.from_hsv(default_modulate.h + (damage * 0.2), default_modulate.s + (damage * 0.2), default_modulate.v - (damage * 0.1), default_modulate.a)
+	var new_modulate = Color.from_hsv(default_modulate.h + (damage * 0.2), default_modulate.s + (damage * 0.2), default_modulate.v - (damage * 0.05), default_modulate.a)
+	modulate = lerp(modulate, new_modulate, 0.3)
 	
 func move() -> void:
 	velocity = move_and_slide(velocity)
