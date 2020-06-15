@@ -8,10 +8,10 @@ modulate = Color( 0.639216, 0.282353, 0.992157, 1 )
 scale = Vector2( 1.6, 0.8 )
 script = ExtResource( 2 )
 ACCELERATION = 210
-essence_upgrade_variable = "base_reload_speed"
-essence_upgrade_amount = -0.001
 MAX_SPEED = 400
 FRICTION = 0
+essence_upgrade_variable = "base_reload_speed"
+essence_upgrade_amount = -0.001
 knockback = 1.0
 
 [editable path="SoftCollision"]

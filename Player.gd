@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export var ACCELERATION = 1890
-export var MAX_SPEED = 215
+export var MAX_SPEED = 215 setget set_max_speed
 export var FRICTION = 670
 export(float) var damage = 1
 export(float) var reload_speed = 0.1
@@ -74,7 +74,11 @@ func squash_stretch(delta) -> void:
 	$Circle.rotation = velocity.angle()
 	$Circle.scale = $Circle.scale.move_toward(new_scale, ACCELERATION * delta)
 
-func set_base_damage(new_damage: float) -> void:
+func set_max_speed(new_max_speed: float) -> void:
+	MAX_SPEED = new_max_speed
+	ACCELERATION += new_max_speed
+	
+func set_base_damage(new_damage: int) -> void:
 	base_damage  = new_damage
 	damage = max(base_damage, damage)
 	
