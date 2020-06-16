@@ -57,9 +57,9 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 "
 
 [node name="BulletPierce" instance=ExtResource( 1 )]
-scale = Vector2( 0.15, 0.05 )
+scale = Vector2( 0.12, 0.08 )
 script = SubResource( 1 )
 piercing = true
 
 [node name="Circle" parent="." index="1"]
-color = Color( 1, 1, 1, 0.752941 )
+color = Color( 1, 1, 1, 0.478431 )
