@@ -72,16 +72,23 @@ func move(delta: float) -> void:
 func _on_Area2D_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_damager") and stun == false:
 		var hit_effect = Global.instance_node(area.HIT_EFFECT_SCENE, area.global_position, Global.node_creation_parent)
-		hit_effect.modulate = modulate
+		hit_effect.modulate = base_modulate
 		Global.play_sound("res://enemy-hurt-2.wav")
-		Global.camera.screen_shake(10, 0.02)
+		if not area.piercing:
+			stun = true
+			area.queue_free()
+			Global.camera.screen_shake(10, 0.02)
+
+		else:
+			stun = false
+			Global.camera.screen_shake(5, 0.02)
+			
+		
 		modulate = Color.white
-		stun = true
 		velocity = (-velocity.rotated(rotation) / 2) * knockback
 		health -= area.damage
-		$StunTimer.start()
-		area.queue_free()
 		
+		$StunTimer.start()
 		var popup_label = Global.instance_node(POPUP_LABEL_SCENE, area.global_position, Global.node_creation_parent)
 		popup_label.text = str(-area.damage)
 		popup_label.scale = Vector2(0.8, 0.8)

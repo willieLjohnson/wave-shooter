@@ -1,6 +1,11 @@
-extends Area2D
+[gd_scene load_steps=3 format=2]
 
-const HIT_EFFECT_SCENE = preload("res://HitEffect.tscn")
+[ext_resource path="res://Bullet.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Area2D
+
+const HIT_EFFECT_SCENE = preload(\"res://HitEffect.tscn\")
 
 export(bool) var piercing = false
 
@@ -8,8 +13,6 @@ var velocity = Vector2(1, 0)
 var default_speed = 250
 var speed = default_speed
 var initial_speed = default_speed * 3.5
-
-var default_size = 0.1
 
 var damage = 1 setget set_damage
 var recoil = (damage) + (default_speed * 0.1)
@@ -21,7 +24,7 @@ var direction = Vector2.ZERO
 
 
 func _ready() -> void:
-	set_scale(Vector2((default_size * damage + velocity.x) * 0.5, (default_size * damage + velocity.y) * 0.5))  
+	set_scale(Vector2((default_scale.x * damage + velocity.x) * 0.5, (default_scale.y * damage + velocity.y) * 0.5))  
 	speed = initial_speed
 	
 func init(damage: float, direction: Vector2, color: Color) -> void:
@@ -44,10 +47,19 @@ func _process(delta: float) -> void:
 func set_damage(value) -> void:
 	damage = value
 	recoil = damage * default_speed * 0.2
-	set_scale(Vector2((default_size * damage + velocity.x) * 0.5, (default_size * damage + velocity.y) * 0.5))  
+	set_scale(Vector2((default_scale.x * damage + velocity.x) * 0.5, (default_scale.y * damage + velocity.y) * 0.5))  
 	var audioPitch = $AudioStreamPlayer.pitch_scale
 	$AudioStreamPlayer.pitch_scale = 0.9 / damage
 		
 func _on_VisibilityNotifier2D_screen_exited() -> void:
 	queue_free()
 
+"
+
+[node name="BulletPierce" instance=ExtResource( 1 )]
+scale = Vector2( 0.15, 0.05 )
+script = SubResource( 1 )
+piercing = true
+
+[node name="Circle" parent="." index="1"]
+color = Color( 1, 1, 1, 0.752941 )

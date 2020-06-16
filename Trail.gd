@@ -29,12 +29,15 @@ func _ready() -> void:
 		gradient.colors[1] = Color(default_color.r, default_color.g, default_color.b, default_color.a)
 	
 func _physics_process(delta: float) -> void:
+	if target.is_queued_for_deletion(): return
 	global_position = Vector2.ZERO
 	rotation = 0
-	width = default_width + (target_width_multiplier * target.scale.y)
-	trailLength = default_trailLength + (target_trailLength_multiplier * target.scale.x)
-	point = target.global_position
-	add_point(point)
+	
+	if target != null:
+		width = default_width + (target_width_multiplier * target.scale.y)
+		trailLength = default_trailLength + (target_trailLength_multiplier * target.scale.x)
+		point = target.global_position
+		add_point(point)
 	
 	if wobble: wobble(delta)
 	
