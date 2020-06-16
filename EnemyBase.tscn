@@ -44,6 +44,8 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Indicator" parent="." instance=ExtResource( 3 )]
+modulate = Color( 1, 1, 1, 0.490196 )
+offset = 100.0
 
 [node name="SoftCollision" parent="." instance=ExtResource( 4 )]
 collision_layer = 2

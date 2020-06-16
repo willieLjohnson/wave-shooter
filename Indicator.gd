@@ -1,12 +1,14 @@
 extends Node2D
 
 export(NodePath) var target_path
+export(float) var offset = 50
+
 var target = null
 
 onready var shape = $Shape
 
 var target_position = null
-var offset = 50
+
 
 func _physics_process(delta: float) -> void:
 	var canvas = get_canvas_transform()
