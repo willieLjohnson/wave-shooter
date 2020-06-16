@@ -78,17 +78,17 @@ func _on_Area2D_area_entered(area: Area2D) -> void:
 			stun = true
 			area.queue_free()
 			Global.camera.screen_shake(10, 0.02)
-
+			modulate = Color.white
+			$StunTimer.start()
+			velocity = (-velocity.rotated(rotation) / 2) * knockback
 		else:
 			stun = false
 			Global.camera.screen_shake(5, 0.02)
+			area.damage *= 2
+			area.speed *= 2
 			
-		
-		modulate = Color.white
-		velocity = (-velocity.rotated(rotation) / 2) * knockback
 		health -= area.damage
 		
-		$StunTimer.start()
 		var popup_label = Global.instance_node(POPUP_LABEL_SCENE, area.global_position, Global.node_creation_parent)
 		popup_label.text = str(-area.damage)
 		popup_label.scale = Vector2(0.8, 0.8)
