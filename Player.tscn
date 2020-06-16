@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Circle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://Trail.tscn" type="PackedScene" id=3]
 [ext_resource path="res://BlueGradient.tres" type="Gradient" id=4]
 [ext_resource path="res://TrailWidthCurve.tres" type="Curve" id=5]
+[ext_resource path="res://Weapon.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 310.056
@@ -51,6 +52,8 @@ gradient = ExtResource( 4 )
 targetPath = NodePath("../..")
 wobble = true
 match_target_color = true
+
+[node name="Weapon" parent="." instance=ExtResource( 6 )]
 [connection signal="timeout" from="ReloadSpeed" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="PowerupDuration" to="." method="_on_PowerupDuration_timeout"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]

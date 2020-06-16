@@ -15,15 +15,23 @@ var recoil = (damage) + (default_speed * 0.1)
 var look_once = true
 
 var default_scale = scale
+var direction = Vector2.ZERO
 
 func _ready() -> void:
 	set_scale(Vector2((default_size * damage + velocity.x) * 0.5, (default_size * damage + velocity.y) * 0.5))  
 	speed = initial_speed
-	look_at(get_global_mouse_position())
 	
+func init(damage: float, direction: Vector2, color: Color) -> void:
+	self.direction = direction
+	self.damage = damage
+	self.modulate = color
+	look_once = true
+	look_at(direction)
+
+			
 func _process(delta: float) -> void:
 	if look_once:
-		look_at(get_global_mouse_position())
+		look_at(direction)
 		look_once = false
 	global_position += velocity.rotated(rotation) * speed * delta
 	scale = lerp(scale, default_scale * damage, 0.15)

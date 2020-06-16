@@ -11,6 +11,7 @@ const BULLET_SCENE = preload("res://Bullet.tscn")
 const BLOOD_SCENE = preload("res://PlayerBlood.tscn")
 
 onready var default_shape_scale = $Circle.scale
+onready var weapon = $Weapon
 
 var velocity = Vector2.ZERO
 
@@ -51,14 +52,13 @@ func _physics_process(delta: float) -> void:
 		rotation /= 2
 	
 	if Input.is_action_pressed("shoot") and Global.node_creation_parent != null and can_shoot:
-		var bullet = Global.instance_node(BULLET_SCENE, global_position, Global.node_creation_parent)
-		bullet.modulate = Color.from_hsv(modulate.h, modulate.s, modulate.v * 0.6)
-		bullet.damage = damage
-		var direction = global_position.direction_to(get_global_mouse_position()).normalized()
-		$ReloadSpeed.start()
+		var direction = get_global_mouse_position() 
+		var recoil = weapon.shoot(damage, direction, modulate)
+		velocity += recoil * global_position.direction_to(direction).normalized()
 		can_shoot = false
 		Global.camera.screen_shake(5, 0.01)
-		velocity += -bullet.recoil * direction
+		$ReloadSpeed.start()
+		
 	move()
 	squash_stretch(delta)
 	var new_modulate = Color.from_hsv(base_modulate.h + (damage * 0.2), base_modulate.s + (damage * 0.2), base_modulate.v - (damage * 0.05), base_modulate.a)
