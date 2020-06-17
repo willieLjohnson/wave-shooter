@@ -51,14 +51,27 @@ wait_time = 15.0
 autostart = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.5, -0.5 )
+motion_scale = Vector2( 0.5, 0.5 )
 motion_mirroring = Vector2( 640, 640 )
 
 [node name="dot-grid" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 12 )]
 modulate = Color( 1, 1, 1, 0.054902 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.2, 0.2 )
+motion_mirroring = Vector2( 640, 640 )
+
+[node name="dot-grid" parent="ParallaxBackground/ParallaxLayer2" instance=ExtResource( 12 )]
+modulate = Color( 1, 1, 1, 0.027451 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.05, 0.05 )
+motion_mirroring = Vector2( 640, 640 )
+
+[node name="dot-grid" parent="ParallaxBackground/ParallaxLayer3" instance=ExtResource( 12 )]
+modulate = Color( 1, 1, 1, 0.0117647 )
 
 [node name="Border" type="Line2D" parent="."]
 points = PoolVector2Array( 0, -2.5025, 0, 360, 640, 360, 640, 0, 2.5, 0 )
