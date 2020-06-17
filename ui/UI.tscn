@@ -18,10 +18,16 @@ font_data = ExtResource( 2 )
 script/source = "extends Label
 
 
-func update_wave(new_wave: int) -> void:
-	var wave = int(text)
-	wave = new_wave
-	text = str(wave)
+func update_wave(new_wave: int, is_boss_level: bool) -> void:
+	if is_boss_level:
+		text = \"\"
+		get_parent().get_node(\"Label\").text = \"BOSS WAVE\"
+		return
+	else:
+		get_parent().get_node(\"Label\").text = \"WAVE:\"
+		var wave = int(text)
+		wave = new_wave
+		text = str(wave)
 
 func reset():
 	text = str(0)

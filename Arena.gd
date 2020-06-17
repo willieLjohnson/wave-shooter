@@ -1,12 +1,15 @@
 extends Node2D
 
 export(Array, PackedScene) var enemies
+export(Array, PackedScene) var bosses
 export(Array, PackedScene) var powerups
 
 var current_wave: int = 1
 var wave_max_enemies: int  = 10
+var boss_wave_max_enemies: int  = 1
 var wave_enemies_spawned: int  = 0
 var wave_enemies_left: int = wave_max_enemies
+var is_boss_wave = false
 
 signal update_wave
 
@@ -27,7 +30,7 @@ func _exit_tree() -> void:
 
 
 func _on_EnemySpawnTimer_timeout() -> void:
-	if wave_enemies_spawned < wave_max_enemies:
+	if wave_enemies_spawned < wave_max_enemies and !is_boss_wave:
 		var enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
 		while enemy_position.x < 640 and enemy_position.x > -80 and enemy_position.y < 360 and enemy_position.y > -45:
 			enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
@@ -36,6 +39,14 @@ func _on_EnemySpawnTimer_timeout() -> void:
 		rand_enemy_index = clamp(rand_enemy_index, 0, current_wave - 1)
 		Global.instance_node(enemies[rand_enemy_index], enemy_position, self)
 		wave_enemies_spawned += 1
+	elif is_boss_wave and wave_enemies_spawned < wave_max_enemies:
+		var boss_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
+		while boss_position.x < 640 and boss_position.x > -80 and boss_position.y < 360 and boss_position.y > -45:
+			boss_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
+		var rand_boss_index = round(rand_range(0, bosses.size() - 1))
+		Global.instance_node(bosses[rand_boss_index], boss_position, self)
+		$EnemySpawnTimer.paused = true
+		wave_enemies_spawned += 1
 	else:
 		$DifficultyTimer.paused = true
 
@@ -43,15 +54,19 @@ func enemy_died() -> void:
 	wave_enemies_left -= 1
 	if wave_enemies_left == 0:
 		new_wave()
-	print(wave_enemies_left)
 		
 func new_wave() -> void:
 	current_wave += 1
+	is_boss_wave = current_wave % 2 == 0
+	if is_boss_wave:
+		wave_max_enemies = boss_wave_max_enemies
+	else: 
+		wave_max_enemies += (1.5 * current_wave)
 	wave_enemies_spawned = 0
-	wave_max_enemies += (1.5 * current_wave)
 	wave_enemies_left = wave_max_enemies
-	emit_signal("update_wave", current_wave)
+	emit_signal("update_wave", current_wave, is_boss_wave)
 	$DifficultyTimer.paused = false
+	$EnemySpawnTimer.paused = false
 	
 func _on_DifficultyTimer_timeout() -> void:
 	if 	$EnemySpawnTimer.wait_time > 0.5:

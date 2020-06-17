@@ -17,6 +17,7 @@
 [node name="Arena" type="Node2D"]
 script = ExtResource( 2 )
 enemies = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 10 ) ]
+bosses = [ ExtResource( 13 ) ]
 powerups = [ ExtResource( 7 ), ExtResource( 8 ) ]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -78,13 +79,6 @@ modulate = Color( 1, 1, 1, 0.0117647 )
 points = PoolVector2Array( 0, -2.5025, 0, 360, 640, 360, 640, 0, 2.5, 0 )
 width = 5.0
 default_color = Color( 1, 1, 1, 0.145098 )
-
-[node name="EnemyBase" parent="." instance=ExtResource( 13 )]
-position = Vector2( 118.146, 154.354 )
-
-[node name="EnemyTank" parent="." instance=ExtResource( 9 )]
-position = Vector2( 232.687, 173.961 )
-scale = Vector2( 2.5, 2.5 )
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_PowerupSpawnTimer_timeout"]
