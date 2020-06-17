@@ -3,10 +3,10 @@ extends Node2D
 export(Array, PackedScene) var enemies
 export(Array, PackedScene) var powerups
 
-var current_wave = 1
-var wave_max_enemies = 10
-var wave_enemies_spawned = 0
-var wave_enemies_left = wave_max_enemies
+var current_wave: int = 1
+var wave_max_enemies: int  = 10
+var wave_enemies_spawned: int  = 0
+var wave_enemies_left: int = wave_max_enemies
 
 signal update_wave
 
@@ -31,7 +31,7 @@ func _on_EnemySpawnTimer_timeout() -> void:
 		var enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
 		while enemy_position.x < 640 and enemy_position.x > -80 and enemy_position.y < 360 and enemy_position.y > -45:
 			enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
-			
+		
 		var rand_enemy_index = round(rand_range(0, enemies.size() - 1))
 		Global.instance_node(enemies[rand_enemy_index], enemy_position, self)
 		wave_enemies_spawned += 1
