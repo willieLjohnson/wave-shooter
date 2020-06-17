@@ -61,7 +61,7 @@ func new_wave() -> void:
 	if is_boss_wave:
 		wave_max_enemies = boss_wave_max_enemies
 	else: 
-		wave_max_enemies += (1.5 * current_wave)
+		wave_max_enemies += (2.5 * current_wave)
 	wave_enemies_spawned = 0
 	wave_enemies_left = wave_max_enemies
 	emit_signal("update_wave", current_wave, is_boss_wave)
@@ -70,7 +70,7 @@ func new_wave() -> void:
 	
 func _on_DifficultyTimer_timeout() -> void:
 	if 	$EnemySpawnTimer.wait_time > 0.5:
-		$EnemySpawnTimer.wait_time -= 0.025
+		$EnemySpawnTimer.wait_time -= 0.010
 
 
 func _on_PowerupSpawnTimer_timeout() -> void:
