@@ -3,8 +3,6 @@ extends Node2D
 export(NodePath) var target_path
 export(float) var offset = 50
 
-var target = null
-
 onready var shape = $Shape
 
 var target_position = null
@@ -19,7 +17,7 @@ func _physics_process(delta: float) -> void:
 	set_indicator_rotation()
 	
 func set_indicator_position(bounds: Rect2):
-	if target ==  null:
+	if target_position ==  null:
 		shape.global_position.x = clamp(global_position.x, bounds.position.x + offset, bounds.end.x - offset)
 		shape.global_position.y = clamp(global_position.y, bounds.position.y + offset, bounds.end.y - offset)
 	else:
@@ -46,8 +44,10 @@ func set_indicator_position(bounds: Rect2):
 		
 	if bounds.has_point(global_position):
 		hide()
+		$AudioStreamPlayer2D.stream_paused = true
 	else:
 		show()
+		$AudioStreamPlayer2D.stream_paused = false
 		
 func set_indicator_rotation():
 	var angle = (global_position - shape.global_position).angle()

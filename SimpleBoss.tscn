@@ -9,6 +9,7 @@ script = ExtResource( 2 )
 essence_upgrade_variable = "damage"
 knockback = 0.0
 health = 100
+score_value = 100
 
 [node name="HitBox" parent="." index="2" groups=[
 "boss",
@@ -16,6 +17,10 @@ health = 100
 
 [node name="StunTimer" parent="." index="3"]
 wait_time = 0.001
+
+[node name="AudioStreamPlayer2D" parent="Indicator" index="2"]
+volume_db = 0.0
+pitch_scale = 0.5
 
 [node name="SoftCollision" parent="." index="5" groups=[
 "boss",
@@ -34,5 +39,7 @@ autostart = true
 one_shot = true
 [connection signal="timeout" from="SpecialAttackTimer" to="." method="_on_SpecialAttackTimer_timeout"]
 [connection signal="timeout" from="SpecialAttackDuration" to="." method="_on_SpecialAttackDuration_timeout"]
+
+[editable path="Indicator"]
 
 [editable path="SoftCollision"]

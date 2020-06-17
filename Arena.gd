@@ -31,9 +31,9 @@ func _exit_tree() -> void:
 
 func _on_EnemySpawnTimer_timeout() -> void:
 	if wave_enemies_spawned < wave_max_enemies and !is_boss_wave:
-		var enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
-		while enemy_position.x < 640 and enemy_position.x > -80 and enemy_position.y < 360 and enemy_position.y > -45:
-			enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
+		var enemy_position = Vector2(rand_range(-170, 680), rand_range(-100, 400))
+		while enemy_position.x <= 630 and enemy_position.x > -70 and enemy_position.y < 360 and enemy_position.y > -35:
+			enemy_position = Vector2(rand_range(-170, 680), rand_range(-100, 400))
 		
 		var rand_enemy_index = round(rand_range(0, enemies.size() - 1))
 		rand_enemy_index = clamp(rand_enemy_index, 0, current_wave - 1)
