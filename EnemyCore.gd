@@ -72,10 +72,11 @@ func move(delta: float) -> void:
 	elif stun:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 
-	if softCollision.is_colliding():
+	if softCollision.is_colliding() and !$SoftCollision.is_in_group("boss"):
 		velocity += softCollision.get_push_vector() * delta * ACCELERATION
 		
 	velocity = move_and_slide(velocity)
+	
 func _on_Area2D_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_damager") and stun == false:
 		var hit_effect = Global.instance_node(area.HIT_EFFECT_SCENE, area.global_position, Global.node_creation_parent)
@@ -101,7 +102,9 @@ func _on_Area2D_area_entered(area: Area2D) -> void:
 		popup_label.scale = Vector2(0.8, 0.8)
 		popup_label.modulate = area.modulate
 		popup_label.z_index = 5 
-
+	if area.is_in_group("boss"):
+		velocity += area.get_parent().velocity
+		
 func _on_StunTimer_timeout() -> void:
 	modulate = Color(base_modulate)
 	stun = false

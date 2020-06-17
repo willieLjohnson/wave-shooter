@@ -6,7 +6,7 @@
 [ext_resource path="res://SoftCollision.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 18.6786
+radius = 13.5988
 
 [node name="EnemyBase" type="KinematicBody2D"]
 modulate = Color( 0.992157, 0.282353, 0.282353, 1 )

@@ -1,5 +1,6 @@
 extends Area2D
 
+export(float) var force = 1
 
 func is_colliding():
 	var areas = get_overlapping_areas()
@@ -11,5 +12,5 @@ func get_push_vector():
 	if is_colliding():
 		var area = areas[0]
 		push_vector = area.global_position.direction_to(global_position)
-		push_vector = push_vector.normalized()
+		push_vector = push_vector.normalized() * area.force
 	return push_vector
