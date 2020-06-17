@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Score.gd" type="Script" id=1]
 [ext_resource path="res://assets/Font.ttf" type="DynamicFontData" id=2]
@@ -13,6 +13,19 @@ font_data = ExtResource( 2 )
 size = 60
 extra_spacing_char = 5
 font_data = ExtResource( 2 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Label
+
+
+func update_wave(new_wave: int) -> void:
+	var wave = int(text)
+	wave = new_wave
+	text = str(wave)
+
+func reset():
+	text = str(0)
+"
 
 [node name="UI" type="Node2D"]
 
@@ -51,6 +64,46 @@ custom_fonts/font = SubResource( 2 )
 text = "100"
 valign = 1
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WaveContainer" type="HBoxContainer" parent="Control"]
+margin_top = 313.0
+margin_right = 1214.0
+margin_bottom = 399.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_constants/separation = 10
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/WaveContainer"]
+modulate = Color( 1, 1, 1, 0.490196 )
+margin_left = 1048.0
+margin_top = 11.0
+margin_right = 1185.0
+margin_bottom = 75.0
+custom_fonts/font = SubResource( 2 )
+text = "wave:"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentWave" type="Label" parent="Control/WaveContainer"]
+modulate = Color( 1, 1, 1, 0.490196 )
+margin_left = 1195.0
+margin_top = 11.0
+margin_right = 1214.0
+margin_bottom = 75.0
+custom_fonts/font = SubResource( 2 )
+text = "1"
+align = 2
+valign = 1
+script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

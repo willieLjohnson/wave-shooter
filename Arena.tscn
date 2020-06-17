@@ -67,3 +67,5 @@ default_color = Color( 1, 1, 1, 0.145098 )
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_PowerupSpawnTimer_timeout"]
+
+[editable path="UI"]

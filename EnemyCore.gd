@@ -22,6 +22,12 @@ var stun = false
 
 onready var base_modulate = modulate
 
+signal died
+
+func _ready() -> void:
+	var arena = get_node("/root/Arena")
+	self.connect("died", arena, "enemy_died")
+
 func _process(delta: float) -> void:
 	if health <= 0:
 		Global.play_sound("res://enemy-death.wav")
@@ -39,7 +45,8 @@ func _process(delta: float) -> void:
 			popup_label.text = str(score_value)
 			popup_label.modulate = base_modulate
 			popup_label.z_index = 10
-			
+		
+		emit_signal("died")
 		queue_free()
 		for essence in range(score_value / 3):
 			var essence_instance = Global.instance_node(ESSENCE_SCENE, global_position, Global.node_creation_parent)

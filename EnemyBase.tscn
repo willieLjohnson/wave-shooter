@@ -27,7 +27,9 @@ centered = true
 num_sides = 4
 size = 24.0
 polygon_color = Color( 1, 1, 1, 1 )
+polygon_texture = null
 border_size = 0.0
+border_color = Color( 0, 0, 0, 1 )
 polygon_rotation = 45.0
 collision_shape = false
 
