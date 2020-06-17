@@ -7,6 +7,7 @@ modulate = Color( 0.882353, 0.556863, 0, 1 )
 scale = Vector2( 2.5, 2.5 )
 ACCELERATION = 250
 MAX_SPEED = 40
+essence_upgrade_amount = 0.001
 knockback = 0.0
 health = 8
 

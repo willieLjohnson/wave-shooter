@@ -44,7 +44,8 @@ func _on_EnemySpawnTimer_timeout() -> void:
 		while boss_position.x < 640 and boss_position.x > -80 and boss_position.y < 360 and boss_position.y > -45:
 			boss_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
 		var rand_boss_index = round(rand_range(0, bosses.size() - 1))
-		Global.instance_node(bosses[rand_boss_index], boss_position, self)
+		var boss = Global.instance_node(bosses[rand_boss_index], boss_position, self)
+		boss.health *= current_wave / 5
 		$EnemySpawnTimer.paused = true
 		wave_enemies_spawned += 1
 	else:
@@ -57,11 +58,11 @@ func enemy_died() -> void:
 		
 func new_wave() -> void:
 	current_wave += 1
-	is_boss_wave = current_wave % 2 == 0
+	is_boss_wave = current_wave % 5 == 0
 	if is_boss_wave:
 		wave_max_enemies = boss_wave_max_enemies
 	else: 
-		wave_max_enemies += (2.5 * current_wave)
+		wave_max_enemies += (5 * current_wave)
 	wave_enemies_spawned = 0
 	wave_enemies_left = wave_max_enemies
 	emit_signal("update_wave", current_wave, is_boss_wave)
@@ -70,7 +71,7 @@ func new_wave() -> void:
 	
 func _on_DifficultyTimer_timeout() -> void:
 	if 	$EnemySpawnTimer.wait_time > 0.5:
-		$EnemySpawnTimer.wait_time -= 0.010
+		$EnemySpawnTimer.wait_time -= 0.020
 
 
 func _on_PowerupSpawnTimer_timeout() -> void:

@@ -13,6 +13,7 @@ modulate = Color( 0.992157, 0.282353, 0.282353, 1 )
 scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 1 )
 essence_upgrade_variable = "base_damage"
+essence_upgrade_amount = 0.001
 
 [node name="CollisionShape2" type="CollisionPolygon2D" parent="."]
 visible = false
@@ -27,9 +28,7 @@ centered = true
 num_sides = 4
 size = 24.0
 polygon_color = Color( 1, 1, 1, 1 )
-polygon_texture = null
 border_size = 0.0
-border_color = Color( 0, 0, 0, 1 )
 polygon_rotation = 45.0
 collision_shape = false
 

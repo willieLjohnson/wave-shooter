@@ -11,7 +11,7 @@ ACCELERATION = 200
 MAX_SPEED = 390
 FRICTION = 0
 essence_upgrade_variable = "base_reload_speed"
-essence_upgrade_amount = -0.001
+essence_upgrade_amount = 0.0
 knockback = 1.0
 score_value = 20
 

@@ -49,7 +49,7 @@ func _process(delta: float) -> void:
 		
 		emit_signal("died")
 		queue_free()
-		for essence in range(score_value / 3):
+		for essence in range(score_value / rand_range(1, 5)):
 			var essence_instance = Global.instance_node(ESSENCE_SCENE, global_position, Global.node_creation_parent)
 			essence_instance.modulate = base_modulate
 			essence_instance.player_variable_modify = essence_upgrade_variable
