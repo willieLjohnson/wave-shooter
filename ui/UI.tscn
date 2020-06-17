@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Score.gd" type="Script" id=1]
 [ext_resource path="res://assets/Font.ttf" type="DynamicFontData" id=2]
@@ -14,17 +14,41 @@ size = 60
 extra_spacing_char = 5
 font_data = ExtResource( 2 )
 
+[sub_resource type="DynamicFont" id=5]
+size = 60
+extra_spacing_char = 5
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "BossWave"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
+
 [sub_resource type="GDScript" id=3]
 script/source = "extends Label
 
+onready var wave_label = get_parent().get_node(\"Label\")
 
-func update_wave(new_wave: int, is_boss_level: bool) -> void:
-	if is_boss_level:
+func update_wave(new_wave: int, is_boss_wave: bool) -> void:
+	if is_boss_wave:
 		text = \"\"
-		get_parent().get_node(\"Label\").text = \"BOSS WAVE\"
+		wave_label.text = \"BOSS WAVE\"
+		wave_label.get_node(\"AnimationPlayer\").play(\"BossWave\")
 		return
 	else:
-		get_parent().get_node(\"Label\").text = \"WAVE:\"
+		wave_label.text = \"WAVE:\"
+		wave_label.get_node(\"AnimationPlayer\").stop()
 		var wave = int(text)
 		wave = new_wave
 		text = str(wave)
@@ -91,13 +115,16 @@ margin_left = 1048.0
 margin_top = 11.0
 margin_right = 1185.0
 margin_bottom = 75.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 5 )
 text = "wave:"
 align = 2
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/WaveContainer/Label"]
+anims/BossWave = SubResource( 4 )
 
 [node name="CurrentWave" type="Label" parent="Control/WaveContainer"]
 modulate = Color( 1, 1, 1, 0.490196 )

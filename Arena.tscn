@@ -35,6 +35,11 @@ autostart = true
 [node name="UI" parent="." instance=ExtResource( 3 )]
 position = Vector2( -0.122093, 0 )
 
+[node name="Label" parent="UI/Control/WaveContainer" index="0"]
+margin_left = 1048.0
+margin_top = 11.0
+margin_bottom = 75.0
+
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 scale = Vector2( 0.2, 0.2 )
 limit_left = -10
