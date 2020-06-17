@@ -33,6 +33,7 @@ func _on_EnemySpawnTimer_timeout() -> void:
 			enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
 		
 		var rand_enemy_index = round(rand_range(0, enemies.size() - 1))
+		rand_enemy_index = clamp(rand_enemy_index, 0, current_wave - 1)
 		Global.instance_node(enemies[rand_enemy_index], enemy_position, self)
 		wave_enemies_spawned += 1
 	else:
