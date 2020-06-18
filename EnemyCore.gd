@@ -82,7 +82,7 @@ func _on_Area2D_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy_damager") and stun == false:
 		var hit_effect = Global.instance_node(area.HIT_EFFECT_SCENE, area.global_position, Global.node_creation_parent)
 		hit_effect.modulate = base_modulate
-		Global.play_sound("res://enemy-hurt-3.wav", -5, 0.5 + (health / base_health))
+		Global.play_sound("res://enemy-hurt-3.wav", -5, (base_health / (health + 1)))
 		if not area.piercing:
 			stun = true
 			area.queue_free()
