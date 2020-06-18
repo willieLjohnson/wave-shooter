@@ -20,13 +20,13 @@ enemies = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 1
 bosses = [ ExtResource( 13 ) ]
 powerups = [ ExtResource( 7 ), ExtResource( 8 ) ]
 
+[node name="BloomEnvironment" parent="." instance=ExtResource( 11 )]
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 320, 180 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
-
-[node name="BloomEnvironment" parent="." instance=ExtResource( 11 )]
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 2.7

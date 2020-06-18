@@ -55,6 +55,8 @@ func _process(delta: float) -> void:
 
 [node name="MainMenu" type="Node"]
 
+[node name="BloomEnvironment" parent="." instance=ExtResource( 4 )]
+
 [node name="UI" type="Node2D" parent="."]
 
 [node name="Control" type="Control" parent="UI"]
@@ -129,8 +131,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="BloomEnvironment" parent="." instance=ExtResource( 4 )]
 
 [node name="Node" type="Node" parent="."]
 
