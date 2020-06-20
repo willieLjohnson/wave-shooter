@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const BLOOD_PARTICLES = preload("res://BloodParticles.tscn")
 const ESSENCE_SCENE = preload("res://Essence.tscn")
-const POPUP_LABEL_SCENE = preload("res://PopupLabel.tscn")
+
 
 export(int) var ACCELERATION = 500
 export(int) var MAX_SPEED = 85
@@ -42,11 +42,8 @@ func _process(delta: float) -> void:
 			blood_particles.rotation = velocity.angle()
 			blood_particles.modulate = Color.from_hsv(base_modulate.h, base_modulate.s, base_modulate.v * 0.5)
 			
-			var popup_label = Global.instance_node(POPUP_LABEL_SCENE, global_position, Global.node_creation_parent)
-			popup_label.text = str(score_value)
-			popup_label.modulate = base_modulate
-			popup_label.z_index = 10
-		
+			var popup_label = Global.instance_popup_label(global_position, str(score_value), base_modulate, 10)
+	
 		emit_signal("died")
 		queue_free()
 		for essence in range(score_value / rand_range(1, 5)):
@@ -98,11 +95,9 @@ func _on_Area2D_area_entered(area: Area2D) -> void:
 			
 		health -= area.damage
 		
-		var popup_label = Global.instance_node(POPUP_LABEL_SCENE, area.global_position, Global.node_creation_parent)
-		popup_label.text = str(-area.damage)
+		var popup_label = Global.instance_popup_label(area.global_position, str(-area.damage), area.modulate)
 		popup_label.scale = Vector2(0.8, 0.8)
-		popup_label.modulate = area.modulate
-		popup_label.z_index = 5 
+		
 	if area.is_in_group("boss"):
 		velocity += area.get_parent().velocity
 		

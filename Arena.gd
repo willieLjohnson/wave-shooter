@@ -57,6 +57,7 @@ func enemy_died() -> void:
 		new_wave()
 		
 func new_wave() -> void:
+	
 	current_wave += 1
 	is_boss_wave = current_wave % 5 == 0
 	if is_boss_wave:

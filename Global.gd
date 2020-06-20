@@ -1,5 +1,7 @@
 extends Node
 
+const POPUP_LABEL_SCENE = preload("res://PopupLabel.tscn")
+
 var node_creation_parent = null
 var player = null
 var is_player_dead = false
@@ -16,6 +18,13 @@ func instance_node(node, location, parent):
 	node_instance.global_position = location
 	return node_instance  
 	
+func instance_popup_label(position, text, modulate = Color.white, z_index = 5):
+	var label = instance_node(POPUP_LABEL_SCENE, position, node_creation_parent)
+	label.text = text
+	label.modulate = modulate
+	label.z_index = z_index
+	return label
+			
 func play_sound(sound, volume = 0, pitch = 1):
 	if node_creation_parent != null:
 		var audioStreamPlayer = AudioStreamPlayer.new()
