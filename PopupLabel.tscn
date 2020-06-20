@@ -4,7 +4,7 @@
 [ext_resource path="res://PopupLabel.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=1]
-size = 15
+size = 100
 use_filter = true
 font_data = ExtResource( 1 )
 
@@ -14,6 +14,7 @@ script = ExtResource( 2 )
 [node name="Label" type="Label" parent="."]
 margin_right = 19.0
 margin_bottom = 17.0
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )

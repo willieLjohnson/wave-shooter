@@ -4,8 +4,9 @@ export(Array, PackedScene) var enemies
 export(Array, PackedScene) var bosses
 export(Array, PackedScene) var powerups
 
+const boss_wave = 5
 var current_wave: int = 1
-var wave_max_enemies: int  = 10
+var wave_max_enemies: int = 2
 var boss_wave_max_enemies: int  = 1
 var wave_enemies_spawned: int  = 0
 var wave_enemies_left: int = wave_max_enemies
@@ -46,6 +47,7 @@ func _on_EnemySpawnTimer_timeout() -> void:
 		var rand_boss_index = round(rand_range(0, bosses.size() - 1))
 		var boss = Global.instance_node(bosses[rand_boss_index], boss_position, self)
 		boss.health *= current_wave / 5
+		boss.score_value *= current_wave / 10
 		$EnemySpawnTimer.paused = true
 		wave_enemies_spawned += 1
 	else:
@@ -58,10 +60,15 @@ func enemy_died() -> void:
 		
 func new_wave() -> void:
 	
+	var new_wave_label = Global.instance_popup_label(Global.player.global_position, "NEW WAVE", Color.yellowgreen, 30)
+	new_wave_label.scale = Vector2(5, 5)
 	current_wave += 1
-	is_boss_wave = current_wave % 5 == 0
+	is_boss_wave = current_wave % boss_wave == 0
 	if is_boss_wave:
 		wave_max_enemies = boss_wave_max_enemies
+		new_wave_label.text = "BOSS WAVE"
+		new_wave_label.scale = Vector2(7, 7)
+		new_wave_label.modulate = Color.crimson
 	else: 
 		wave_max_enemies += (5 * current_wave)
 	wave_enemies_spawned = 0

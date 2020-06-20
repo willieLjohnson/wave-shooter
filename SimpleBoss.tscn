@@ -9,7 +9,7 @@ script = ExtResource( 2 )
 essence_upgrade_variable = "damage"
 knockback = 0.0
 health = 100
-score_value = 100
+score_value = 200
 
 [node name="HitBox" parent="." index="2" groups=[
 "boss",
