@@ -59,7 +59,8 @@ func enemy_died(position) -> void:
 	if wave_enemies_left == 0:
 		new_wave()
 	else:
-		var enemies_left_label = Global.instance_popup_label(Global.player.global_position, str(wave_enemies_left), Color.firebrick, 15, Global.player)
+		var enemies_left_label = Global.instance_popup_label(Global.player.global_position,
+								 str(wave_enemies_left), Color.whitesmoke, 15, Global.player)
 		enemies_left_label.scale = Vector2(20, 20)
 func new_wave() -> void:
 	
