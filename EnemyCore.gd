@@ -23,7 +23,7 @@ var stun = false
 onready var base_health = health
 onready var base_modulate = modulate
 
-signal died
+signal died(position)
 
 func _ready() -> void:
 	var arena = get_node("/root/Arena")
@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 			var popup_label = Global.instance_popup_label(global_position, str(score_value), base_modulate, 10)
 			popup_label.scale = Vector2(1.5, 1.5)
 	
-		emit_signal("died")
+		emit_signal("died", global_position)
 		queue_free()
 		for essence in range(score_value / rand_range(1, 5)):
 			var essence_instance = Global.instance_node(ESSENCE_SCENE, global_position, Global.node_creation_parent)

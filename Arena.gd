@@ -6,7 +6,7 @@ export(Array, PackedScene) var powerups
 
 const boss_wave = 5
 var current_wave: int = 1
-var wave_max_enemies: int = 2
+var wave_max_enemies: int = 5
 var boss_wave_max_enemies: int  = 1
 var wave_enemies_spawned: int  = 0
 var wave_enemies_left: int = wave_max_enemies
@@ -53,11 +53,14 @@ func _on_EnemySpawnTimer_timeout() -> void:
 	else:
 		$DifficultyTimer.paused = true
 
-func enemy_died() -> void:
+func enemy_died(position) -> void:
 	wave_enemies_left -= 1
+	
 	if wave_enemies_left == 0:
 		new_wave()
-		
+	else:
+		var enemies_left_label = Global.instance_popup_label(Global.player.global_position, str(wave_enemies_left), Color.firebrick, 15, Global.player)
+		enemies_left_label.scale = Vector2(20, 20)
 func new_wave() -> void:
 	
 	var new_wave_label = Global.instance_popup_label(Global.player.global_position, "NEW WAVE", Color.yellowgreen, 30)

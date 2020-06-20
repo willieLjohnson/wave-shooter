@@ -20,8 +20,8 @@ func instance_node(node, location, parent):
 	node_instance.global_position = location
 	return node_instance  
 	
-func instance_popup_label(position, text, modulate = Color.white, z_index = 5):
-	var label = instance_node(POPUP_LABEL_SCENE, position, node_creation_parent)
+func instance_popup_label(position, text, modulate = Color.white, z_index = 5, parent = node_creation_parent):
+	var label = instance_node(POPUP_LABEL_SCENE, position, parent)
 	label.text = text
 	label.modulate = modulate
 	label.z_index = z_index
