@@ -29,7 +29,7 @@ position = Vector2( 320, 180 )
 remote_path = NodePath("../../Camera2D")
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 2.7
+wait_time = 2.5
 autostart = true
 
 [node name="UI" parent="." instance=ExtResource( 3 )]

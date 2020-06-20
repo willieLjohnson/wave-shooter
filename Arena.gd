@@ -70,8 +70,8 @@ func new_wave() -> void:
 	$EnemySpawnTimer.paused = false
 	
 func _on_DifficultyTimer_timeout() -> void:
-	if 	$EnemySpawnTimer.wait_time > 0.5:
-		$EnemySpawnTimer.wait_time -= 0.020
+	if 	$EnemySpawnTimer.wait_time > 1:
+		$EnemySpawnTimer.wait_time -= 0.010
 
 
 func _on_PowerupSpawnTimer_timeout() -> void:
