@@ -47,7 +47,7 @@ func _on_EnemySpawnTimer_timeout() -> void:
 		var rand_boss_index = round(rand_range(0, bosses.size() - 1))
 		var boss = Global.instance_node(bosses[rand_boss_index], boss_position, self)
 		boss.health *= current_wave / 5
-		boss.score_value *= current_wave / 10
+		boss.score_value *= current_wave / 5
 		$EnemySpawnTimer.paused = true
 		wave_enemies_spawned += 1
 	else:

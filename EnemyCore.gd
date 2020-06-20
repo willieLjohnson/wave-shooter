@@ -13,6 +13,7 @@ export(float) var knockback = 2
 export(int) var health = 3
 export(int) var screen_shake_intensity = 60
 export(int) var score_value = 10
+export(bool) var is_boss = false
 
 onready var softCollision = $SoftCollision
 
@@ -33,7 +34,10 @@ func _process(delta: float) -> void:
 	if health <= 0:
 		Global.play_sound("res://enemy-death-2.wav", -5)
 		if Global.camera:
-			Global.camera.screen_shake(screen_shake_intensity, 0.2)
+			if is_boss:
+				Global.camera.screen_shake(screen_shake_intensity, 1)
+			else:
+				Global.camera.screen_shake(15, 0.02)
 		
 		Global.score += score_value
 		if Global.node_creation_parent != null:
@@ -47,7 +51,10 @@ func _process(delta: float) -> void:
 	
 		emit_signal("died", global_position)
 		queue_free()
-		for essence in range(score_value / rand_range(1, 5)):
+		var num_essence = score_value
+		if !is_boss:
+			num_essence /= rand_range(1, 5)
+		for essence in range(num_essence):
 			var essence_instance = Global.instance_node(ESSENCE_SCENE, global_position, Global.node_creation_parent)
 			essence_instance.modulate = base_modulate
 			essence_instance.player_variable_modify = essence_upgrade_variable
@@ -84,7 +91,10 @@ func _on_Area2D_area_entered(area: Area2D) -> void:
 		if not area.piercing:
 			stun = true
 			area.queue_free()
-			Global.camera.screen_shake(10, 0.02)
+			if is_boss:
+				Global.camera.screen_shake(10, 0.02)
+			else:
+				Global.camera.screen_shake(15, 0.02)
 			modulate = Color.white
 			$StunTimer.start()
 			velocity = (-velocity.rotated(rotation) / 2) * knockback

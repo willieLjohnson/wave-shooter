@@ -7,7 +7,7 @@ func _physics_process(delta: float) -> void:
 	if !is_special_attack:
 		basic_movement_towards_player(delta)
 	else:
-		special_attack_movement(delta)
+		special_attack_movement(delta)	
 		if special_attack_target == null:
 			look_at(Global.player.global_position)
 
