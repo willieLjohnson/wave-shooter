@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/Bullet.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Area2D
+
+const HIT_EFFECT_SCENE = preload(\"res://HitEffect.tscn\")
+
+export(bool) var piercing = false
+
+var velocity = Vector2(1, 0)
+var default_speed = 250
+var speed = default_speed
+var initial_speed = default_speed * 3.5
+
+var damage = 1 setget set_damage
+var recoil = (damage) + (default_speed * 0.1)
+
+var look_once = true
+
+var default_scale = scale
+var direction = Vector2.ZERO
+
+
+func _ready() -> void:
+	set_scale(Vector2((default_scale.x * damage + velocity.x) * 0.5, (default_scale.y * damage + velocity.y) * 0.5))  
+	speed = initial_speed
+	
+func init(damage: float, direction: Vector2, color: Color) -> void:
+	self.direction = direction
+	self.damage = damage
+	self.modulate = color
+	look_once = true
+	look_at(direction)
+
+			
+func _process(delta: float) -> void:
+	if look_once:
+		look_at(direction)
+		look_once = false
+	global_position += velocity.rotated(rotation) * speed * delta
+	scale = lerp(scale, default_scale * damage, 0.15)
+	speed = lerp(speed, default_speed, 0.15)
+
+	
+func set_damage(value) -> void:
+	damage = value
+	recoil = damage * default_speed * 0.2
+	set_scale(Vector2((default_scale.x * damage + velocity.x) * 0.5, (default_scale.y * damage + velocity.y) * 0.5))  
+	var audioPitch = $AudioStreamPlayer.pitch_scale
+	$AudioStreamPlayer.pitch_scale = 0.9 / damage
+		
+func _on_VisibilityNotifier2D_screen_exited() -> void:
+	queue_free()
+
+"
+
+[node name="BulletPierce" instance=ExtResource( 1 )]
+scale = Vector2( 0.12, 0.08 )
+script = SubResource( 1 )
+piercing = true

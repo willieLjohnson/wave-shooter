@@ -16,13 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Wave Shooter"
-run/main_scene="res://MainMenu.tscn"
+run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Global="*res://Global.gd"
-ObjectPooler="*res://ObjectPooler.tscn"
+ObjectPooler="*res://objects/ObjectPooler.tscn"
 
 [display]
 
@@ -86,7 +86,6 @@ shoot_secondary={
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 quality/filters/use_nearest_mipmap_filter=true
 environment/default_clear_color=Color( 0.014, 0, 0.12, 1 )
 quality/filters/msaa=1

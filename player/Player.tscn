@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://common/Circle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://player/Player.gd" type="Script" id=2]
+[ext_resource path="res://common/Trail.tscn" type="PackedScene" id=3]
+[ext_resource path="res://common/BlueGradient.tres" type="Gradient" id=4]
+[ext_resource path="res://common/TrailWidthCurve.tres" type="Curve" id=5]
+[ext_resource path="res://player/Weapon.tscn" type="PackedScene" id=6]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 12.0
+
+[node name="Player" type="KinematicBody2D"]
+modulate = Color( 0.729412, 1, 0.917647, 1 )
+z_index = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 12.0, -12.0 ],
+"_edit_vertical_guides_": [ 12.0, -12.0 ]
+}
+ACCELERATION = 1690
+MAX_SPEED = 200
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Circle" parent="." instance=ExtResource( 1 )]
+radius = 12.0
+
+[node name="ReloadSpeed" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="PowerupDuration" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="HitBox" type="Area2D" parent="." groups=[
+"player",
+]]
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Trail" parent="Node" instance=ExtResource( 3 )]
+width = 1.0
+width_curve = ExtResource( 5 )
+default_color = Color( 0, 0.670588, 1, 0.839216 )
+gradient = ExtResource( 4 )
+targetPath = NodePath("../..")
+wobble = true
+wobbleStrenth = 15
+target_width_multiplier = 20
+target_trailLength_multiplier = 20
+match_target_color = true
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="Normal" parent="Weapons" instance=ExtResource( 6 )]
+[connection signal="timeout" from="ReloadSpeed" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="PowerupDuration" to="." method="_on_PowerupDuration_timeout"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]

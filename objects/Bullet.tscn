@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://objects/Bullet.gd" type="Script" id=1]
+[ext_resource path="res://assets/sounds/shoot-2.wav" type="AudioStream" id=2]
+[ext_resource path="res://common/Circle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://common/Trail.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.0
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0.00909091, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
+
+[node name="Bullet" type="Area2D" groups=[
+"enemy_damager",
+]]
+z_index = -1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ -8.0, 8.0 ],
+"_edit_vertical_guides_": [ -8.0, 8.0 ]
+}
+
+[node name="Circle" parent="." instance=ExtResource( 3 )]
+radius = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 8.34465e-07, 8.34465e-07 )
+scale = Vector2( 0.8, 0.8 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -5.0
+autoplay = true
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Trail" parent="Node" instance=ExtResource( 4 )]
+width = 1.0
+width_curve = SubResource( 3 )
+default_color = Color( 1, 1, 1, 1 )
+gradient = SubResource( 2 )
+targetPath = NodePath("../..")
+wobble = true
+target_width_multiplier = 13
+target_trailLength_multiplier = 8
+match_target_color = true
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

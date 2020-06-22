@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://environment/Camera2D.gd" type="Script" id=1]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2( 320, 180 )
+current = true
+script = ExtResource( 1 )
+
+[node name="ScreenShakeTime" type="Timer" parent="."]
+[connection signal="timeout" from="ScreenShakeTime" to="." method="_on_ScreenShakeTime_timeout"]

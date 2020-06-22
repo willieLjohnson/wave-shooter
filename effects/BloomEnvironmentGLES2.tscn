@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://effects/BloolmEnvironmentGLES2.tres" type="Environment" id=1]
+
+[node name="BloomEnvironmentGLES2" type="WorldEnvironment"]
+environment = ExtResource( 1 )

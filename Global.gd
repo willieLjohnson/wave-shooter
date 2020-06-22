@@ -1,6 +1,6 @@
 extends Node
 
-const POPUP_LABEL_SCENE = preload("res://PopupLabel.tscn")
+const POPUP_LABEL_SCENE = preload("res://objects/PopupLabel.tscn")
 
 var node_creation_parent = null
 var player = null
