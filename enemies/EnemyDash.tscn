@@ -2,7 +2,6 @@
 
 [ext_resource path="res://enemies/EnemyBase.tscn" type="PackedScene" id=1]
 
-
 [node name="EnemyDash" instance=ExtResource( 1 )]
 modulate = Color( 0.87451, 1, 0, 1 )
 scale = Vector2( 0.8, 0.8 )

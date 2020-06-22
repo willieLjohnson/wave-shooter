@@ -53,7 +53,6 @@ default_color = Color( 0, 0.670588, 1, 0.839216 )
 gradient = ExtResource( 4 )
 targetPath = NodePath("../..")
 wobble = true
-wobbleStrenth = 15
 target_width_multiplier = 20
 target_trailLength_multiplier = 20
 match_target_color = true

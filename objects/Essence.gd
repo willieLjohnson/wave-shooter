@@ -44,5 +44,6 @@ func _on_LifeTimer_timeout() -> void:
 func remove_self():
 	if not spawned: return
 	get_parent().remove_child(self)
+	ObjectPooler.deactivate_obj(self)
 	spawned = false
 

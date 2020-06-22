@@ -52,6 +52,7 @@ func _process(delta: float) -> void:
 	
 		emit_signal("died", global_position)
 		queue_free()
+		
 		var num_essence = score_value
 		if !is_boss:
 			num_essence /= rand_range(1, 5)

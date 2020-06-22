@@ -49,7 +49,7 @@ func set_damage(value) -> void:
 func update_scale() -> void:
 	var scale_vel = Vector2(abs(velocity.x), abs(velocity.y))
 	var squash = ((scale_vel.y + scale_vel.x))
-	var new_scale = Vector2(squash + default_scale.x + (damage * 0.2), (squash / -1.5) + default_scale.x  + (damage * 0.4))
+	var new_scale = Vector2(squash + default_scale.x + (damage * 0.2), (squash / -1.5) + default_scale.x  + (damage * 0.35))
 	set_scale(new_scale)
 	
 func _on_VisibilityNotifier2D_screen_exited() -> void:
