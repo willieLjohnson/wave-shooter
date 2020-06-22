@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://Global.gd"
+ObjectPooler="*res://ObjectPooler.tscn"
 
 [display]
 
@@ -79,7 +80,9 @@ shoot_secondary={
 
 [layer_names]
 
+2d_physics/layer_1="player"
 2d_physics/layer_2="soft_body_collision"
+2d_physics/layer_3="enemy"
 
 [rendering]
 

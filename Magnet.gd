@@ -3,6 +3,7 @@ extends Area2D
 
 func is_colliding():
 	var areas = get_overlapping_areas()
+	print(areas.size())
 	return areas.size() > 0
 	
 func get_push_vector():
@@ -13,4 +14,5 @@ func get_push_vector():
 		if area.is_in_group("player"):
 			push_vector = area.global_position.direction_to(global_position)
 			push_vector = push_vector.normalized()
+	
 	return push_vector

@@ -35,6 +35,7 @@ collision_shape = false
 [node name="HitBox" type="Area2D" parent="." groups=[
 "enemy",
 ]]
+collision_layer = 4
 
 [node name="CollisionShape" type="CollisionPolygon2D" parent="HitBox"]
 visible = false

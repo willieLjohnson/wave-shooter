@@ -40,6 +40,7 @@ func _process(delta: float) -> void:
 				Global.camera.screen_shake(15, 0.02)
 		
 		Global.score += score_value
+		
 		if Global.node_creation_parent != null:
 			var blood_particles = Global.instance_node(BLOOD_PARTICLES, global_position, Global.node_creation_parent)
 			blood_particles.get_node("Particles").scale_amount = 0.3 * scale.x
@@ -54,12 +55,14 @@ func _process(delta: float) -> void:
 		var num_essence = score_value
 		if !is_boss:
 			num_essence /= rand_range(1, 5)
-		for essence in range(num_essence):
-			var essence_instance = Global.instance_node(ESSENCE_SCENE, global_position, Global.node_creation_parent)
+		for _i in range(num_essence):
+			var essence_instance = ObjectPooler.spawn_from_pool("essence", global_position, 0)
 			essence_instance.modulate = base_modulate
 			essence_instance.player_variable_modify = essence_upgrade_variable
 			essence_instance.player_variable_set = essence_upgrade_amount
 			essence_instance.velocity = Vector2(rand_range(-1, 1), rand_range(-1, 1))
+			Global.node_creation_parent.add_child(essence_instance)
+			
 	if Global.is_player_dead:
 		velocity = velocity.move_toward(Vector2(rand_range(-1, 1), rand_range(-1, 1)) * MAX_SPEED * 3, ACCELERATION * 3 * delta)
 		velocity = move_and_slide(velocity)

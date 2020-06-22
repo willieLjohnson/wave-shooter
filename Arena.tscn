@@ -36,7 +36,6 @@ autostart = true
 position = Vector2( -0.122093, 0 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
-scale = Vector2( 0.2, 0.2 )
 limit_left = -10
 limit_top = -10
 limit_right = 650
@@ -79,9 +78,6 @@ modulate = Color( 1, 1, 1, 0.0117647 )
 points = PoolVector2Array( 0, -2.5025, 0, 360, 640, 360, 640, 0, 2.5, 0 )
 width = 5.0
 default_color = Color( 1, 1, 1, 0.145098 )
-
-[node name="SimpleBoss" parent="." instance=ExtResource( 13 )]
-position = Vector2( 152.75, 133.1 )
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_PowerupSpawnTimer_timeout"]

@@ -11,7 +11,6 @@ const BULLET_SCENE = preload("res://Bullet.tscn")
 const BLOOD_SCENE = preload("res://PlayerBlood.tscn")
 
 onready var default_shape_scale = $Circle.scale
-onready var weapon = $Weapon
 
 var velocity = Vector2.ZERO
 

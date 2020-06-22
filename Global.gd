@@ -16,15 +16,16 @@ onready var camera_rect: Rect2 setget ,get_camera_rect
 
 func instance_node(node, location, parent):
 	var node_instance = node.instance()
-	parent.add_child(node_instance)
-	node_instance.global_position = location
+	if location != null: node_instance.global_position = location
+	if parent != null: parent.add_child(node_instance)
 	return node_instance  
 	
 func instance_popup_label(position, text, modulate = Color.white, z_index = 5, parent = node_creation_parent):
-	var label = instance_node(POPUP_LABEL_SCENE, position, parent)
+	var label = instance_node(POPUP_LABEL_SCENE, null, parent)
 	label.text = text
 	label.modulate = modulate
 	label.z_index = z_index
+	label.position = position
 	return label
 			
 func get_camera_rect():
