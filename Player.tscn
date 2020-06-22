@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Circle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://BlueGradient.tres" type="Gradient" id=4]
 [ext_resource path="res://TrailWidthCurve.tres" type="Curve" id=5]
 [ext_resource path="res://Weapon.tscn" type="PackedScene" id=6]
-[ext_resource path="res://BulletPierce.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 13.0
@@ -60,19 +59,9 @@ target_width_multiplier = 20
 target_trailLength_multiplier = 20
 match_target_color = true
 
-[node name="Normal" type="Node2D" parent="."]
+[node name="Weapons" type="Node2D" parent="."]
 
-[node name="Weapon" parent="Normal" instance=ExtResource( 6 )]
-
-[node name="Pearce" type="Node2D" parent="."]
-
-[node name="Weapon" parent="Pearce" instance=ExtResource( 6 )]
-position = Vector2( 0, 3 )
-bullet_type = ExtResource( 7 )
-
-[node name="Weapon2" parent="Pearce" instance=ExtResource( 6 )]
-position = Vector2( 0, -3 )
-bullet_type = ExtResource( 7 )
+[node name="Normal" parent="Weapons" instance=ExtResource( 6 )]
 [connection signal="timeout" from="ReloadSpeed" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="PowerupDuration" to="." method="_on_PowerupDuration_timeout"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]
