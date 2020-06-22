@@ -3,7 +3,6 @@ extends Area2D
 
 func is_colliding():
 	var areas = get_overlapping_areas()
-	print(areas.size())
 	return areas.size() > 0
 	
 func get_push_vector():
