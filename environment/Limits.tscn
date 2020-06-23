@@ -1,0 +1,15 @@
+[gd_scene format=2]
+
+[node name="Limits" type="Node"]
+
+[node name="TopLeft" type="Position2D" parent="."]
+position = Vector2( -20, -20 )
+__meta__ = {
+"_gizmo_extents_": 101.7
+}
+
+[node name="BottomRight" type="Position2D" parent="."]
+position = Vector2( 660, 380 )
+__meta__ = {
+"_gizmo_extents_": 185.0
+}

@@ -24,7 +24,9 @@ var is_dead = false setget set_is_dead
 
 var powerup_reset = []
 
-var border = null
+var topLeft = null
+var bottomRight = null
+
 var parent = null
 
 onready var current_weapon = $Weapons/Normal
@@ -33,7 +35,9 @@ func _ready() -> void:
 	Global.player = self
 	self.is_dead = false
 	parent = get_parent()
-	if parent: border = parent.get_node("Border")
+	if parent != null:
+		topLeft = parent.get_node("Camera2D/Limits/TopLeft")
+		bottomRight = parent.get_node("Camera2D/Limits/BottomRight")
 	
 func _exit_tree() -> void:
 	Global.player = null
@@ -68,8 +72,8 @@ func _physics_process(delta: float) -> void:
 	
 func move() -> void:
 	velocity = move_and_slide(velocity)
-	global_position.x = clamp(global_position.x, border.points[0].x + 15, border.points[3].x - 15)
-	global_position.y = clamp(global_position.y, border.points[0].y + 15, border.points[1].y - 15)
+	global_position.x = clamp(global_position.x, topLeft.position.x + 15, bottomRight.position.x - 15)
+	global_position.y = clamp(global_position.y, topLeft.position.y + 15, bottomRight.position.y - 15)
 	
 func squash_stretch(delta) -> void:
 	var scale_vel = Vector2(abs(velocity.x), abs(velocity.y))

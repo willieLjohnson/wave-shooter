@@ -1,13 +1,22 @@
 extends Camera2D
 
+export(bool) var useLimits = true
 var screen_shake_started = false
 var shake_intensity = 0
 var zoom_factor = 0.0015
 var damp = 0.3
 
+onready var topLeft = $Limits/TopLeft
+onready var bottomRight = $Limits/BottomRight
+
 func _ready() -> void:
 	Global.camera = self
-	
+	if useLimits:
+		limit_top = topLeft.position.y
+		limit_left = topLeft.position.x
+		limit_bottom = bottomRight.position.y
+		limit_right = bottomRight.position.x
+
 func _exit_tree() -> void:
 	Global.camera = null
 	

@@ -145,6 +145,7 @@ wobble = true
 target_width_multiplier = 20
 
 [node name="MouseFollow" type="Polygon2D" parent="."]
+visible = false
 rotation = -1.97222
 scale = Vector2( 0.3, 0.3 )
 color = Color( 0, 0.670588, 1, 0.839216 )
