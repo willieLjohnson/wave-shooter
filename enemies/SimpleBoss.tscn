@@ -11,7 +11,7 @@ essence_upgrade_amount = 0.005
 knockback = 0.0
 health = 100.0
 screen_shake_intensity = 100
-score_value = 200
+score_value = 150
 is_boss = true
 
 [node name="HitBox" parent="." index="2" groups=[

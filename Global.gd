@@ -14,6 +14,7 @@ var save_file_path = "user://savegame.save"
 
 onready var camera_rect: Rect2 setget ,get_camera_rect
 
+	
 func instance_node(node, location, parent):
 	var node_instance = node.instance()
 	if location != null: node_instance.global_position = location

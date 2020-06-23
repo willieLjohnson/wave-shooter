@@ -11,6 +11,6 @@ essence_upgrade_variable = "MAX_SPEED"
 essence_upgrade_amount = 0.01
 health = 1.0
 screen_shake_intensity = 40
-score_value = 20
+score_value = 15
 
 [editable path="SoftCollision"]

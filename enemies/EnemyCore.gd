@@ -56,12 +56,28 @@ func _process(delta: float) -> void:
 		var num_essence = score_value
 		if !is_boss:
 			num_essence /= rand_range(1, 5)
-		for _i in range(num_essence):
+		
+		var big_essence = num_essence / 10
+		var small_essence = fmod(num_essence, 10)
+		
+		for _i in range(big_essence):
 			var essence_instance = ObjectPooler.spawn_from_pool("essence", global_position, 0)
 			essence_instance.modulate = base_modulate
+			essence_instance.scale = Vector2(1.5,1.5)
+			essence_instance.value_multiplier = 10
 			essence_instance.player_variable_modify = essence_upgrade_variable
 			essence_instance.player_variable_set = essence_upgrade_amount
 			essence_instance.velocity = Vector2(rand_range(-1, 1), rand_range(-1, 1))
+			Global.node_creation_parent.add_child(essence_instance)
+			
+		for _j in range(small_essence):
+			var essence_instance = ObjectPooler.spawn_from_pool("essence", global_position, 0)
+			essence_instance.modulate = base_modulate.darkened(0.2)
+			essence_instance.scale = Vector2(0.9,0.9)
+			essence_instance.value_multiplier = 1
+			essence_instance.player_variable_modify = essence_upgrade_variable
+			essence_instance.player_variable_set = essence_upgrade_amount
+			essence_instance.velocity = Vector2(rand_range(-2, 2), rand_range(-2, 2))
 			Global.node_creation_parent.add_child(essence_instance)
 			
 	if Global.is_player_dead:

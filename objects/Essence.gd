@@ -7,6 +7,7 @@ var velocity = Vector2.ZERO
 
 var life_timer
 var spawned = false
+var value_multiplier = 1
 
 var push_vector = Vector2.ZERO
 
@@ -30,10 +31,10 @@ func _physics_process(delta: float) -> void:
 func _on_HitBox_area_entered(area: Area2D) -> void:
 	if not spawned: return
 	if area.is_in_group("player"):
-		Global.score += score_value
+		Global.score += score_value * value_multiplier
 		Global.play_sound("res://assets/sounds/essence-collect.wav", -10)
 		var player_variable = area.get_parent().get(player_variable_modify)
-		area.get_parent().set(player_variable_modify, player_variable + player_variable_set)
+		area.get_parent().set(player_variable_modify, player_variable + (player_variable_set * value_multiplier))
 		call_deferred("remove_self")
 
 
