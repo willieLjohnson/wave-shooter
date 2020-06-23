@@ -6,6 +6,8 @@ var shake_intensity = 0
 var zoom_factor = 0.0015
 var damp = 0.3
 
+
+onready var base_zoom = zoom
 onready var topLeft = $Limits/TopLeft
 onready var bottomRight = $Limits/BottomRight
 
@@ -21,7 +23,7 @@ func _exit_tree() -> void:
 	Global.camera = null
 	
 func _process(delta: float) -> void:
-	zoom = lerp(zoom, Vector2(1, 1), damp)
+	zoom = lerp(zoom, base_zoom, damp)
 	
 	if screen_shake_started:
 		global_position += Vector2(rand_range(-shake_intensity, shake_intensity), rand_range(-shake_intensity, shake_intensity)) * delta
@@ -30,7 +32,7 @@ func _process(delta: float) -> void:
 		
 func screen_shake(intensity, time):
 	if intensity > shake_intensity:
-		zoom = Vector2(1, 1) - Vector2(intensity * zoom_factor, intensity * zoom_factor)
+		zoom = base_zoom - Vector2(intensity * zoom_factor, intensity * zoom_factor)
 		shake_intensity = intensity
 		$ScreenShakeTime.wait_time = time
 		$ScreenShakeTime.start()

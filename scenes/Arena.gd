@@ -4,6 +4,10 @@ export(Array, PackedScene) var enemies
 export(Array, PackedScene) var bosses
 export(Array, PackedScene) var powerups
 
+
+onready var topLeft = $Camera2D/Limits/TopLeft
+onready var bottomRight = $Camera2D/Limits/BottomRight
+
 const boss_wave = 5
 var current_wave: int = 1
 var wave_max_enemies: int = 5
@@ -31,19 +35,26 @@ func _exit_tree() -> void:
 
 
 func _on_EnemySpawnTimer_timeout() -> void:
+	# NORMAL ENEMY SPAWN
 	if wave_enemies_spawned < wave_max_enemies and !is_boss_wave:
-		var enemy_position = Vector2(rand_range(-170, 680), rand_range(-100, 400))
-		while enemy_position.x <= 630 and enemy_position.x > -70 and enemy_position.y < 340 and enemy_position.y > -35:
-			enemy_position = Vector2(rand_range(-170, 680), rand_range(-100, 400))
+		var enemy_position = Vector2(rand_range(topLeft.position.x - 150, bottomRight.position.x + 150),
+									rand_range(topLeft.position.y - 150, bottomRight.position.y + 150))
+		while enemy_position.x <= bottomRight.position.x and enemy_position.x > topLeft.position.x and enemy_position.y < bottomRight.position.y and enemy_position.y > topLeft.position.y:
+			enemy_position = Vector2(rand_range(topLeft.position.x - 150, bottomRight.position.x + 150),
+									rand_range(topLeft.position.y - 150, bottomRight.position.y + 150))
 		
 		var rand_enemy_index = round(rand_range(0, enemies.size() - 1))
 		rand_enemy_index = clamp(rand_enemy_index, 0, current_wave - 1)
 		Global.instance_node(enemies[rand_enemy_index], enemy_position, self)
 		wave_enemies_spawned += 1
+		
+	# BOSS SPAWN
 	elif is_boss_wave and wave_enemies_spawned < wave_max_enemies:
-		var boss_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
-		while boss_position.x < 640 and boss_position.x > -80 and boss_position.y < 360 and boss_position.y > -45:
-			boss_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
+		var boss_position = Vector2(rand_range(topLeft.position.x - 150, bottomRight.position.x + 150),
+									rand_range(topLeft.position.y - 150, bottomRight.position.y + 150))
+		while boss_position.x <= bottomRight.position.x and boss_position.x > topLeft.position.x and boss_position.y < bottomRight.position.y and boss_position.y > topLeft.position.y:
+			boss_position = Vector2(rand_range(topLeft.position.x - 150, bottomRight.position.x + 150),
+									rand_range(topLeft.position.y - 150, bottomRight.position.y + 150))
 		var rand_boss_index = round(rand_range(0, bosses.size() - 1))
 		var boss = Global.instance_node(bosses[rand_boss_index], boss_position, self)
 		boss.health *= current_wave / 5

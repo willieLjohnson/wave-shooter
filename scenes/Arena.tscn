@@ -34,7 +34,13 @@ wait_time = 2.5
 autostart = true
 
 [node name="UI" parent="." instance=ExtResource( 3 )]
-position = Vector2( -0.122093, 0 )
+
+[node name="Border" type="Line2D" parent="UI"]
+position = Vector2( -14.7692, -11.9437 )
+scale = Vector2( 1.04615, 1.07382 )
+points = PoolVector2Array( 0, -2.5025, 0, 360, 640, 360, 640, 0, 2.5, 0 )
+width = 5.0
+default_color = Color( 1, 1, 1, 0.145098 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 limit_left = -10
@@ -44,13 +50,6 @@ limit_bottom = 370
 limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 2.5
-
-[node name="Border" type="Line2D" parent="Camera2D"]
-visible = false
-position = Vector2( -320, -180 )
-points = PoolVector2Array( 0, -2.5025, 0, 360, 640, 360, 640, 0, 2.5, 0 )
-width = 5.0
-default_color = Color( 1, 1, 1, 0.145098 )
 
 [node name="Limits" parent="Camera2D" instance=ExtResource( 14 )]
 
@@ -67,3 +66,5 @@ autostart = true
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_PowerupSpawnTimer_timeout"]
 
 [editable path="UI"]
+
+[editable path="Camera2D/Limits"]
