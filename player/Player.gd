@@ -7,6 +7,8 @@ export var FRICTION = 670
 export(float) var base_damage = 1 setget set_base_damage
 export(float) var base_reload_speed = 0.2 setget set_base_reload_speed
 
+export(bool) var god_mode = false
+
 const BULLET_SCENE = preload("res://objects/Bullet.tscn")
 const BLOOD_SCENE = preload("res://effects/PlayerBlood.tscn")
 
@@ -87,7 +89,7 @@ func set_max_speed(new_max_speed: float) -> void:
 	ACCELERATION += new_max_speed
 	
 func set_base_damage(new_damage: float) -> void:
-	base_damage  = new_damage
+	base_damage = new_damage
 	damage = max(base_damage, damage)
 	
 func set_base_reload_speed(new_reload_speed: float) -> void:
@@ -103,6 +105,7 @@ func _on_Timer_timeout() -> void:
 	$ReloadSpeed.wait_time = reload_speed
 	
 func _on_HitBox_area_entered(area: Area2D) -> void:
+	if god_mode: return
 	if area.is_in_group("enemy") and not is_dead:
 		Global.play_sound("res://assets/sounds/player-death.wav")
 		var blood = Global.instance_node(BLOOD_SCENE, global_position, Global.node_creation_parent)

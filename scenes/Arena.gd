@@ -97,6 +97,7 @@ func _on_DifficultyTimer_timeout() -> void:
 
 
 func _on_PowerupSpawnTimer_timeout() -> void:
-	var powerup_position = Vector2(rand_range(0, 640), rand_range(0, 360))
+	var powerup_position = Vector2(rand_range(topLeft.position.x, bottomRight.position.x),
+									rand_range(topLeft.position.y, bottomRight.position.y))
 	var rand_powerup_index = round(rand_range(0, powerups.size() - 1))
 	Global.instance_node(powerups[rand_powerup_index], powerup_position, self)

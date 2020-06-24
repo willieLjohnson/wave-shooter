@@ -20,6 +20,7 @@ __meta__ = {
 }
 ACCELERATION = 1690
 MAX_SPEED = 200
+god_mode = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
