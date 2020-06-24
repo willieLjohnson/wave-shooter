@@ -10,7 +10,7 @@ onready var bottomRight = $Camera2D/Limits/BottomRight
 
 const boss_wave = 5
 var current_wave: int = 1
-var wave_max_enemies: int = 5
+var wave_max_enemies: int = 8
 var boss_wave_max_enemies: int  = 1
 var wave_enemies_spawned: int  = 0
 var wave_enemies_left: int = wave_max_enemies
@@ -84,7 +84,7 @@ func new_wave() -> void:
 		new_wave_label.scale = Vector2(7, 7)
 		new_wave_label.modulate = Color.crimson
 	else: 
-		wave_max_enemies += (5 * current_wave)
+		wave_max_enemies += 5 + (1.2 * current_wave)
 	wave_enemies_spawned = 0
 	wave_enemies_left = wave_max_enemies
 	emit_signal("update_wave", current_wave, is_boss_wave)
@@ -92,7 +92,7 @@ func new_wave() -> void:
 	$EnemySpawnTimer.paused = false
 	
 func _on_DifficultyTimer_timeout() -> void:
-	if 	$EnemySpawnTimer.wait_time > 1:
+	if 	$EnemySpawnTimer.wait_time > 1 - (current_wave * 0.02):
 		$EnemySpawnTimer.wait_time -= 0.010
 
 
