@@ -14,7 +14,8 @@ var push_vector = Vector2.ZERO
 
 func on_object_spawned() -> void:
 	life_timer = Timer.new()
-	life_timer.start(5)
+	life_timer.wait_time = 5
+	life_timer.autostart = true
 	life_timer.connect("timeout", self, "_on_LifeTimer_timeout")
 	self.add_child(life_timer)
 	$AnimationPlayer.play("Animate")
@@ -39,12 +40,12 @@ func _on_HitBox_area_entered(area: Area2D) -> void:
 
 func _on_LifeTimer_timeout() -> void:
 	if not spawned: return
+	life_timer.queue_free()
 	call_deferred("remove_self")
 
 func remove_self():
 	if not spawned: return
 	get_parent().remove_child(self)
 	ObjectPooler.deactivate_obj(self)
-	life_timer.stop()
 	spawned = false
 
