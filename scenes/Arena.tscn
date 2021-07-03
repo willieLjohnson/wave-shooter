@@ -78,7 +78,7 @@ default_color = Color( 1, 1, 1, 0.145098 )
 
 [node name="MoveJoystick" parent="UI" instance=ExtResource( 15 )]
 modulate = Color( 1, 1, 1, 0.156863 )
-position = Vector2( 142, 256 )
+position = Vector2( 63, 264 )
 scale = Vector2( 0.4, 0.4 )
 texture = SubResource( 1 )
 
@@ -86,7 +86,8 @@ texture = SubResource( 1 )
 passby_press = true
 
 [node name="ShootJoystick" parent="UI" instance=ExtResource( 15 )]
-position = Vector2( 498, 256 )
+modulate = Color( 1, 1, 1, 0.156863 )
+position = Vector2( 577, 256 )
 scale = Vector2( 0.4, 0.4 )
 texture = SubResource( 2 )
 
