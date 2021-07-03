@@ -21,10 +21,11 @@ ObjectPooler="*res://objects/ObjectPooler.tscn"
 
 [display]
 
-window/size/width=640
-window/size/height=360
-window/size/test_width=1280
+window/size/width=896
+window/size/height=414
+window/size/test_width=1980
 window/size/test_height=720
+window/handheld/orientation="sensor_landscape"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -86,6 +87,6 @@ pointing/emulate_touch_from_mouse=true
 [rendering]
 
 quality/filters/use_nearest_mipmap_filter=true
-environment/default_clear_color=Color( 0.014, 0, 0.12, 1 )
+environment/default_clear_color=Color( 0.0156863, 0, 0.121569, 1 )
 quality/filters/msaa=1
 environment/default_environment="res://default_env.tres"

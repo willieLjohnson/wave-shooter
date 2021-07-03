@@ -44,7 +44,7 @@ powerups = [ ExtResource( 7 ), ExtResource( 8 ) ]
 [node name="BloomEnvironment" parent="." instance=ExtResource( 11 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 320, 180 )
+position = Vector2( 414, 207 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -56,29 +56,43 @@ autostart = true
 [node name="UI" parent="." instance=ExtResource( 3 )]
 
 [node name="Control" parent="UI" index="0"]
-margin_left = -0.536209
-margin_right = 639.464
+margin_left = -32.0
+margin_right = 832.0
+margin_bottom = 440.0
+
+[node name="Score" parent="UI/Control" index="0"]
+margin_right = 1728.0
 
 [node name="HighScore" parent="UI/Control" index="1"]
-margin_left = -303.464
-margin_top = -180.0
-margin_right = 926.536
-margin_bottom = -94.0
+margin_left = -440.0
+margin_top = -220.0
+margin_right = 1304.0
+margin_bottom = -134.0
 
 [node name="WaveContainer" parent="UI/Control" index="2"]
+margin_left = 1.0
 margin_top = 0.0
+margin_right = 1727.0
 margin_bottom = 86.0
 
+[node name="Label" parent="UI/Control/WaveContainer" index="0"]
+margin_left = 1560.0
+margin_right = 1697.0
+
+[node name="CurrentWave" parent="UI/Control/WaveContainer" index="1"]
+margin_left = 1707.0
+margin_right = 1726.0
+
 [node name="Border" type="Line2D" parent="UI"]
-position = Vector2( -73.9077, -30.8158 )
-scale = Vector2( 1.21846, 1.22415 )
+position = Vector2( -33.2308, 1.18421 )
+scale = Vector2( 1.35385, 1.22415 )
 points = PoolVector2Array( 0, -2.5025, 0, 360, 640, 360, 640, 0, 2.5, 0 )
 width = 5.0
 default_color = Color( 1, 1, 1, 0.145098 )
 
 [node name="MoveJoystick" parent="UI" instance=ExtResource( 15 )]
 modulate = Color( 1, 1, 1, 0.156863 )
-position = Vector2( 63, 264 )
+position = Vector2( 128, 320 )
 scale = Vector2( 0.4, 0.4 )
 texture = SubResource( 1 )
 
@@ -87,7 +101,7 @@ passby_press = true
 
 [node name="ShootJoystick" parent="UI" instance=ExtResource( 15 )]
 modulate = Color( 1, 1, 1, 0.156863 )
-position = Vector2( 577, 256 )
+position = Vector2( 704, 320 )
 scale = Vector2( 0.4, 0.4 )
 texture = SubResource( 2 )
 
@@ -95,13 +109,10 @@ texture = SubResource( 2 )
 normal = SubResource( 3 )
 pressed = SubResource( 4 )
 shape = SubResource( 5 )
+passby_press = true
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
-zoom = Vector2( 1.2, 1.2 )
-limit_left = -10
-limit_top = -10
-limit_right = 650
-limit_bottom = 370
+position = Vector2( 414, 207 )
 limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 2.5
@@ -109,10 +120,10 @@ smoothing_speed = 2.5
 [node name="Limits" parent="Camera2D" instance=ExtResource( 14 )]
 
 [node name="TopLeft" parent="Camera2D/Limits" index="0"]
-position = Vector2( -72, -32 )
+position = Vector2( -40, 0 )
 
 [node name="BottomRight" parent="Camera2D/Limits" index="1"]
-position = Vector2( 704, 408 )
+position = Vector2( 848, 448 )
 
 [node name="DifficultyTimer" type="Timer" parent="."]
 autostart = true
