@@ -31,9 +31,19 @@ var bottomRight = null
 
 var parent = null
 
+var is_mobile = false
+
 onready var current_weapon = $Weapons/Normal
+onready var shoot_dir = $ShootDir
+onready var move_joystick = get_parent().get_node("UI/MoveJoystick/JoystickButton")
+onready var shoot_joystick = get_parent().get_node("UI/ShootJoystick/JoystickButton")
 
 func _ready() -> void:
+	is_mobile = OS.get_name() == "Android" or OS.get_name() == "iOS" 
+	if not is_mobile:
+		move_joystick.get_parent().hide()
+		shoot_joystick.get_parent().hide()
+		
 	Global.player = self
 	self.is_dead = false
 	parent = get_parent()
@@ -52,20 +62,37 @@ func _physics_process(delta: float) -> void:
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
 	
+
+	if is_mobile:
+		input_vector = move_joystick.get_value()
+		
+		if shoot_joystick.event_is_pressed and Global.node_creation_parent != null and can_shoot:
+			shoot_dir.set_cast_to(shoot_joystick.get_value())
+			
+			var ray_endpoint = shoot_dir.global_position + shoot_dir.cast_to
+			var recoil = current_weapon.shoot(damage, ray_endpoint, modulate)
+			velocity += recoil * global_position.direction_to(ray_endpoint).normalized()
+			can_shoot = false
+			Global.camera.screen_shake(5, 0.01)
+			$ReloadSpeed.start()
+			current_weapon.look_at(ray_endpoint)
+	else:
+		if Input.is_action_pressed("shoot") and Global.node_creation_parent != null and can_shoot:
+			var direction = get_global_mouse_position() 
+			var recoil = current_weapon.shoot(damage, direction, modulate)
+			velocity += recoil * global_position.direction_to(direction).normalized()
+			can_shoot = false
+			Global.camera.screen_shake(5, 0.01)
+			$ReloadSpeed.start()
+
+		$Weapons.look_at(get_global_mouse_position())
+			
 	if input_vector != Vector2.ZERO:
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		rotation /= 2
-	
-	if Input.is_action_pressed("shoot") and Global.node_creation_parent != null and can_shoot:
-		var direction = get_global_mouse_position() 
-		var recoil = current_weapon.shoot(damage, direction, modulate)
-		velocity += recoil * global_position.direction_to(direction).normalized()
-		can_shoot = false
-		Global.camera.screen_shake(5, 0.01)
-		$ReloadSpeed.start()
-	$Weapons.look_at(get_global_mouse_position())
+
 	
 	move()
 	squash_stretch(delta)

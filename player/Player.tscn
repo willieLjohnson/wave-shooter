@@ -20,7 +20,6 @@ __meta__ = {
 }
 ACCELERATION = 1690
 MAX_SPEED = 200
-god_mode = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -61,6 +60,12 @@ match_target_color = true
 [node name="Weapons" type="Node2D" parent="."]
 
 [node name="Normal" parent="Weapons" instance=ExtResource( 6 )]
+
+[node name="ShootDir" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 1, 1 )
+collide_with_areas = true
+
 [connection signal="timeout" from="ReloadSpeed" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="PowerupDuration" to="." method="_on_PowerupDuration_timeout"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]

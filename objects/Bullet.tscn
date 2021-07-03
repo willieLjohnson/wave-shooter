@@ -8,10 +8,10 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.0
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=2]
 _data = [ Vector2( 0.00909091, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
 
 [node name="Bullet" type="Area2D" groups=[
@@ -43,12 +43,13 @@ autoplay = true
 
 [node name="Trail" parent="Node" instance=ExtResource( 4 )]
 width = 1.0
-width_curve = SubResource( 3 )
+width_curve = SubResource( 2 )
 default_color = Color( 1, 1, 1, 1 )
-gradient = SubResource( 2 )
+gradient = SubResource( 3 )
 targetPath = NodePath("../..")
 wobble = true
 target_width_multiplier = 13
 target_trailLength_multiplier = 8
 match_target_color = true
+
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -29,7 +29,6 @@ func init(damage: float, direction: Vector2, color: Color) -> void:
 	self.modulate = color
 	look_once = true
 	look_at(direction)
-
 			
 func _process(delta: float) -> void:
 	if look_once:
