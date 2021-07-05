@@ -61,30 +61,34 @@ margin_right = 832.0
 margin_bottom = 440.0
 
 [node name="Score" parent="UI/Control" index="0"]
+margin_top = 8.0
 margin_right = 1728.0
+margin_bottom = 120.0
 
 [node name="HighScore" parent="UI/Control" index="1"]
-margin_left = -440.0
-margin_top = -220.0
-margin_right = 1304.0
-margin_bottom = -134.0
+margin_left = -424.0
+margin_top = -212.0
+margin_right = 1288.0
+margin_bottom = -126.0
 
 [node name="WaveContainer" parent="UI/Control" index="2"]
+anchor_left = -0.00115741
+anchor_right = -0.00115741
 margin_left = 1.0
-margin_top = 0.0
-margin_right = 1727.0
-margin_bottom = 86.0
+margin_top = 8.0
+margin_right = 1697.0
+margin_bottom = 94.0
 
 [node name="Label" parent="UI/Control/WaveContainer" index="0"]
-margin_left = 1560.0
-margin_right = 1697.0
+margin_left = 1530.0
+margin_right = 1667.0
 
 [node name="CurrentWave" parent="UI/Control/WaveContainer" index="1"]
-margin_left = 1707.0
-margin_right = 1726.0
+margin_left = 1677.0
+margin_right = 1696.0
 
 [node name="Border" type="Line2D" parent="UI"]
-position = Vector2( -33.2308, 1.18421 )
+position = Vector2( -32, 0 )
 scale = Vector2( 1.35385, 1.22415 )
 points = PoolVector2Array( 0, -2.5025, 0, 360, 640, 360, 640, 0, 2.5, 0 )
 width = 5.0
@@ -120,10 +124,10 @@ smoothing_speed = 2.5
 [node name="Limits" parent="Camera2D" instance=ExtResource( 14 )]
 
 [node name="TopLeft" parent="Camera2D/Limits" index="0"]
-position = Vector2( -40, 0 )
+position = Vector2( -48, -8 )
 
 [node name="BottomRight" parent="Camera2D/Limits" index="1"]
-position = Vector2( 848, 448 )
+position = Vector2( 856, 456 )
 
 [node name="DifficultyTimer" type="Timer" parent="."]
 autostart = true
