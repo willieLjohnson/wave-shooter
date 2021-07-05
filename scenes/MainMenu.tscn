@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/uitheme.tres" type="Theme" id=1]
 [ext_resource path="res://common/BlueGradient.tres" type="Gradient" id=2]
@@ -9,10 +9,62 @@
 [ext_resource path="res://common/Trail.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
-size = 100
+size = 125
 use_filter = true
 extra_spacing_char = 13
 font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.702429, 0.65442 ), Vector2( 0.65, 0.55 ), Vector2( 0.8, 0.7 ), Vector2( 0.702429, 0.65442 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, -1.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:custom_constants/shadow_offset_x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 5, 1, 5 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:custom_constants/shadow_offset_y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 5, 20, 5 ]
+}
 
 [sub_resource type="GDScript" id=2]
 resource_name = "ButtonStart"
@@ -67,32 +119,39 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="UI/Control"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -320.0
-margin_top = -328.0
-margin_right = 960.0
-margin_bottom = -220.0
-rect_scale = Vector2( 0.5, 0.5 )
+anchor_left = 0.497
+anchor_top = 0.003
+anchor_right = 0.497
+anchor_bottom = 0.003
+margin_left = -637.809
+margin_top = -25.242
+margin_right = 638.191
+margin_bottom = 135.758
+rect_rotation = -0.0505328
+rect_scale = Vector2( 0.708885, 0.657759 )
+rect_pivot_offset = Vector2( 637.787, 73.3474 )
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0.670588, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0.45098, 1, 0.682353 )
-custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 5
 text = "wave shooter"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Control/Title"]
+autoplay = "Idle"
+playback_speed = 0.5
+anims/Idle = SubResource( 6 )
+
 [node name="ButtonStart" type="Button" parent="UI/Control"]
-margin_left = 403.447
-margin_top = 185.828
-margin_right = 499.447
-margin_bottom = 209.828
+margin_left = 352.0
+margin_top = 168.0
+margin_right = 544.0
+margin_bottom = 216.0
 theme = ExtResource( 1 )
 text = "START"
 script = SubResource( 2 )
@@ -101,10 +160,10 @@ __meta__ = {
 }
 
 [node name="ButtonQuit" type="Button" parent="UI/Control"]
-margin_left = 403.447
-margin_top = 233.828
-margin_right = 499.447
-margin_bottom = 257.828
+margin_left = 352.0
+margin_top = 248.0
+margin_right = 544.0
+margin_bottom = 296.0
 theme = ExtResource( 1 )
 text = "QUIT"
 script = SubResource( 3 )
@@ -115,13 +174,13 @@ __meta__ = {
 [node name="HighScore" type="Label" parent="UI/Control"]
 modulate = Color( 1, 1, 1, 0.87451 )
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.966
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -320.0
-margin_top = -48.0
-margin_right = 960.0
-margin_bottom = 38.0
+margin_left = -440.5
+margin_top = -55.924
+margin_right = 1319.5
+margin_bottom = 64.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = SubResource( 4 )
 text = "100"
