@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://ui/Score.gd" type="Script" id=1]
 [ext_resource path="res://assets/Font.ttf" type="DynamicFontData" id=2]
@@ -65,6 +65,19 @@ func _on_pressed() -> void:
 		Engine.get_singleton(\"Haptic\").impact(1)
 	get_tree().paused = false
 	get_parent().hide()
+"
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends Button
+
+func _ready() -> void:
+	connect(\"pressed\", self, \"_on_pressed\")
+	
+func _on_pressed() -> void:
+	if Engine.has_singleton(\"Haptic\"):
+		Engine.get_singleton(\"Haptic\").impact(1)
+	get_tree().paused = false
+	get_tree().change_scene(\"res://scenes/MainMenu.tscn\")
 "
 
 [node name="UI" type="Node2D"]
@@ -168,19 +181,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="Control/Pause"]
+[node name="Unpause" type="Button" parent="Control/Pause"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = -28.0
-margin_right = 112.0
-margin_bottom = 44.0
+margin_left = -120.0
+margin_top = -92.0
+margin_right = 120.0
+margin_bottom = -20.0
 theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 4 )
 text = "UNPAUSE"
 script = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="Button" parent="Control/Pause"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = 4.0
+margin_right = 120.0
+margin_bottom = 76.0
+theme = ExtResource( 5 )
+custom_fonts/font = ExtResource( 4 )
+text = "MENU"
+script = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
