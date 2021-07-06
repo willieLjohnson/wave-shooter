@@ -74,10 +74,12 @@ func _physics_process(delta: float) -> void:
 		
 		if shoot_joystick.event_is_pressed and Global.node_creation_parent != null and can_shoot:
 			shoot_dir.set_cast_to(shoot_joystick.get_value())
-			if damage >= 2:
-				haptics.impact(0)
 			if damage >= 3:
 				haptics.impact(1)
+			elif damage >= 2:
+				haptics.impact(0)
+			else:
+				haptics.selection()
 				
 			var ray_endpoint = shoot_dir.global_position + shoot_dir.cast_to
 			var recoil = current_weapon.shoot(damage, ray_endpoint, modulate)
