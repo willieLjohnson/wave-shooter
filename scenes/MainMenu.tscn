@@ -70,9 +70,12 @@ tracks/3/keys = {
 script/source = "extends Button
 
 func _ready() -> void:
+		
 	connect(\"pressed\", self, \"_on_pressed\")
 	
 func _on_pressed() -> void:
+	if Engine.has_singleton(\"Haptic\"):
+		Engine.get_singleton(\"Haptic\").impact(1)
 	get_tree().change_scene(\"res://scenes/Arena.tscn\")
 "
 
@@ -81,13 +84,19 @@ script/source = "extends Button
 
 func _ready() -> void:
 	connect(\"pressed\", self, \"_on_pressed\")
+	if OS.get_name() == \"iOS\":
+		hide()
 	
 func _on_pressed() -> void:
-	get_tree().quit()
+	if Engine.has_singleton(\"Haptic\"):
+		Engine.get_singleton(\"Haptic\").impact(1)
+	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
+
+
 "
 
 [sub_resource type="DynamicFont" id=5]
-size = 80
+size = 60
 use_filter = true
 extra_spacing_char = 5
 font_data = ExtResource( 4 )
@@ -147,8 +156,8 @@ anims/Idle = SubResource( 2 )
 [node name="ButtonStart" type="Button" parent="UI/Control"]
 margin_left = 352.0
 margin_top = 168.0
-margin_right = 544.0
-margin_bottom = 216.0
+margin_right = 552.0
+margin_bottom = 218.0
 theme = ExtResource( 1 )
 text = "START"
 script = SubResource( 3 )
@@ -159,8 +168,8 @@ __meta__ = {
 [node name="ButtonQuit" type="Button" parent="UI/Control"]
 margin_left = 352.0
 margin_top = 248.0
-margin_right = 544.0
-margin_bottom = 296.0
+margin_right = 552.0
+margin_bottom = 298.0
 theme = ExtResource( 1 )
 text = "QUIT"
 script = SubResource( 4 )
@@ -170,15 +179,13 @@ __meta__ = {
 
 [node name="HighScore" type="Label" parent="UI/Control"]
 modulate = Color( 1, 1, 1, 0.87451 )
-anchor_left = 0.5
-anchor_top = 0.966
-anchor_right = 0.5
+anchor_left = 0.499
+anchor_top = 1.0
+anchor_right = 0.499
 anchor_bottom = 1.0
-margin_left = -440.5
-margin_top = -55.924
-margin_right = 1319.5
-margin_bottom = 64.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = -447.603
+margin_top = -86.0
+margin_right = 448.397
 custom_fonts/font = SubResource( 5 )
 text = "100"
 align = 1

@@ -34,12 +34,11 @@ func _ready() -> void:
 	
 	if Engine.has_singleton("Haptic"):
 		haptics = Engine.get_singleton("Haptic")
-		haptics.selection()
 
 func _process(delta: float) -> void:
 	if health <= 0:
 		Global.play_sound("res://assets/sounds/enemy-death-2.wav", -5)
-		haptics.impact(2)
+		haptics.impact(1)
 		if Global.camera:
 			if is_boss:
 				Input.vibrate_handheld(500)

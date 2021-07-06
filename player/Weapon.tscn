@@ -3,10 +3,6 @@
 [ext_resource path="res://player/Weapon.gd" type="Script" id=1]
 [ext_resource path="res://objects/Bullet.tscn" type="PackedScene" id=2]
 
-
-
-
-
 [node name="Weapon" type="Node2D"]
 script = ExtResource( 1 )
 bullet_type = ExtResource( 2 )
