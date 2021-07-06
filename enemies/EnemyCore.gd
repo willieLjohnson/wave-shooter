@@ -26,15 +26,23 @@ onready var base_modulate = modulate
 
 signal died(position)
 
+var haptics
+
 func _ready() -> void:
 	var arena = get_node("/root/Arena")
 	self.connect("died", arena, "enemy_died")
+	
+	if Engine.has_singleton("Haptic"):
+		haptics = Engine.get_singleton("Haptic")
+		haptics.selection()
 
 func _process(delta: float) -> void:
 	if health <= 0:
 		Global.play_sound("res://assets/sounds/enemy-death-2.wav", -5)
+		haptics.impact(2)
 		if Global.camera:
 			if is_boss:
+				Input.vibrate_handheld(500)
 				Global.camera.screen_shake(screen_shake_intensity, 1)
 			else:
 				Global.camera.screen_shake(15, 0.02)
@@ -108,6 +116,7 @@ func _on_Area2D_area_entered(area: Area2D) -> void:
 		var hit_effect = Global.instance_node(area.HIT_EFFECT_SCENE, area.global_position, Global.node_creation_parent)
 		hit_effect.modulate = base_modulate
 		Global.play_sound("res://assets/sounds/enemy-hurt-3.wav", -5, (base_health / (health + 1)))
+		haptics.impact(1)
 		if not area.piercing:
 			stun = true
 			area.queue_free()

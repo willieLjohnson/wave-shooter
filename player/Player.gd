@@ -38,11 +38,17 @@ onready var shoot_dir = $ShootDir
 onready var move_joystick = get_parent().get_node("UI/MoveJoystick/JoystickButton")
 onready var shoot_joystick = get_parent().get_node("UI/ShootJoystick/JoystickButton")
 
+var haptics
+
 func _ready() -> void:
 	is_mobile = OS.get_name() == "Android" or OS.get_name() == "iOS" 
 	if not is_mobile:
 		move_joystick.get_parent().hide()
 		shoot_joystick.get_parent().hide()
+
+	if Engine.has_singleton("Haptic"):
+		haptics = Engine.get_singleton("Haptic")
+		haptics.selection()
 		
 	Global.player = self
 	self.is_dead = false
@@ -64,11 +70,15 @@ func _physics_process(delta: float) -> void:
 	
 
 	if is_mobile:
-		input_vector = move_joystick.get_value()
+		input_vector = move_joystick.get_value()		
 		
 		if shoot_joystick.event_is_pressed and Global.node_creation_parent != null and can_shoot:
 			shoot_dir.set_cast_to(shoot_joystick.get_value())
-			
+			if damage >= 2:
+				haptics.impact(0)
+			if damage >= 3:
+				haptics.impact(1)
+				
 			var ray_endpoint = shoot_dir.global_position + shoot_dir.cast_to
 			var recoil = current_weapon.shoot(damage, ray_endpoint, modulate)
 			velocity += recoil * global_position.direction_to(ray_endpoint).normalized()
@@ -134,6 +144,7 @@ func _on_Timer_timeout() -> void:
 func _on_HitBox_area_entered(area: Area2D) -> void:
 	if god_mode: return
 	if area.is_in_group("enemy") and not is_dead:
+		Input.vibrate_handheld(500)
 		Global.play_sound("res://assets/sounds/player-death.wav")
 		var blood = Global.instance_node(BLOOD_SCENE, global_position, Global.node_creation_parent)
 		blood.rotation = velocity.angle()
