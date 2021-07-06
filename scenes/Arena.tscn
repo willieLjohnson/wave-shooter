@@ -115,8 +115,10 @@ margin_right = 864.0
 margin_bottom = 448.0
 
 [node name="ColorRect" parent="UI/Control/Pause" index="0"]
-margin_right = 864.0
-margin_bottom = 440.0
+margin_left = -56.0
+margin_top = -16.0
+margin_right = 936.0
+margin_bottom = 456.0
 
 [node name="Border" type="Line2D" parent="UI"]
 position = Vector2( -32, 0 )
