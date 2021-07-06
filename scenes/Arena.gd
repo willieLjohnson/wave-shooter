@@ -101,3 +101,13 @@ func _on_PowerupSpawnTimer_timeout() -> void:
 									rand_range(topLeft.position.y, bottomRight.position.y))
 	var rand_powerup_index = round(rand_range(0, powerups.size() - 1))
 	Global.instance_node(powerups[rand_powerup_index], powerup_position, self)
+
+func _notification(what) -> void:
+#	if what == MainLoop.NOTIFICATION_WM_FOCUS_IN:
+#		$UI/Control/Pause.hide()
+#		get_tree().paused = false
+
+	if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+		$UI/Control/Pause.show()
+		get_tree().paused = true
+

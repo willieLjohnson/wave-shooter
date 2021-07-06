@@ -53,6 +53,29 @@ remote_path = NodePath("../../Camera2D")
 wait_time = 2.5
 autostart = true
 
+[node name="Camera2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 414, 207 )
+limit_smoothed = true
+smoothing_enabled = true
+smoothing_speed = 2.5
+
+[node name="Limits" parent="Camera2D" instance=ExtResource( 14 )]
+
+[node name="TopLeft" parent="Camera2D/Limits" index="0"]
+position = Vector2( -48, -8 )
+
+[node name="BottomRight" parent="Camera2D/Limits" index="1"]
+position = Vector2( 856, 456 )
+
+[node name="DifficultyTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="PowerupSpawnTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[node name="ParallaxBackground" parent="." instance=ExtResource( 12 )]
+
 [node name="UI" parent="." instance=ExtResource( 3 )]
 
 [node name="Control" parent="UI" index="0"]
@@ -87,6 +110,14 @@ margin_right = 1667.0
 margin_left = 1677.0
 margin_right = 1696.0
 
+[node name="Pause" parent="UI/Control" index="3"]
+margin_right = 864.0
+margin_bottom = 448.0
+
+[node name="ColorRect" parent="UI/Control/Pause" index="0"]
+margin_right = 864.0
+margin_bottom = 440.0
+
 [node name="Border" type="Line2D" parent="UI"]
 position = Vector2( -32, 0 )
 scale = Vector2( 1.35385, 1.22415 )
@@ -115,34 +146,11 @@ pressed = SubResource( 4 )
 shape = SubResource( 5 )
 passby_press = true
 
-[node name="Camera2D" parent="." instance=ExtResource( 4 )]
-position = Vector2( 414, 207 )
-limit_smoothed = true
-smoothing_enabled = true
-smoothing_speed = 2.5
-
-[node name="Limits" parent="Camera2D" instance=ExtResource( 14 )]
-
-[node name="TopLeft" parent="Camera2D/Limits" index="0"]
-position = Vector2( -48, -8 )
-
-[node name="BottomRight" parent="Camera2D/Limits" index="1"]
-position = Vector2( 856, 456 )
-
-[node name="DifficultyTimer" type="Timer" parent="."]
-autostart = true
-
-[node name="PowerupSpawnTimer" type="Timer" parent="."]
-wait_time = 15.0
-autostart = true
-
-[node name="ParallaxBackground" parent="." instance=ExtResource( 12 )]
-
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_PowerupSpawnTimer_timeout"]
 
+[editable path="Camera2D/Limits"]
 [editable path="UI"]
 [editable path="UI/MoveJoystick"]
 [editable path="UI/ShootJoystick"]
-[editable path="Camera2D/Limits"]

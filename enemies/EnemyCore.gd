@@ -38,7 +38,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if health <= 0:
 		Global.play_sound("res://assets/sounds/enemy-death-2.wav", -5)
-		haptics.impact(1)
+		if haptics: haptics.impact(1)
 		if Global.camera:
 			if is_boss:
 				Input.vibrate_handheld(500)
@@ -115,7 +115,7 @@ func _on_Area2D_area_entered(area: Area2D) -> void:
 		var hit_effect = Global.instance_node(area.HIT_EFFECT_SCENE, area.global_position, Global.node_creation_parent)
 		hit_effect.modulate = base_modulate
 		Global.play_sound("res://assets/sounds/enemy-hurt-3.wav", -5, (base_health / (health + 1)))
-		haptics.impact(1)
+		if haptics: haptics.impact(1)
 		if not area.piercing:
 			stun = true
 			area.queue_free()
