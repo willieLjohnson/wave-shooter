@@ -44,6 +44,7 @@ powerups = [ ExtResource( 7 ), ExtResource( 8 ) ]
 [node name="BloomEnvironment" parent="." instance=ExtResource( 11 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+modulate = Color( 0.729412, 1, 0.917647, 1 )
 position = Vector2( 448, 208 )
 rotation = -2.7672
 
@@ -129,7 +130,6 @@ passby_press = true
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 448, 208 )
 rotation = -2.7672
-scale = Vector2( 1, 1 )
 limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 2.5

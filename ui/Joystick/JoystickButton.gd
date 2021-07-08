@@ -18,8 +18,12 @@ var angle = 0
 
 var event_is_pressed = false
 
+var haptics
 
 func _process(delta):
+	if Engine.has_singleton("Haptic"):
+		haptics = Engine.get_singleton("Haptic")
+		
 	if ongoing_drag == -1:
 		var pos_difference = (Vector2(0, 0) - radius) - position
 		position += pos_difference * return_accel * delta
@@ -32,7 +36,10 @@ func _input(event):
 		var event_dist_from_centre = (event.position - get_parent().global_position).length()
 		
 		if event_dist_from_centre <= boundary * global_scale.x or event.get_index() == ongoing_drag:
-			event_is_pressed = true
+			if not event_is_pressed:
+				event_is_pressed = true
+				haptics.impact(0)
+				get_parent().modulate = Color("#ffffffe6") 
 			set_global_position(event.position - radius * global_scale)
 
 			if get_button_pos().length() > boundary:
@@ -42,7 +49,10 @@ func _input(event):
 			
 
 	if event is InputEventScreenTouch and !event.is_pressed() and event.get_index() == ongoing_drag:
-		event_is_pressed = false
+		if event_is_pressed:
+			event_is_pressed = false
+			haptics.selection()
+			get_parent().modulate = Color("#28ffffff") 
 		ongoing_drag = -1
 
 func get_value():
