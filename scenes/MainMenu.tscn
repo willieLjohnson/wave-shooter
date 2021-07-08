@@ -10,8 +10,9 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 125
+outline_size = 1
 use_filter = true
-extra_spacing_char = 13
+extra_spacing_char = 20
 font_data = ExtResource( 4 )
 
 [sub_resource type="Animation" id=2]
@@ -24,10 +25,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 0.5, 1 ),
 "update": 0,
-"values": [ Vector2( 0.702429, 0.65442 ), Vector2( 0.65, 0.55 ), Vector2( 0.8, 0.7 ), Vector2( 0.702429, 0.65442 ) ]
+"values": [ Vector2( 0.702, 0.654 ), Vector2( 0.65, 0.55 ), Vector2( 0.702429, 0.65442 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:rect_rotation")
@@ -98,7 +99,7 @@ func _on_pressed() -> void:
 [sub_resource type="DynamicFont" id=5]
 size = 60
 use_filter = true
-extra_spacing_char = 5
+extra_spacing_char = 8
 font_data = ExtResource( 4 )
 
 [sub_resource type="GDScript" id=6]
@@ -128,19 +129,18 @@ __meta__ = {
 anchor_left = 0.497
 anchor_top = 0.003
 anchor_right = 0.497
-anchor_bottom = 0.003
+anchor_bottom = 0.00300001
 margin_left = -637.809
 margin_top = -25.242
 margin_right = 638.191
 margin_bottom = 135.758
-rect_rotation = -1.0134
-rect_scale = Vector2( 0.772477, 0.667394 )
+rect_scale = Vector2( 0.702, 0.654 )
 rect_pivot_offset = Vector2( 637.787, 73.3474 )
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0, 0.670588, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0.45098, 1, 0.682353 )
-custom_constants/shadow_offset_x = 2
-custom_constants/shadow_offset_y = 14
+custom_colors/font_color = Color( 0.0117647, 0.662745, 0.956863, 1 )
+custom_colors/font_color_shadow = Color( 0.0117647, 0.662745, 0.956863, 0.537255 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 5
 text = "wave shooter"
 align = 1
 valign = 1
@@ -187,6 +187,8 @@ margin_left = -447.603
 margin_top = -86.0
 margin_right = 448.397
 custom_fonts/font = SubResource( 5 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 0
 text = "100"
 align = 1
 valign = 1
