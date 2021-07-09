@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Arena.gd" type="Script" id=2]
@@ -14,32 +14,53 @@
 [ext_resource path="res://environment/ParallaxBackground.tscn" type="PackedScene" id=12]
 [ext_resource path="res://enemies/SimpleBoss.tscn" type="PackedScene" id=13]
 [ext_resource path="res://environment/Limits.tscn" type="PackedScene" id=14]
-[ext_resource path="res://ui/Joystick/Joystick.tscn" type="PackedScene" id=15]
-
-[sub_resource type="StreamTexture" id=1]
-flags = 4
-load_path = "res://.import/joystick_background.png-dec851576b0f73cb25fa1346b9215f6b.stex"
-
-[sub_resource type="StreamTexture" id=2]
-flags = 4
-load_path = "res://.import/joystick_background.png-dec851576b0f73cb25fa1346b9215f6b.stex"
-
-[sub_resource type="StreamTexture" id=3]
-flags = 4
-load_path = "res://.import/joystick_handle.png-c7ec6791e7f1e6dcf51860095541cfa6.stex"
-
-[sub_resource type="StreamTexture" id=4]
-flags = 4
-load_path = "res://.import/joystick_circle.png-1d142998f0cc1095ebc2149c6cadc022.stex"
-
-[sub_resource type="CircleShape2D" id=5]
-radius = 64.0
 
 [node name="Arena" type="Node2D"]
 script = ExtResource( 2 )
 enemies = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 10 ) ]
 bosses = [ ExtResource( 13 ) ]
 powerups = [ ExtResource( 7 ), ExtResource( 8 ) ]
+
+[node name="UI" parent="." instance=ExtResource( 3 )]
+margin_left = -3.05176e-05
+margin_top = -1.52588e-05
+margin_right = 905.0
+margin_bottom = 427.0
+rect_scale = Vector2( 0.989938, 0.97431 )
+
+[node name="Labels" parent="UI/Container" index="0"]
+margin_right = 885.0
+
+[node name="HighScore" parent="UI/Container/Labels" index="0"]
+margin_right = 285.0
+
+[node name="Score" parent="UI/Container/Labels" index="1"]
+margin_left = 289.0
+margin_right = 575.0
+
+[node name="WaveContainer" parent="UI/Container/Labels" index="2"]
+margin_left = 579.0
+margin_right = 865.0
+
+[node name="Label" parent="UI/Container/Labels/WaveContainer" index="0"]
+margin_left = 145.0
+margin_right = 263.0
+
+[node name="CurrentWave" parent="UI/Container/Labels/WaveContainer" index="1"]
+margin_left = 273.0
+margin_right = 286.0
+
+[node name="Pause" parent="UI/Container" index="1"]
+margin_right = 885.0
+margin_bottom = 407.0
+
+[node name="MoveJoystick" parent="UI/Container/Joysticks" index="0"]
+position = Vector2( 148, 315 )
+
+[node name="ShootJoystick" parent="UI/Container/Joysticks" index="1"]
+position = Vector2( 750, 315 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BloomEnvironment" parent="." instance=ExtResource( 11 )]
 
@@ -50,89 +71,21 @@ rotation = -2.7672
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
+update_rotation = false
+update_scale = false
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 2.5
 autostart = true
 
-[node name="UI" parent="." instance=ExtResource( 3 )]
-
-[node name="Control" parent="UI" index="0"]
-margin_right = 896.0
-margin_bottom = 416.0
-
-[node name="Score" parent="UI/Control" index="0"]
-margin_top = 8.0
-margin_right = 1792.0
-margin_bottom = 120.0
-
-[node name="HighScore" parent="UI/Control" index="1"]
-margin_left = -440.0
-margin_top = -212.0
-margin_right = 1336.0
-margin_bottom = -126.0
-
-[node name="WaveContainer" parent="UI/Control" index="2"]
-anchor_left = -0.00115741
-anchor_right = -0.00115741
-margin_left = 33.037
-margin_top = 8.0
-margin_right = 1729.04
-margin_bottom = 94.0
-
-[node name="Label" parent="UI/Control/WaveContainer" index="0"]
-margin_left = 1510.0
-margin_right = 1667.0
-
-[node name="CurrentWave" parent="UI/Control/WaveContainer" index="1"]
-margin_left = 1677.0
-margin_right = 1696.0
-
-[node name="Pause" parent="UI/Control" index="3"]
-visible = false
-margin_right = 864.0
-margin_bottom = 448.0
-
-[node name="ColorRect" parent="UI/Control/Pause" index="0"]
-margin_left = -56.0
-margin_top = -16.0
-margin_right = 936.0
-margin_bottom = 456.0
-
-[node name="Border" type="Line2D" parent="UI"]
-position = Vector2( 1.90735e-06, -5.96046e-08 )
-scale = Vector2( 1.38888, 1.14143 )
-points = PoolVector2Array( 0, -2.5025, 0, 360, 640, 360, 640, 0, 2.5, 0 )
-width = 5.0
-default_color = Color( 1, 1, 1, 0.145098 )
-
-[node name="MoveJoystick" parent="UI" instance=ExtResource( 15 )]
-modulate = Color( 1, 1, 1, 0.156863 )
-position = Vector2( 148, 320 )
-scale = Vector2( 0.4, 0.4 )
-texture = SubResource( 1 )
-
-[node name="JoystickButton" parent="UI/MoveJoystick" index="0"]
-passby_press = true
-
-[node name="ShootJoystick" parent="UI" instance=ExtResource( 15 )]
-modulate = Color( 1, 1, 1, 0.156863 )
-position = Vector2( 740, 320 )
-scale = Vector2( 0.4, 0.4 )
-texture = SubResource( 2 )
-
-[node name="JoystickButton" parent="UI/ShootJoystick" index="0"]
-normal = SubResource( 3 )
-pressed = SubResource( 4 )
-shape = SubResource( 5 )
-passby_press = true
-
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 448, 208 )
 rotation = -2.7672
+process_mode = 0
 limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 2.5
+useLimits = false
 
 [node name="Limits" parent="Camera2D" instance=ExtResource( 14 )]
 
@@ -156,6 +109,4 @@ autostart = true
 [connection signal="timeout" from="PowerupSpawnTimer" to="." method="_on_PowerupSpawnTimer_timeout"]
 
 [editable path="UI"]
-[editable path="UI/MoveJoystick"]
-[editable path="UI/ShootJoystick"]
 [editable path="Camera2D/Limits"]

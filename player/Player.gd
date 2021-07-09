@@ -35,8 +35,8 @@ var is_mobile = false
 
 onready var current_weapon = $Weapons/Normal
 onready var shoot_dir = $ShootDir
-onready var move_joystick = get_parent().get_node("UI/MoveJoystick/JoystickButton")
-onready var shoot_joystick = get_parent().get_node("UI/ShootJoystick/JoystickButton")
+onready var move_joystick = get_parent().get_node("UI/Container/Joysticks/MoveJoystick/JoystickButton")
+onready var shoot_joystick = get_parent().get_node("UI/Container/Joysticks/ShootJoystick/JoystickButton")
 
 var haptics
 
