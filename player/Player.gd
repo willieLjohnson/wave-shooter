@@ -31,25 +31,18 @@ var bottomRight = null
 
 var parent = null
 
-var is_mobile = false
 
 onready var current_weapon = $Weapons/Normal
 onready var shoot_dir = $ShootDir
 onready var move_joystick = get_parent().get_node("UI/Container/Joysticks/MoveJoystick/JoystickButton")
 onready var shoot_joystick = get_parent().get_node("UI/Container/Joysticks/ShootJoystick/JoystickButton")
 
-var haptics
-
 func _ready() -> void:
-	is_mobile = OS.get_name() == "Android" or OS.get_name() == "iOS" 
-	if not is_mobile:
+	Global.update_OS_status()
+	if not Global.is_mobile:
 		move_joystick.get_parent().hide()
 		shoot_joystick.get_parent().hide()
 
-	if Engine.has_singleton("Haptic"):
-		haptics = Engine.get_singleton("Haptic")
-		haptics.selection()
-		
 	Global.player = self
 	self.is_dead = false
 	parent = get_parent()
@@ -69,17 +62,18 @@ func _physics_process(delta: float) -> void:
 	input_vector = input_vector.normalized()
 	
 
-	if is_mobile:
+	if Global.is_mobile:
 		input_vector = move_joystick.get_value()		
 		
 		if shoot_joystick.event_is_pressed and Global.node_creation_parent != null and can_shoot:
 			shoot_dir.set_cast_to(shoot_joystick.get_value())
+			
 			if damage >= 3:
-				haptics.impact(1)
+				Global.vibrate(2)
 			elif damage >= 2:
-				haptics.impact(0)
+				Global.vibrate(1)
 			else:
-				haptics.selection()
+				Global.vibrate()
 				
 			var ray_endpoint = shoot_dir.global_position + shoot_dir.cast_to
 			var recoil = current_weapon.shoot(damage, ray_endpoint, modulate)

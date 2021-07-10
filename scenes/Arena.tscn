@@ -22,43 +22,23 @@ bosses = [ ExtResource( 13 ) ]
 powerups = [ ExtResource( 7 ), ExtResource( 8 ) ]
 
 [node name="UI" parent="." instance=ExtResource( 3 )]
-margin_left = -3.05176e-05
-margin_top = -1.52588e-05
-margin_right = 905.0
-margin_bottom = 427.0
-rect_scale = Vector2( 0.989938, 0.97431 )
+margin_right = 904.0
+margin_bottom = 424.0
 
-[node name="Labels" parent="UI/Container" index="0"]
-margin_right = 885.0
-
-[node name="HighScore" parent="UI/Container/Labels" index="0"]
-margin_right = 285.0
-
-[node name="Score" parent="UI/Container/Labels" index="1"]
-margin_left = 289.0
-margin_right = 575.0
-
-[node name="WaveContainer" parent="UI/Container/Labels" index="2"]
-margin_left = 579.0
-margin_right = 865.0
-
-[node name="Label" parent="UI/Container/Labels/WaveContainer" index="0"]
-margin_left = 145.0
-margin_right = 263.0
-
-[node name="CurrentWave" parent="UI/Container/Labels/WaveContainer" index="1"]
-margin_left = 273.0
-margin_right = 286.0
-
-[node name="Pause" parent="UI/Container" index="1"]
-margin_right = 885.0
-margin_bottom = 407.0
+[node name="Pause" parent="UI/Container" index="0"]
+margin_right = 884.0
+margin_bottom = 404.0
 
 [node name="MoveJoystick" parent="UI/Container/Joysticks" index="0"]
 position = Vector2( 148, 315 )
 
 [node name="ShootJoystick" parent="UI/Container/Joysticks" index="1"]
 position = Vector2( 750, 315 )
+
+[node name="CanvasLayer" parent="UI/Container" index="2"]
+layer = -1
+follow_viewport_enable = true
+follow_viewport_scale = 0.9
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -81,7 +61,6 @@ autostart = true
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 448, 208 )
 rotation = -2.7672
-process_mode = 0
 limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 2.5
@@ -90,10 +69,10 @@ useLimits = false
 [node name="Limits" parent="Camera2D" instance=ExtResource( 14 )]
 
 [node name="TopLeft" parent="Camera2D/Limits" index="0"]
-position = Vector2( -16, -16 )
+position = Vector2( 0, 0 )
 
 [node name="BottomRight" parent="Camera2D/Limits" index="1"]
-position = Vector2( 912, 432 )
+position = Vector2( 904, 424 )
 
 [node name="DifficultyTimer" type="Timer" parent="."]
 autostart = true

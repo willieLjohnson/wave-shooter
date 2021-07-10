@@ -23,7 +23,7 @@ func _ready() -> void:
 	Global.node_creation_parent = self
 	Global.score = 0
 	Global.is_player_dead = false
-	var wave_label = get_node("/root/Arena/UI/Container/Labels/WaveContainer/CurrentWave")
+	var wave_label = get_node("/root/Arena/UI/Container/CanvasyLayer/Labels/WaveContainer/CurrentWave")
 	self.connect("update_wave", wave_label, "update_wave")
 	
 	var canvas = get_canvas_transform()
@@ -31,12 +31,12 @@ func _ready() -> void:
 	var size = get_viewport_rect().size / canvas.get_scale()
 	var move_joystick = $UI/Container/Joysticks/MoveJoystick
 	var shoot_joystick = $UI/Container/Joysticks/ShootJoystick
-	move_joystick.position = Vector2(148, size.y - 100)
-	shoot_joystick.position = Vector2(size.x - 148, size.y - 100)
+	move_joystick.position = Vector2(130, size.y - 100)
+	shoot_joystick.position = Vector2(size.x - 130, size.y - 100)
 	
 func _process(_delta: float) -> void:
 	if Global.is_player_dead:
-		$UI/Container/Labels/HighScore.visible = true
+		$UI/Container/CanvasLayer/Labels/HighScore.visible = true
 	
 func _exit_tree() -> void:
 	Global.node_creation_parent = null

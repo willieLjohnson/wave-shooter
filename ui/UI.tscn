@@ -15,6 +15,32 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color( 0.8, 0.8, 0.8, 0.505882 )
 
+[sub_resource type="GDScript" id=5]
+script/source = "extends Button
+
+func _ready() -> void:
+	connect(\"pressed\", self, \"_on_pressed\")
+	
+func _on_pressed() -> void:
+	if Engine.has_singleton(\"Haptic\"):
+		Engine.get_singleton(\"Haptic\").impact(1)
+	get_tree().paused = false
+	get_parent().hide()
+"
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Button
+
+func _ready() -> void:
+	connect(\"pressed\", self, \"_on_pressed\")
+	
+func _on_pressed() -> void:
+	if Engine.has_singleton(\"Haptic\"):
+		Engine.get_singleton(\"Haptic\").impact(1)
+	get_tree().paused = false
+	get_tree().change_scene(\"res://scenes/MainMenu.tscn\")
+"
+
 [sub_resource type="DynamicFont" id=2]
 size = 40
 extra_spacing_char = 10
@@ -64,32 +90,6 @@ func reset():
 	text = str(0)
 "
 
-[sub_resource type="GDScript" id=5]
-script/source = "extends Button
-
-func _ready() -> void:
-	connect(\"pressed\", self, \"_on_pressed\")
-	
-func _on_pressed() -> void:
-	if Engine.has_singleton(\"Haptic\"):
-		Engine.get_singleton(\"Haptic\").impact(1)
-	get_tree().paused = false
-	get_parent().hide()
-"
-
-[sub_resource type="GDScript" id=6]
-script/source = "extends Button
-
-func _ready() -> void:
-	connect(\"pressed\", self, \"_on_pressed\")
-	
-func _on_pressed() -> void:
-	if Engine.has_singleton(\"Haptic\"):
-		Engine.get_singleton(\"Haptic\").impact(1)
-	get_tree().paused = false
-	get_tree().change_scene(\"res://scenes/MainMenu.tscn\")
-"
-
 [node name="UI" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -107,93 +107,6 @@ custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Labels" type="HBoxContainer" parent="Container"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 876.0
-margin_bottom = 75.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HighScore" type="Label" parent="Container/Labels"]
-modulate = Color( 1, 1, 1, 0.490196 )
-margin_top = 5.0
-margin_right = 282.0
-margin_bottom = 49.0
-size_flags_horizontal = 3
-custom_fonts/font = SubResource( 2 )
-text = "100"
-valign = 1
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Score" type="Label" parent="Container/Labels"]
-margin_left = 286.0
-margin_right = 569.0
-margin_bottom = 55.0
-size_flags_horizontal = 3
-custom_fonts/font = SubResource( 1 )
-text = "100"
-align = 1
-valign = 1
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="WaveContainer" type="HBoxContainer" parent="Container/Labels"]
-margin_left = 573.0
-margin_top = 5.0
-margin_right = 856.0
-margin_bottom = 49.0
-size_flags_horizontal = 3
-size_flags_vertical = 4
-custom_constants/separation = 10
-alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Container/Labels/WaveContainer"]
-modulate = Color( 1, 1, 1, 0.490196 )
-margin_left = 142.0
-margin_right = 260.0
-margin_bottom = 44.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-custom_fonts/font = ExtResource( 4 )
-text = "wave:"
-align = 2
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Container/Labels/WaveContainer/Label"]
-anims/BossWave = SubResource( 3 )
-
-[node name="CurrentWave" type="Label" parent="Container/Labels/WaveContainer"]
-modulate = Color( 1, 1, 1, 0.490196 )
-margin_left = 270.0
-margin_right = 283.0
-margin_bottom = 44.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-custom_fonts/font = SubResource( 2 )
-text = "1"
-align = 2
-valign = 1
-script = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -258,3 +171,92 @@ scale = Vector2( 0.4, 0.4 )
 [node name="ShootJoystick" parent="Container/Joysticks" instance=ExtResource( 6 )]
 position = Vector2( 816, 336 )
 scale = Vector2( 0.4, 0.4 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Container"]
+
+[node name="Labels" type="HBoxContainer" parent="Container/CanvasLayer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 876.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HighScore" type="Label" parent="Container/CanvasLayer/Labels"]
+modulate = Color( 1, 1, 1, 0.490196 )
+margin_top = 5.0
+margin_right = 282.0
+margin_bottom = 49.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+text = "100"
+valign = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="Container/CanvasLayer/Labels"]
+margin_left = 286.0
+margin_right = 569.0
+margin_bottom = 55.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+text = "100"
+align = 1
+valign = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WaveContainer" type="HBoxContainer" parent="Container/CanvasLayer/Labels"]
+margin_left = 573.0
+margin_top = 5.0
+margin_right = 856.0
+margin_bottom = 49.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+custom_constants/separation = 10
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Container/CanvasLayer/Labels/WaveContainer"]
+modulate = Color( 1, 1, 1, 0.490196 )
+margin_left = 142.0
+margin_right = 260.0
+margin_bottom = 44.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+text = "wave:"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Container/CanvasLayer/Labels/WaveContainer/Label"]
+anims/BossWave = SubResource( 3 )
+
+[node name="CurrentWave" type="Label" parent="Container/CanvasLayer/Labels/WaveContainer"]
+modulate = Color( 1, 1, 1, 0.490196 )
+margin_left = 270.0
+margin_right = 283.0
+margin_bottom = 44.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "1"
+align = 2
+valign = 1
+script = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

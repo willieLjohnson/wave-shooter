@@ -14,7 +14,12 @@ var save_file_path = "user://savegame.save"
 
 onready var camera_rect: Rect2 setget ,get_camera_rect
 
-	
+var is_ios 
+var is_android
+var is_mobile
+
+var haptics = null
+
 func instance_node(node, location, parent):
 	var node_instance = node.instance()
 	if location != null: node_instance.global_position = location
@@ -31,9 +36,10 @@ func instance_popup_label(position, text, modulate = Color.white, z_index = 5, p
 			
 func get_camera_rect():
 	if node_creation_parent != null:
+		update_OS_status()
 		var camera = node_creation_parent.get_node("Camera2D")
 		return camera.get_viewport().get_visible_rect()
-
+	
 func play_sound(sound, volume = 0, pitch = 1):
 	if node_creation_parent != null:
 		var audioStreamPlayer = AudioStreamPlayer.new()
@@ -74,3 +80,42 @@ func load_game():
 	
 	high_score = current_line["high_score"]
 	save_file.close()
+
+func update_OS_status():
+	is_ios = OS.get_name() == "iOS"
+	is_android = OS.get_name() == "Android"
+	is_mobile = is_ios or is_android
+	
+func vibrate(strength=0):
+	if Engine.has_singleton("Haptic") and is_ios and haptics == null:
+		haptics = Engine.get_singleton("Haptic")
+		
+	match strength:
+		0:
+			if is_ios:
+				haptics.selection()
+			elif is_android:
+				Input.vibrate_handheld(3)
+		1:
+			if is_ios:
+				haptics.impact(0)
+			elif is_android:
+				Input.vibrate_handheld(5)
+		2:
+			if is_ios:
+				haptics.impact(1)
+			elif is_android:
+				Input.vibrate_handheld(10)
+		3:
+			if is_ios:
+				haptics.impact(2)
+			elif is_android:
+				Input.vibrate_handheld(20)
+		4:
+			if is_ios:
+				haptics.impact(3)
+			elif is_android:
+				Input.vibrate_handheld(30)
+		5:
+			if is_mobile:
+				Input.vibrate_handheld(400)
