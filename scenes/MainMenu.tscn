@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://ui/uitheme.tres" type="Theme" id=1]
 [ext_resource path="res://common/BlueGradient.tres" type="Gradient" id=2]
@@ -7,6 +7,19 @@
 [ext_resource path="res://common/TrailWidthCurve.tres" type="Curve" id=5]
 [ext_resource path="res://effects/BloomEnvironment.tscn" type="PackedScene" id=6]
 [ext_resource path="res://common/Trail.tscn" type="PackedScene" id=7]
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="DynamicFont" id=5]
+size = 60
+use_filter = true
+extra_spacing_char = 8
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 125
@@ -96,12 +109,6 @@ func _on_pressed() -> void:
 
 "
 
-[sub_resource type="DynamicFont" id=5]
-size = 60
-use_filter = true
-extra_spacing_char = 8
-font_data = ExtResource( 4 )
-
 [sub_resource type="GDScript" id=6]
 script/source = "extends Node2D
 
@@ -116,76 +123,33 @@ func _process(delta: float) -> void:
 
 [node name="BloomEnvironment" parent="." instance=ExtResource( 6 )]
 
-[node name="UI" type="Node2D" parent="."]
+[node name="UI" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Control" type="Control" parent="UI"]
+[node name="Control" type="MarginContainer" parent="UI"]
 margin_right = 897.0
 margin_bottom = 414.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title" type="Label" parent="UI/Control"]
-anchor_left = 0.497
-anchor_top = 0.003
-anchor_right = 0.497
-anchor_bottom = 0.00300001
-margin_left = -637.809
-margin_top = -25.242
-margin_right = 638.191
-margin_bottom = 135.758
-rect_scale = Vector2( 0.702, 0.654 )
-rect_pivot_offset = Vector2( 637.787, 73.3474 )
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.0117647, 0.662745, 0.956863, 1 )
-custom_colors/font_color_shadow = Color( 0.0117647, 0.662745, 0.956863, 0.537255 )
-custom_constants/shadow_offset_x = 5
-custom_constants/shadow_offset_y = 5
-text = "wave shooter"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Control/Title"]
-autoplay = "Idle"
-playback_speed = 0.5
-anims/Idle = SubResource( 2 )
-
-[node name="ButtonStart" type="Button" parent="UI/Control"]
-margin_left = 352.0
-margin_top = 168.0
-margin_right = 552.0
-margin_bottom = 218.0
-theme = ExtResource( 1 )
-text = "START"
-script = SubResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ButtonQuit" type="Button" parent="UI/Control"]
-margin_left = 352.0
-margin_top = 248.0
-margin_right = 552.0
-margin_bottom = 298.0
-theme = ExtResource( 1 )
-text = "QUIT"
-script = SubResource( 4 )
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HighScore" type="Label" parent="UI/Control"]
 modulate = Color( 1, 1, 1, 0.87451 )
-anchor_left = 0.499
-anchor_top = 1.0
-anchor_right = 0.499
-anchor_bottom = 1.0
-margin_left = -447.603
-margin_top = -86.0
-margin_right = 448.397
+margin_left = 20.0
+margin_top = 330.0
+margin_right = 111.0
+margin_bottom = 394.0
+size_flags_horizontal = 0
+size_flags_vertical = 10
 custom_fonts/font = SubResource( 5 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 0
@@ -193,6 +157,70 @@ text = "100"
 align = 1
 valign = 1
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="HBoxContainer" parent="UI/Control"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 877.0
+margin_bottom = 394.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="Title" type="Label" parent="UI/Control/VBoxContainer"]
+margin_top = 120.0
+margin_right = 714.0
+margin_bottom = 254.0
+rect_pivot_offset = Vector2( 637.787, 73.3474 )
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0117647, 0.662745, 0.956863, 1 )
+custom_colors/font_color_shadow = Color( 0.0117647, 0.662745, 0.956863, 0.537255 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 5
+text = "WAVE BLAST"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Control/VBoxContainer/Title"]
+autoplay = "Idle"
+playback_speed = 0.5
+anims/Idle = SubResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/VBoxContainer"]
+margin_left = 764.0
+margin_right = 857.0
+margin_bottom = 374.0
+custom_constants/separation = 24
+alignment = 1
+
+[node name="ButtonStart" type="Button" parent="UI/Control/VBoxContainer/VBoxContainer"]
+margin_top = 122.0
+margin_right = 93.0
+margin_bottom = 175.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+text = "START"
+script = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonQuit" type="Button" parent="UI/Control/VBoxContainer/VBoxContainer"]
+margin_top = 199.0
+margin_right = 93.0
+margin_bottom = 252.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource( 1 )
+text = "QUIT"
+script = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
