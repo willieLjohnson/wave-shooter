@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Arena.gd" type="Script" id=2]
@@ -14,6 +14,33 @@
 [ext_resource path="res://environment/ParallaxBackground.tscn" type="PackedScene" id=12]
 [ext_resource path="res://enemies/SimpleBoss.tscn" type="PackedScene" id=13]
 [ext_resource path="res://environment/Limits.tscn" type="PackedScene" id=14]
+[ext_resource path="res://ui/uitheme.tres" type="Theme" id=15]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+
+func _ready() -> void:
+	connect(\"pressed\", self, \"_on_pressed\")
+	
+func _on_pressed() -> void:
+	if Engine.has_singleton(\"Haptic\"):
+		Engine.get_singleton(\"Haptic\").impact(1)
+	get_tree().paused = false
+	get_parent().get_parent().hide()
+"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Button
+
+func _ready() -> void:
+	connect(\"pressed\", self, \"_on_pressed\")
+	
+func _on_pressed() -> void:
+	if Engine.has_singleton(\"Haptic\"):
+		Engine.get_singleton(\"Haptic\").impact(1)
+	get_tree().paused = false
+	get_tree().change_scene(\"res://scenes/MainMenu.tscn\")
+"
 
 [node name="Arena" type="Node2D"]
 script = ExtResource( 2 )
@@ -25,20 +52,67 @@ powerups = [ ExtResource( 7 ), ExtResource( 8 ) ]
 margin_right = 904.0
 margin_bottom = 424.0
 
-[node name="Pause" parent="UI/Container" index="0"]
-margin_right = 884.0
-margin_bottom = 404.0
-
 [node name="MoveJoystick" parent="UI/Container/Joysticks" index="0"]
 position = Vector2( 148, 315 )
 
 [node name="ShootJoystick" parent="UI/Container/Joysticks" index="1"]
 position = Vector2( 750, 315 )
 
-[node name="CanvasLayer" parent="UI/Container" index="2"]
+[node name="CanvasLayer" parent="UI/Container" index="1"]
 layer = -1
 follow_viewport_enable = true
 follow_viewport_scale = 0.9
+
+[node name="PauseLayer" type="CanvasLayer" parent="UI/Container" index="2"]
+
+[node name="Pause" type="Popup" parent="UI/Container/PauseLayer"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="UI/Container/PauseLayer/Pause"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.517647 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Container/PauseLayer/Pause"]
+margin_left = 384.5
+margin_top = 151.0
+margin_right = 491.5
+margin_bottom = 223.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Unpause" type="Button" parent="UI/Container/PauseLayer/Pause/VBoxContainer"]
+margin_right = 125.0
+margin_bottom = 53.0
+theme = ExtResource( 15 )
+text = "UNPAUSE"
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="Button" parent="UI/Container/PauseLayer/Pause/VBoxContainer"]
+margin_top = 57.0
+margin_right = 125.0
+margin_bottom = 110.0
+theme = ExtResource( 15 )
+text = "MENU"
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -116,6 +116,8 @@ func _notification(what) -> void:
 #		get_tree().paused = false
 
 	if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
-		$UI/Container/Pause.show()
+		Global.save_game()
+		$UI/Container/PauseLayer/Pause.show()
 		get_tree().paused = true
+		
 

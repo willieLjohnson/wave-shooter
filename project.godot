@@ -23,8 +23,6 @@ ObjectPooler="*res://objects/ObjectPooler.tscn"
 
 window/size/width=896
 window/size/height=414
-window/size/test_width=1980
-window/size/test_height=720
 window/handheld/orientation="sensor_landscape"
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
