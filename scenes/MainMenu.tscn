@@ -8,7 +8,7 @@
 [ext_resource path="res://effects/BloomEnvironment.tscn" type="PackedScene" id=6]
 [ext_resource path="res://common/Trail.tscn" type="PackedScene" id=7]
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 2
 border_width_top = 2
@@ -19,7 +19,7 @@ corner_radius_top_right = 42
 corner_radius_bottom_right = 42
 corner_radius_bottom_left = 42
 
-[sub_resource type="GDScript" id=10]
+[sub_resource type="GDScript" id=2]
 script/source = "extends Panel
 
 func _ready():
@@ -30,20 +30,20 @@ func _ready():
 		self.get_stylebox(\"panel\", \"\").set_corner_radius_all(0)
 "
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=3]
 size = 60
 use_filter = true
 extra_spacing_char = 8
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=4]
 size = 125
 outline_size = 1
 use_filter = true
 extra_spacing_char = 20
 font_data = ExtResource( 4 )
 
-[sub_resource type="GDScript" id=8]
+[sub_resource type="GDScript" id=5]
 script/source = "extends Label
 
   
@@ -84,7 +84,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$AnimationPlayer.play(\"Idle\")
 "
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=6]
 resource_name = "Click"
 length = 0.5
 step = 0.5
@@ -125,8 +125,7 @@ tracks/2/keys = {
 "values": [ 5, 20, 5 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Idle"
+[sub_resource type="Animation" id=7]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -178,7 +177,7 @@ tracks/3/keys = {
 "values": [ 5, 20, 5 ]
 }
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=8]
 script/source = "extends Button
 
 func _ready() -> void:
@@ -191,7 +190,7 @@ func _on_pressed() -> void:
 	get_tree().change_scene(\"res://scenes/Arena.tscn\")
 "
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=9]
 script/source = "extends Button
 
 func _ready() -> void:
@@ -207,7 +206,7 @@ func _on_pressed() -> void:
 
 "
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=10]
 script/source = "extends Node2D
 
 var velocity = Vector2(1, 1)
@@ -224,8 +223,8 @@ func _process(delta: float) -> void:
 [node name="UI" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 7 )
-script = SubResource( 10 )
+custom_styles/panel = SubResource( 1 )
+script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -249,7 +248,7 @@ margin_right = 111.0
 margin_bottom = 394.0
 size_flags_horizontal = 0
 size_flags_vertical = 10
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 3 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 0
 text = "100"
@@ -275,22 +274,22 @@ rect_pivot_offset = Vector2( 637.787, 73.3474 )
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.0117647, 0.662745, 0.956863, 1 )
 custom_colors/font_color_shadow = Color( 0.0117647, 0.662745, 0.956863, 0.537255 )
 custom_constants/shadow_offset_x = 5
 custom_constants/shadow_offset_y = 5
 text = "WAVE BLAST"
 valign = 1
-script = SubResource( 8 )
+script = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Control/VBoxContainer/Title"]
 autoplay = "Idle"
-anims/Click = SubResource( 9 )
-anims/Idle = SubResource( 2 )
+anims/Click = SubResource( 6 )
+anims/Idle = SubResource( 7 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/VBoxContainer"]
 margin_left = 764.0
@@ -307,7 +306,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = ExtResource( 1 )
 text = "START"
-script = SubResource( 3 )
+script = SubResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -320,7 +319,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme = ExtResource( 1 )
 text = "QUIT"
-script = SubResource( 4 )
+script = SubResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -344,7 +343,7 @@ scale = Vector2( 0.3, 0.3 )
 color = Color( 0, 0.670588, 1, 0.839216 )
 offset = Vector2( 21.724, 0 )
 polygon = PoolVector2Array( 0, 0, -32, 16, -24, 0, -32, -16 )
-script = SubResource( 6 )
+script = SubResource( 10 )
 
 [connection signal="gui_input" from="UI/Control/VBoxContainer/Title" to="UI/Control/VBoxContainer/Title" method="_on_Title_gui_input"]
 [connection signal="animation_finished" from="UI/Control/VBoxContainer/Title/AnimationPlayer" to="UI/Control/VBoxContainer/Title" method="_on_AnimationPlayer_animation_finished"]
