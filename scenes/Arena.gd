@@ -23,7 +23,7 @@ func _ready() -> void:
 	Global.node_creation_parent = self
 	Global.score = 0
 	Global.is_player_dead = false
-	var wave_label = get_node("/root/Arena/UI/Container/CanvasyLayer/Labels/WaveContainer/CurrentWave")
+	var wave_label = $UI/Container/CanvasLayer/Labels/WaveContainer/CurrentWave
 	self.connect("update_wave", wave_label, "update_wave")
 	
 	var canvas = get_canvas_transform()
@@ -115,9 +115,16 @@ func _notification(what) -> void:
 #		$UI/Control/Pause.hide()
 #		get_tree().paused = false
 
-	if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+	if what == MainLoop.NOTIFICATION_APP_PAUSED:
+		Global.save_game()
+		get_tree().paused = true
+		$UI/Container/PauseLayer/Pause.show()
+		
+	if what == MainLoop.NOTIFICATION_APP_RESUMED:
+		get_tree().paused = false
+
+	if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT or what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		Global.save_game()
 		$UI/Container/PauseLayer/Pause.show()
 		get_tree().paused = true
-		
-
+	

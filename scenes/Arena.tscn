@@ -52,16 +52,15 @@ powerups = [ ExtResource( 7 ), ExtResource( 8 ) ]
 margin_right = 904.0
 margin_bottom = 424.0
 
+[node name="Pause" parent="UI/Container" index="0"]
+margin_right = 884.0
+margin_bottom = 404.0
+
 [node name="MoveJoystick" parent="UI/Container/Joysticks" index="0"]
 position = Vector2( 148, 315 )
 
 [node name="ShootJoystick" parent="UI/Container/Joysticks" index="1"]
 position = Vector2( 750, 315 )
-
-[node name="CanvasLayer" parent="UI/Container" index="1"]
-layer = -1
-follow_viewport_enable = true
-follow_viewport_scale = 0.9
 
 [node name="PauseLayer" type="CanvasLayer" parent="UI/Container" index="2"]
 
@@ -113,6 +112,11 @@ script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CanvasLayer" parent="UI/Container" index="3"]
+layer = -1
+follow_viewport_enable = true
+follow_viewport_scale = 0.9
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

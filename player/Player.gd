@@ -93,6 +93,9 @@ func _physics_process(delta: float) -> void:
 
 		$Weapons.look_at(get_global_mouse_position())
 			
+		if Input.is_action_just_pressed("ui_cancel"):
+			get_tree().notification(MainLoop.NOTIFICATION_APP_PAUSED)
+			
 	if input_vector != Vector2.ZERO:
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:

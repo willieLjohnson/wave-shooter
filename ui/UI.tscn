@@ -7,7 +7,7 @@
 [ext_resource path="res://ui/uitheme.tres" type="Theme" id=5]
 [ext_resource path="res://ui/Joystick/Joystick.tscn" type="PackedScene" id=6]
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 3
 border_width_top = 3
@@ -15,7 +15,7 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color( 0.8, 0.8, 0.8, 0.505882 )
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=2]
 script/source = "extends Button
 
 func _ready() -> void:
@@ -24,11 +24,11 @@ func _ready() -> void:
 func _on_pressed() -> void:
 	if Engine.has_singleton(\"Haptic\"):
 		Engine.get_singleton(\"Haptic\").impact(1)
-	get_tree().paused = false
+	get_tree().notification(MainLoop.NOTIFICATION_APP_RESUMED)
 	get_parent().hide()
 "
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=3]
 script/source = "extends Button
 
 func _ready() -> void:
@@ -41,19 +41,18 @@ func _on_pressed() -> void:
 	get_tree().change_scene(\"res://scenes/MainMenu.tscn\")
 "
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
 size = 40
 extra_spacing_char = 10
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=5]
 size = 50
 use_filter = true
 extra_spacing_char = 10
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "BossWave"
+[sub_resource type="Animation" id=6]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_scale")
@@ -68,7 +67,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=7]
 script/source = "extends Label
 
 onready var wave_label = get_parent().get_node(\"Label\")
@@ -93,7 +92,7 @@ func reset():
 [node name="UI" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -146,7 +145,7 @@ margin_right = 107.0
 margin_bottom = 34.0
 theme = ExtResource( 5 )
 text = "UNPAUSE"
-script = SubResource( 5 )
+script = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -157,7 +156,7 @@ margin_right = 107.0
 margin_bottom = 72.0
 theme = ExtResource( 5 )
 text = "MENU"
-script = SubResource( 6 )
+script = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -192,7 +191,7 @@ margin_top = 5.0
 margin_right = 282.0
 margin_bottom = 49.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "100"
 valign = 1
 script = ExtResource( 3 )
@@ -205,7 +204,7 @@ margin_left = 286.0
 margin_right = 569.0
 margin_bottom = 55.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 5 )
 text = "100"
 align = 1
 valign = 1
@@ -243,7 +242,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Container/CanvasLayer/Labels/WaveContainer/Label"]
-anims/BossWave = SubResource( 3 )
+anims/BossWave = SubResource( 6 )
 
 [node name="CurrentWave" type="Label" parent="Container/CanvasLayer/Labels/WaveContainer"]
 modulate = Color( 1, 1, 1, 0.490196 )
@@ -252,11 +251,11 @@ margin_right = 283.0
 margin_bottom = 44.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "1"
 align = 2
 valign = 1
-script = SubResource( 4 )
+script = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
