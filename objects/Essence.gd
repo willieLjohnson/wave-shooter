@@ -31,6 +31,7 @@ func _physics_process(delta: float) -> void:
 func _on_HitBox_area_entered(area: Area2D) -> void:
 	if not spawned: return
 	if area.is_in_group("player"):
+		Global.vibrate()
 		Global.score += score_value * value_multiplier
 		Global.play_sound("res://assets/sounds/essence-collect.wav", -10)
 		var player_variable = area.get_parent().get(player_variable_modify)
