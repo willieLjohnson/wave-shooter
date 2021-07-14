@@ -59,4 +59,5 @@ shape = SubResource( 2 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Shape")
 anims/Animate = SubResource( 3 )
+
 [connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]

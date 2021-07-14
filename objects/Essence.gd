@@ -40,11 +40,11 @@ func _on_HitBox_area_entered(area: Area2D) -> void:
 
 func _on_LifeTimer_timeout() -> void:
 	if not spawned: return
-	life_timer.queue_free()
 	call_deferred("remove_self")
 
 func remove_self():
 	if not spawned: return
+	life_timer.queue_free()
 	get_parent().remove_child(self)
 	ObjectPooler.deactivate_obj(self)
 	spawned = false
