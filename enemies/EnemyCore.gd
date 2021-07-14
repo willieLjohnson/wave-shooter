@@ -65,7 +65,7 @@ func _process(delta: float) -> void:
 		for _i in range(big_essence):
 			var essence_instance = ObjectPooler.spawn_from_pool("essence", global_position, 0)
 			essence_instance.modulate = base_modulate
-			essence_instance.scale = Vector2(1.5,1.5)
+			essence_instance.scale = Vector2(2,2)
 			essence_instance.value_multiplier = 10
 			essence_instance.player_variable_modify = essence_upgrade_variable
 			essence_instance.player_variable_set = essence_upgrade_amount
@@ -75,7 +75,7 @@ func _process(delta: float) -> void:
 		for _j in range(small_essence):
 			var essence_instance = ObjectPooler.spawn_from_pool("essence", global_position, 0)
 			essence_instance.modulate = base_modulate.darkened(0.2)
-			essence_instance.scale = Vector2(0.9,0.9)
+			essence_instance.scale = Vector2(1.2,1.2)
 			essence_instance.value_multiplier = 1
 			essence_instance.player_variable_modify = essence_upgrade_variable
 			essence_instance.player_variable_set = essence_upgrade_amount
